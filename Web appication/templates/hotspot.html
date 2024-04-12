@@ -1,4336 +1,499 @@
-{% extends "nav.html" %} {% block content %}
-  <div
-    style="
-      width: 30px;
-      height: 23.5px;
-      left: 33px;
-      top: 25.07px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 30px;
-        height: 23.5px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-      "
-    ></div>
-  </div>
-</div>
-<div
-  style="width: 168px; height: 33px; left: 131px; top: 34px; position: absolute"
-></div>
-<div
-  style="
-    left: 1468px;
-    top: 28px;
-    position: absolute;
-    color: #2b2b2b;
-    font-size: 20px;
-    font-family: DM Sans;
-    font-weight: 400;
-    word-wrap: break-word;
-  "
->
-  Karnataka State Police
-</div>
-<div
-  style="
-    left: 1468px;
-    top: 59px;
-    position: absolute;
-    color: rgba(0, 0, 0, 0.63);
-    font-size: 13px;
-    font-family: DM Sans;
-    font-weight: 400;
-    word-wrap: break-word;
-  "
->
-  Government of Karnataka
-</div>
-<div
-  style="
-    width: 39px;
-    height: 0px;
-    left: 1359px;
-    top: 34px;
-    position: absolute;
-    transform: rotate(90deg);
-    transform-origin: 0 0;
-    border: 0.4px rgba(0, 0, 0, 0.39) solid;
-  "
-></div>
-<div
-  style="
-    left: 318px;
-    top: 56px;
-    position: absolute;
-    color: #2b2b2b;
-    font-size: 15px;
-    font-family: DM Sans;
-    font-weight: 400;
-    word-wrap: break-word;
-  "
->
-  Building a Safer Neighborhood
-</div>
-<div
-  style="
-    left: 131px;
-    top: 120px;
-    position: absolute;
-    color: #2b2b2b;
-    font-size: 36px;
-    font-family: Gotham;
-    font-weight: 300;
-    word-wrap: break-word;
-  "
->
-  Hotspot Mapping
-</div>
-<div
-  style="
-    width: 447px;
-    height: 56px;
-    left: 1244px;
-    top: 108px;
-    position: absolute;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03);
-  "
->
-  <div
-    style="width: 36px; height: 36px; left: 20px; top: 10px; position: absolute"
-  >
-    <div
-      style="
-        width: 36px;
-        height: 36px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        background: #d9d9d9;
-      "
-    ></div>
-    <div
-      style="
-        width: 26.71px;
-        height: 16.44px;
-        left: 4.5px;
-        top: 10.5px;
-        position: absolute;
-        background: #2b2b2b;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      left: 73px;
-      top: 21px;
-      position: absolute;
-      color: #4f4f4f;
-      font-size: 20px;
-      font-family: Gotham;
-      font-weight: 300;
-      word-wrap: break-word;
-    "
-  >
-    Search for an address
-  </div>
-</div>
-<div
-  style="
-    width: 1560px;
-    height: 724px;
-    left: 131px;
-    top: 186px;
-    position: absolute;
-    box-shadow: 2px 17px 39px rgba(0, 0, 0, 0.1);
-  "
->
-  <img
-    style="
-      width: 1560px;
-      height: 748px;
-      left: 0px;
-      top: 0px;
-      position: absolute;
-    "
-    src="https://via.placeholder.com/1560x748"
-  />
-  <div
-    style="
-      width: 102px;
-      height: 102px;
-      left: 404px;
-      top: 307px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 102px;
-        height: 102px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: rgba(219.83, 255, 145.11, 0.6);
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 46px;
-        top: 46px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 384px;
-      height: 404px;
-      left: 20px;
-      top: 20px;
-      position: absolute;
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
-      border-radius: 10px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-    "
-  >
-    <div style="width: 360px; left: 12px; top: 58px; position: absolute">
-      <div
-        style="
-          left: 0px;
-          top: 7px;
-          position: absolute;
-          color: white;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        Crime Type
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+<body>
+  {% extends "nav.html" %} {% block content %}
+  <!-- header -->
+  <!-- <div class="flex justify-between align-center mx-8 mt-4">
+    <div class="flex items-center gap-4">
+      <button id="menuButton"><span class="material-symbols-rounded text-3xl">menu</span></button>
+      <div id="menu" class="menu text-black">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        <a href="#">Link 4</a>
       </div>
-      <div
-        style="
-          width: 253px;
-          height: 34px;
-          padding: 4px;
-          left: 107px;
-          top: 0px;
-          position: absolute;
-          background: #f8f8f8;
-          border-radius: 25px;
-          overflow: hidden;
-          justify-content: space-between;
-          align-items: center;
-          display: inline-flex;
-        "
-      >
-        <div style="position: relative">
-          <div
-            style="
-              width: 79px;
-              height: 26px;
-              padding-left: 9px;
-              padding-right: 9px;
-              padding-top: 5px;
-              padding-bottom: 5px;
-              left: 0px;
-              top: 0px;
-              position: absolute;
-              background: #dcff91;
-              border-radius: 18px;
-              justify-content: center;
-              align-items: center;
-              gap: 8px;
-              display: inline-flex;
-            "
-          >
-            <div style="width: 7px; height: 7px; background: #2b2b2b"></div>
-            <div
-              style="
-                color: #2b2b2b;
-                font-size: 12px;
-                font-family: DM Sans;
-                font-weight: 400;
-                word-wrap: break-word;
-              "
-            >
-              Burglary
-            </div>
-          </div>
-          <div
-            style="
-              width: 73px;
-              height: 26px;
-              padding-left: 9px;
-              padding-right: 9px;
-              padding-top: 5px;
-              padding-bottom: 5px;
-              left: 87px;
-              top: 0px;
-              position: absolute;
-              background: #ffcbda;
-              border-radius: 21px;
-              justify-content: center;
-              align-items: center;
-              gap: 8px;
-              display: inline-flex;
-            "
-          >
-            <div style="width: 7px; height: 7px; background: #2b2b2b"></div>
-            <div
-              style="
-                color: #2b2b2b;
-                font-size: 12px;
-                font-family: DM Sans;
-                font-weight: 400;
-                word-wrap: break-word;
-              "
-            >
-              Murder
+      <div id="logo">
+        <img src="saferhood_logo.svg" alt="">
+        <p>Building a Safer Neighborhood</p>
+      </div>
+    </div>
+    <div class="flex gap-6 align-center items-center">
+      <img class="h-16"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png"
+        alt="">
+      <div class="h-full w-[1.6px] bg-black/40"></div>
+      <div class="flex items-center">
+        <img class="h-16"
+          src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FLOGO%2FK%2FKarnataka-Govt%2FKarnataka-Govt-Logo-Vector-PNG.png&f=1&nofb=1&ipt=412c3a068839b289050c2b567c132e2c1948d6b080341d5a034fe8af43bcc4e6&ipo=images"
+          alt="">
+        <div class="ml-4">
+          <p class="text-xl font-bold">Karnataka State Police</p>
+          <p class="text-sm">Government of Karnataka</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- top bar -->
+  <div class="mx-8 my-5 flex justify-between">
+    <h2 class="text-4xl font-light text-black/50">
+      Hotspot Mapping
+    </h2>
+  </div>
+  <div id="map" class="h-[80vh] mx-8">
+    <!-- map filters -->
+    <div class="bg-black/50 m-4 rounded overflow-hidden" id="filters" style="backdrop-filter: blur(10px);">
+      <div class="text-xl text-white font-bold mx-6 my-2 flex items-center justify-between">
+        Map Filters
+        <button>
+          <span class="material-symbols-rounded text-4xl">
+            expand_more
+          </span>
+        </button>
+      </div>
+
+      <div id="map_options">
+        <!-- date select -->
+        <div class="flex justify-between items-center mx-6 my-4 text-lg gap-4">
+          <h2 class="text-xl text-white">Date&nbsp;Range</h2>
+
+          <div class="bg-slate-50 flex rounded-full px-3">
+            <div class="flex gap-2 items-center">
+              <div class="flex gap-0 rounded-xl">
+                <select id="startMonth" class="py-2 bg-slate-50 px-2 border-r-2 rounded-l-full"></select>
+                <select id="startYear" class="py-2 bg-slate-50 px-2 border-r-2"></select>
+              </div>
+              <p class="text-zinc-800 text-base font-bold">TO</p>
+              <div class="flex gap-0">
+                <select id="endMonth" class="py-2 bg-slate-50 border-r-2 border-l-2 px-2"></select>
+                <select id="endYear" class="py-2 bg-slate-50 px-2  rounded-r-full"></select>
+              </div>
             </div>
           </div>
         </div>
-        <div style="width: 21px; height: 21px; position: relative">
-          <div
-            style="
-              width: 21px;
-              height: 21px;
-              left: 0px;
-              top: 0px;
-              position: absolute;
-              background: #d9d9d9;
-            "
-          ></div>
-          <div
-            style="
-              width: 8.94px;
-              height: 4.81px;
-              left: 6.03px;
-              top: 7.77px;
-              position: absolute;
-              background: black;
-            "
-          ></div>
-        </div>
-      </div>
-    </div>
-    <div style="width: 360px; left: 12px; top: 102px; position: absolute">
-      <div
-        style="
-          left: 0px;
-          top: 7px;
-          position: absolute;
-          color: white;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        Boundary
-      </div>
-      <div
-        style="
-          width: 253px;
-          height: 34px;
-          padding: 4px;
-          left: 107px;
-          top: 0px;
-          position: absolute;
-          background: #f8f8f8;
-          border-radius: 25px;
-          overflow: hidden;
-          justify-content: space-between;
-          align-items: center;
-          display: inline-flex;
-        "
-      >
-        <div
-          style="
-            padding-left: 9px;
-            padding-right: 9px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            background: #11415d;
-            border-radius: 16px;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            display: flex;
-          "
-        >
-          <div style="width: 7px; height: 7px; background: white"></div>
-          <div
-            style="
-              color: white;
-              font-size: 12px;
-              font-family: DM Sans;
-              font-weight: 400;
-              word-wrap: break-word;
-            "
-          >
-            District
+        <!-- crime type -->
+        <div class="flex mx-6 my-4 items-center gap-4">
+          <h2 class="text-xl text-white flex items-center mb-2">
+            Crime&nbsp;type
+          </h2>
+          <!-- current filters -->
+          <div id="current_filters"
+            class="bg-slate-50 w-full h-12 overflow-scroll rounded-full flex items-center justify-items-end gap-3 text-white text-base px-2 py-1">
+            <button class="crimefilter_dropdown" id="crimefilter_dropdown">
+              <span class="material-symbols-rounded text-2xl text-black">
+                keyboard_arrow_down
+              </span>
+            </button>
           </div>
         </div>
-        <div style="width: 21px; height: 21px; position: relative">
-          <div
-            style="
-              width: 21px;
-              height: 21px;
-              left: 0px;
-              top: 0px;
-              position: absolute;
-              background: #d9d9d9;
-            "
-          ></div>
-          <div
-            style="
-              width: 8.94px;
-              height: 4.81px;
-              left: 6.03px;
-              top: 7.77px;
-              position: absolute;
-              background: black;
-            "
-          ></div>
-        </div>
-      </div>
-    </div>
-    <div style="width: 360px; left: 13px; top: 146px; position: absolute">
-      <div
-        style="
-          left: 0px;
-          top: 7px;
-          position: absolute;
-          color: white;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        Landmarks
-      </div>
-      <div
-        style="
-          width: 253px;
-          height: 34px;
-          padding: 4px;
-          left: 107px;
-          top: 0px;
-          position: absolute;
-          background: #f8f8f8;
-          border-radius: 25px;
-          overflow: hidden;
-          justify-content: space-between;
-          align-items: center;
-          display: inline-flex;
-        "
-      >
-        <div style="position: relative">
-          <div
-            style="
-              width: 103px;
-              height: 26px;
-              padding-left: 9px;
-              padding-right: 9px;
-              padding-top: 5px;
-              padding-bottom: 5px;
-              left: 0px;
-              top: 0px;
-              position: absolute;
-              background: #5c8dd6;
-              border-radius: 16px;
-              justify-content: center;
-              align-items: center;
-              gap: 5px;
-              display: inline-flex;
-            "
-          >
-            <div style="width: 7px; height: 7px; background: white"></div>
-            <div
-              style="
-                color: white;
-                font-size: 12px;
-                font-family: DM Sans;
-                font-weight: 400;
-                word-wrap: break-word;
-              "
-            >
-              ATM/Bank
-            </div>
-            <div style="width: 12px; height: 12px; position: relative">
-              <div
-                style="
-                  width: 12px;
-                  height: 12px;
-                  left: 0px;
-                  top: 0px;
-                  position: absolute;
-                  background: #d9d9d9;
-                "
-              ></div>
-              <div
-                style="
-                  width: 9.31px;
-                  height: 6.69px;
-                  left: 1.35px;
-                  top: 2.62px;
-                  position: absolute;
-                  background: white;
-                "
-              ></div>
-            </div>
-          </div>
-          <div
-            style="
-              width: 116px;
-              height: 26px;
-              padding-left: 9px;
-              padding-right: 9px;
-              padding-top: 5px;
-              padding-bottom: 5px;
-              left: 107px;
-              top: 0px;
-              position: absolute;
-              background: #5c8dd6;
-              border-radius: 16px;
-              justify-content: center;
-              align-items: center;
-              gap: 5px;
-              display: inline-flex;
-            "
-          >
-            <div style="width: 7px; height: 7px; background: white"></div>
-            <div
-              style="
-                color: white;
-                font-size: 12px;
-                font-family: DM Sans;
-                font-weight: 400;
-                word-wrap: break-word;
-              "
-            >
-              Retail Stores
-            </div>
-            <div style="width: 12px; height: 12px; position: relative">
-              <div
-                style="
-                  width: 12px;
-                  height: 12px;
-                  left: 0px;
-                  top: 0px;
-                  position: absolute;
-                  background: #d9d9d9;
-                "
-              ></div>
-              <div
-                style="
-                  width: 9.58px;
-                  height: 8.5px;
-                  left: 1.22px;
-                  top: 1.75px;
-                  position: absolute;
-                  background: white;
-                "
-              ></div>
-            </div>
-          </div>
-        </div>
-        <div style="width: 21px; height: 21px; position: relative">
-          <div
-            style="
-              width: 21px;
-              height: 21px;
-              left: 0px;
-              top: 0px;
-              position: absolute;
-              background: #d9d9d9;
-            "
-          ></div>
-          <div
-            style="
-              width: 8.94px;
-              height: 4.81px;
-              left: 6.03px;
-              top: 7.77px;
-              position: absolute;
-              background: black;
-            "
-          ></div>
-        </div>
-      </div>
-    </div>
-    <div
-      style="
-        width: 384px;
-        height: 104px;
-        left: 0px;
-        top: 200px;
-        position: absolute;
-      "
-    >
-      <div
-        style="
-          left: 140px;
-          top: 6px;
-          position: absolute;
-          color: white;
-          font-size: 20px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        Time range
-      </div>
-      <div
-        style="
-          width: 360px;
-          height: 0px;
-          left: 12px;
-          top: 68.5px;
-          position: absolute;
-          border: 5px #ff8ced solid;
-        "
-      ></div>
-      <div
-        style="
-          left: 175px;
-          top: 84px;
-          position: absolute;
-          color: #ffa0a3;
-          font-size: 14px;
-          font-family: DM Sans;
-          font-weight: 500;
-          text-transform: uppercase;
-          word-wrap: break-word;
-        "
-      >
-        Present
-      </div>
-      <div
-        style="
-          left: 12px;
-          top: 84px;
-          position: absolute;
-          color: #ff8ced;
-          font-size: 14px;
-          font-family: DM Sans;
-          font-weight: 500;
-          text-transform: uppercase;
-          word-wrap: break-word;
-        "
-      >
-        Past
-      </div>
-      <div
-        style="
-          left: 321px;
-          top: 84px;
-          position: absolute;
-          color: #ffb459;
-          font-size: 14px;
-          font-family: DM Sans;
-          font-weight: 500;
-          text-transform: uppercase;
-          word-wrap: break-word;
-        "
-      >
-        Future
-      </div>
-      <div
-        style="
-          width: 20px;
-          height: 20px;
-          left: 278px;
-          top: 57px;
-          position: absolute;
-        "
-      >
-        <div
-          style="
-            width: 20px;
-            height: 20px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #667eff;
-            border-radius: 9999px;
-          "
-        ></div>
-        <div
-          style="
-            width: 10px;
-            height: 10px;
-            left: 5px;
-            top: 5px;
-            position: absolute;
-            background: white;
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.43);
-            border-radius: 9999px;
-          "
-        ></div>
-      </div>
-      <div
-        style="
-          left: 323px;
-          top: 48px;
-          position: absolute;
-          color: #e5e5e5;
-          font-size: 12px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        4 Weeks
-      </div>
-      <div
-        style="
-          left: 12px;
-          top: 48px;
-          position: absolute;
-          color: #e5e5e5;
-          font-size: 12px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        2 Years
-      </div>
-      <div
-        style="
-          left: 167px;
-          top: 38px;
-          position: absolute;
-          color: white;
-          font-size: 12px;
-          font-family: DM Sans;
-          font-weight: 500;
-          text-transform: uppercase;
-          word-wrap: break-word;
-        "
-      >
-        3 Weeks
-      </div>
-    </div>
-    <div
-      style="
-        left: 12px;
-        top: 356px;
-        position: absolute;
-        color: white;
-        font-size: 16px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Select specific date
-    </div>
-    <div
-      style="
-        left: 13px;
-        top: 18px;
-        position: absolute;
-        color: white;
-        font-size: 20px;
-        font-family: Gotham;
-        font-weight: 700;
-        word-wrap: break-word;
-      "
-    >
-      Map Filters
-    </div>
-    <div
-      style="
-        width: 31px;
-        height: 31px;
-        left: 341px;
-        top: 12px;
-        position: absolute;
-      "
-    >
-      <div
-        style="
-          width: 31px;
-          height: 31px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 13.2px;
-          height: 6.65px;
-          left: 8.9px;
-          top: 10.16px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-    <div
-      style="
-        height: 30px;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        padding-left: 9px;
-        padding-right: 81px;
-        left: 175px;
-        top: 352px;
-        position: absolute;
-        background: #f8f8f8;
-        border-radius: 5px;
-        overflow: hidden;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 10px;
-        display: inline-flex;
-      "
-    >
-      <div style="width: 18px; height: 18px; position: relative">
-        <div
-          style="
-            width: 18px;
-            height: 18px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #d9d9d9;
-          "
-        ></div>
-        <div
-          style="
-            width: 12px;
-            height: 13.67px;
-            left: 3px;
-            top: 2.08px;
-            position: absolute;
-            background: #2b2b2b;
-          "
-        ></div>
-      </div>
-      <div
-        style="
-          color: #6c6c6c;
-          font-size: 14px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Select Date
-      </div>
-    </div>
-    <div style="width: 360px; left: 13px; top: 314px; position: absolute">
-      <div
-        style="
-          left: 169px;
-          top: 0px;
-          position: absolute;
-          color: #d2d2d2;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 500;
-          word-wrap: break-word;
-        "
-      >
-        OR
-      </div>
-      <div
-        style="
-          width: 157px;
-          height: 0px;
-          left: 203px;
-          top: 11px;
-          position: absolute;
-          border: 1px #c5c5c5 solid;
-        "
-      ></div>
-      <div
-        style="
-          width: 158px;
-          height: 0px;
-          left: 0px;
-          top: 11px;
-          position: absolute;
-          border: 1px #c5c5c5 solid;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 34px;
-      height: 79px;
-      left: 1499px;
-      top: 624px;
-      position: absolute;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-    "
-  >
-    <div
-      style="
-        width: 25px;
-        height: 0px;
-        left: 5px;
-        top: 40px;
-        position: absolute;
-        border: 1px white solid;
-      "
-    ></div>
-    <div
-      style="
-        width: 24px;
-        height: 24px;
-        left: 5px;
-        top: 48px;
-        position: absolute;
-      "
-    >
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 12px;
-          height: 1px;
-          left: 6px;
-          top: 11.5px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-    <div
-      style="width: 24px; height: 24px; left: 5px; top: 8px; position: absolute"
-    >
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 12px;
-          height: 12px;
-          left: 6px;
-          top: 6px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 88px;
-      height: 88px;
-      left: 696px;
-      top: 314px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 88px;
-        height: 88px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: rgba(219.83, 255, 145.11, 0.6);
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 11px;
-        height: 11px;
-        left: 38px;
-        top: 38px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 62px;
-      height: 62px;
-      left: 973px;
-      top: 135px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 62px;
-        height: 62px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: rgba(219.83, 255, 145.11, 0.6);
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 11px;
-        height: 11px;
-        left: 26px;
-        top: 26px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 42px;
-      height: 42px;
-      left: 629px;
-      top: 41px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 42px;
-        height: 42px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: rgba(219.83, 255, 145.11, 0.6);
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 11px;
-        height: 11px;
-        left: 16px;
-        top: 16px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 185px;
-      height: 185px;
-      left: 952px;
-      top: 412px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 185px;
-        height: 185px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: rgba(219.83, 255, 145.11, 0.6);
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 88px;
-        top: 88px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 148px;
-      height: 148px;
-      left: 734px;
-      top: 210px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 148px;
-        height: 148px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: #ffcbda;
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 69px;
-        top: 69px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 90px;
-      height: 90px;
-      left: 1346px;
-      top: 256px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 90px;
-        height: 90px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: #ffcbda;
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 40px;
-        top: 40px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 134px;
-      height: 134px;
-      left: 1035px;
-      top: 376px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 134px;
-        height: 134px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: #ffcbda;
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 62px;
-        top: 62px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 42px;
-      height: 42px;
-      left: 613px;
-      top: 585px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 42px;
-        height: 42px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: #ffcbda;
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 16px;
-        top: 16px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 185px;
-      height: 185px;
-      left: 1203px;
-      top: -63px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        width: 185px;
-        height: 185px;
-        left: 0px;
-        top: 0px;
-        position: absolute;
-        mix-blend-mode: multiply;
-        background: rgba(219.83, 255, 145.11, 0.6);
-        border-radius: 9999px;
-      "
-    ></div>
-    <div
-      style="
-        width: 10px;
-        height: 10px;
-        left: 88px;
-        top: 88px;
-        position: absolute;
-        background: #5c8dd6;
-        border-radius: 9999px;
-      "
-    ></div>
-  </div>
-  <div
-    style="
-      width: 216px;
-      height: 216px;
-      left: 953px;
-      top: 374px;
-      position: absolute;
-      border-radius: 9999px;
-      border: 2px #ff6c6c solid;
-    "
-  ></div>
-  <div
-    style="
-      width: 222px;
-      height: 222px;
-      left: 673px;
-      top: 197px;
-      position: absolute;
-      border-radius: 9999px;
-      border: 2px #ff6c6c solid;
-    "
-  ></div>
-  <div
-    style="
-      left: 947px;
-      top: 666px;
-      position: absolute;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 20px;
-      display: inline-flex;
-    "
-  >
-    <div
-      style="
-        padding-left: 14px;
-        padding-right: 14px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-        overflow: hidden;
-        backdrop-filter: blur(8px);
-        justify-content: flex-start;
-        align-items: center;
-        gap: 7px;
-        display: flex;
-      "
-    >
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          background: #dcff91;
-          border-radius: 9999px;
-        "
-      ></div>
-      <div
-        style="
-          color: white;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Burglary
-      </div>
-    </div>
-    <div
-      style="
-        padding-left: 14px;
-        padding-right: 14px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-        overflow: hidden;
-        backdrop-filter: blur(8px);
-        justify-content: flex-start;
-        align-items: center;
-        gap: 7px;
-        display: flex;
-      "
-    >
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          background: #ffcbda;
-          border-radius: 9999px;
-        "
-      ></div>
-      <div
-        style="
-          color: white;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Murder
-      </div>
-    </div>
-    <div
-      style="
-        padding-left: 14px;
-        padding-right: 14px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-        overflow: hidden;
-        backdrop-filter: blur(8px);
-        justify-content: flex-start;
-        align-items: center;
-        gap: 7px;
-        display: flex;
-      "
-    >
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          border-radius: 9999px;
-          border: 1.7px #ff6c6c solid;
-        "
-      ></div>
-      <div
-        style="
-          color: white;
-          font-size: 16px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Areas requiring high patrolling
+        <div id="checkboxes"
+          class="checkboxes select-none bg-white/60 flex-wrap text-md gap-x-4 gap-y-2  mx-6 my-6 p-2 rounded-md"></div>
       </div>
     </div>
   </div>
-  <div
-    style="
-      padding: 5px;
-      left: 594px;
-      top: 308px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 805px;
-      top: 102px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1164px;
-      top: 14px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 960px;
-      top: 466px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1070px;
-      top: 521px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 485px;
-      top: 403px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 748px;
-      top: 348px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 21px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 21px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 24px; height: 24px; position: relative">
-      <div
-        style="
-          width: 24px;
-          height: 24px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 18.62px;
-          height: 13.38px;
-          left: 2.69px;
-          top: 5.23px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 362px;
-      height: 136px;
-      left: 1181px;
-      top: 20px;
-      position: absolute;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-    "
-  >
-    <div
-      style="width: 28px; height: 28px; left: 7px; top: 7px; position: absolute"
-    >
-      <div
-        style="
-          width: 28px;
-          height: 28px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 21.47px;
-          height: 21px;
-          left: 3.74px;
-          top: 3.5px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-    <div
-      style="
-        left: 44px;
-        top: 13px;
-        position: absolute;
-        color: white;
-        font-size: 20px;
-        font-family: Gotham;
-        font-weight: 400;
-        word-wrap: break-word;
-      "
-    >
-      Tip
-    </div>
-    <div
-      style="
-        width: 317px;
-        left: 29px;
-        top: 44px;
-        position: absolute;
-        color: white;
-        font-size: 12px;
-        font-family: DM Sans;
-        font-weight: 400;
-        word-wrap: break-word;
-      "
-    >
-      Select Past on time to see historical hotspot.<br />Select Present to see
-      live location of patrolling cars.<br />Select future to predictions and
-      high patrolling areas.<br />Select a specific date to see information
-      about of that particular day.
-    </div>
-    <div
-      style="
-        width: 35px;
-        height: 35px;
-        left: 320px;
-        top: 4px;
-        position: absolute;
-      "
-    >
-      <div
-        style="
-          width: 35px;
-          height: 35px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 13.01px;
-          height: 13.01px;
-          left: 10.98px;
-          top: 11.01px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 537px;
-      top: 189px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 737px;
-      top: 501px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 706px;
-      top: 320px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1019px;
-      top: 524px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1203px;
-      top: 182px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1263px;
-      top: 230px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1155px;
-      top: 126px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 961px;
-      top: 81px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 854px;
-      top: 577px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1286px;
-      top: 588px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1208px;
-      top: 368px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1150px;
-      top: 287px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      padding: 5px;
-      left: 1012px;
-      top: 269px;
-      position: absolute;
-      background: #5c8dd6;
-      border-radius: 17px;
-      justify-content: flex-start;
-      align-items: flex-start;
-      gap: 10px;
-      display: inline-flex;
-    "
-  >
-    <div style="width: 18px; height: 18px; position: relative">
-      <div
-        style="
-          width: 18px;
-          height: 18px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 14.36px;
-          height: 12.75px;
-          left: 1.82px;
-          top: 2.62px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 384px;
-      height: 268px;
-      left: 21px;
-      top: 438px;
-      position: absolute;
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
-      border-radius: 10px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-    "
-  >
-    <div
-      style="
-        left: 12px;
-        top: 15px;
-        position: absolute;
-        color: white;
-        font-size: 20px;
-        font-family: Gotham;
-        font-weight: 700;
-        word-wrap: break-word;
-      "
-    >
-      Crime throughout the day
-    </div>
-    <div
-      style="
-        width: 31px;
-        height: 31px;
-        left: 341px;
-        top: 12px;
-        position: absolute;
-      "
-    >
-      <div
-        style="
-          width: 31px;
-          height: 31px;
-          left: 0px;
-          top: 0px;
-          position: absolute;
-          background: #d9d9d9;
-        "
-      ></div>
-      <div
-        style="
-          width: 13.2px;
-          height: 6.91px;
-          left: 8.9px;
-          top: 11.02px;
-          position: absolute;
-          background: white;
-        "
-      ></div>
-    </div>
-    <div
-      style="
-        width: 154px;
-        height: 0px;
-        left: 56px;
-        top: 65px;
-        position: absolute;
-        transform: rotate(90deg);
-        transform-origin: 0 0;
-        border: 1px white solid;
-      "
-    ></div>
-    <div
-      style="
-        width: 14px;
-        left: 38px;
-        top: 65px;
-        position: absolute;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-end;
-        display: inline-flex;
-      "
-    >
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        16
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        14
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        12
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        10
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        08
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        06
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        04
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        02
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        00
-      </div>
-    </div>
-    <div
-      style="
-        width: 316px;
-        height: 0px;
-        left: 56px;
-        top: 220px;
-        position: absolute;
-        border: 1px white solid;
-      "
-    ></div>
-    <div
-      style="
-        width: 316px;
-        left: 56px;
-        top: 223px;
-        position: absolute;
-        justify-content: space-between;
-        align-items: center;
-        display: inline-flex;
-      "
-    >
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        00:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        03:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        06:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        09:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        12:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        15:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        18:00
-      </div>
-      <div
-        style="
-          color: white;
-          font-size: 10px;
-          font-family: DM Sans;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        21:00
-      </div>
-    </div>
-    <div
-      style="
-        left: 176px;
-        top: 239px;
-        position: absolute;
-        color: white;
-        font-size: 14px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Hours
-    </div>
-    <div
-      style="
-        left: 12px;
-        top: 184px;
-        position: absolute;
-        transform: rotate(-90deg);
-        transform-origin: 0 0;
-        color: white;
-        font-size: 14px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Occurrence
-    </div>
-    <div
-      style="
-        width: 309px;
-        left: 63px;
-        top: 103px;
-        position: absolute;
-        justify-content: space-between;
-        align-items: flex-end;
-        display: inline-flex;
-      "
-    >
-      <div style="width: 22px; height: 116px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 116px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 84px;
-            left: 11px;
-            top: 32px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 100px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 100px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 72.41px;
-            left: 11px;
-            top: 27.59px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 87px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 87px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 45px;
-            left: 11px;
-            top: 42px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 77px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 77px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 30px;
-            left: 11px;
-            top: 47px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 68px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 68px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 42px;
-            left: 11px;
-            top: 26px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 81px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 81px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 34px;
-            left: 11px;
-            top: 47px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 101px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 101px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 59px;
-            left: 11px;
-            top: 42px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-      <div style="width: 22px; height: 87px; position: relative">
-        <div
-          style="
-            width: 11px;
-            height: 87px;
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            background: #dcff91;
-          "
-        ></div>
-        <div
-          style="
-            width: 11px;
-            height: 49px;
-            left: 11px;
-            top: 38px;
-            position: absolute;
-            background: #ffcbda;
-          "
-        ></div>
-      </div>
-    </div>
-    <div
-      style="
-        left: 132px;
-        top: 38px;
-        position: absolute;
-        color: #d1d1d1;
-        font-size: 14px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Date: 04/08/2023
-    </div>
-  </div>
-</div>
-<div
-  style="
-    left: 137px;
-    top: 1010px;
+</body>
+
+<script>
+  var map = L.map('map', {
+    center: [15.18, 77.23], // Initial map center
+    zoom: 7, // Initial zoom level
+    zoomControl: false, // Remove default zoom control
+    attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
+    scrollWheelZoom: true, // Enable scroll wheel zoom
+    dragging: true // Enable click and drag camera movement
+  });
+
+  L.control.zoom({
+    position: 'bottomright'
+  }).addTo(map);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 16
+  }).addTo(map);
+
+  // var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+  //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  //   subdomains: 'abcd',
+  //   maxZoom: 19,
+  //   pane: 'shadowPane',
+  // }).addTo(map)
+
+
+  // map filter
+  var filter = document.getElementById('filters');
+  filter.style.position = 'absolute';
+  filter.style.top = '0';
+  filter.style.left = '0';
+  filter.style.zIndex = '1000';
+  map.getContainer().appendChild(filter);
+
+  filter.addEventListener('mouseover', function () {
+    map.dragging.disable();
+    map.scrollWheelZoom.disable();
+    if (map.tap) map.tap.disable();
+    map.keyboard.disable();
+    map.doubleClickZoom.disable();
+  });
+
+  filter.addEventListener('mouseout', function () {
+    map.dragging.enable();
+    map.scrollWheelZoom.enable();
+    if (map.tap) map.tap.enable();
+    map.keyboard.enable();
+    map.doubleClickZoom.enable();
+  });
+
+  // collapse
+  var filters_open = true;
+  filters.querySelector('button').addEventListener('click', function () {
+    var children = filters.children;
+    if (filters_open) {
+      filters.style.width = '40%';
+      filters.style.height = 'fit-content';
+      document.getElementById('map_options').style.display = 'block';
+      filters.querySelector('span').innerText = 'expand_less';
+      filters_open = false;
+    } else {
+      filters.style.width = '20%';
+      document.getElementById('map_options').style.display = 'none';
+      filters.querySelector('span').innerText = 'expand_more';
+      filters_open = true;
+    }
+  });
+
+  // // menu 
+  // var menuButton = document.getElementById('menuButton');
+  // var menu = document.getElementById('menu');
+
+  // menuButton.addEventListener('mouseenter', function () {
+  //   menu.classList.add('show');
+  // });
+
+  // menu.addEventListener('mouseleave', function () {
+  //   menu.classList.remove('show');
+  // });
+
+  // adding crime hotspots
+  var KARNATAKA_POLICE_ACT_1963 = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } });
+  var THEFT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'yellow', 1: 'red' } });
+  var CRPC = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'pink', 1: 'red' } });
+  var CHEATING = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'magenta', 1: 'red' } });
+  var KARNATAKA_STATE_LOCAL_ACT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'orange', 0.65: 'yellow', 1: 'red' } });
+  var MOLESTATION = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'green', 1: 'red' } });
+  var MISSING_PERSON = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'cyan', 1: 'red' } });
+  var RIOTS = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'blue', 1: 'red' } });
+  var CASES_OF_HURT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'purple', 1: 'red' } });
+  var BURGLARY_NIGHT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'orange', 1: 'red' } });
+  var CRUELTY_BY_HUSBAND = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'blue', 1: 'red' } });
+  var ATTEMPT_TO_MURDER = L.heatLayer([], { radius: 25, gradient: { 0.4: 'orange', 0.65: 'green', 1: 'red' } });
+  var POCSO = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'pink', 1: 'red' } });
+  var PUBLIC_SAFETY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'cyan', 1: 'red' } });
+  var NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'orange', 1: 'red' } });
+  var ROBBERY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'green', 1: 'red' } });
+  var CYBER_CRIME = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'blue', 1: 'red' } });
+  var NEGLIGENT_ACT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'yellow', 1: 'red' } });
+
+
+  var overlayMaps = {
+    "KPA1963": KARNATAKA_POLICE_ACT_1963,
+    "Theft": THEFT,
+    "CrPC": CRPC,
+    "Cheating": CHEATING,
+    "Local State Act": KARNATAKA_STATE_LOCAL_ACT,
+    "Molestation": MOLESTATION,
+    "Missing Person": MISSING_PERSON,
+    "Riots": RIOTS,
+    "Cases of hurt": CASES_OF_HURT,
+    'Burglary (Night)': BURGLARY_NIGHT,
+    'Cruelty by Husband': CRUELTY_BY_HUSBAND,
+    'Attempt to Murder': ATTEMPT_TO_MURDER,
+    'POCSO': POCSO,
+    'Public Safety': PUBLIC_SAFETY,
+    'Drug Abuse': NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES,
+    'Robbery': ROBBERY,
+    'Cyber Crime': CYBER_CRIME,
+    'Negligent Act': NEGLIGENT_ACT
+  };
+
+  document.getElementById('crimefilter_dropdown').addEventListener('click', function () {
+    var filePaths = [];
+    //resetOverlayMaps();
+    var startYear = parseInt(document.getElementById('startYear').value);
+    var startMonth = parseInt(document.getElementById('startMonth').value);
+    var endYear = parseInt(document.getElementById('endYear').value);
+    var endMonth = parseInt(document.getElementById('endMonth').value);
+
+    // Generate file paths for the years within the range
+    for (var year = startYear; year <= endYear; year++) {
+      filePaths.push(year + '_Data.csv');
+    }
+
+    // Iterate through each file path
+    filePaths.forEach(function (filePath) {
+      Papa.parse('/static/data/' + filePath, {
+        header: true,
+        download: true,
+        dynamicTyping: true,
+        complete: function (results) {
+
+          results.data.forEach(function (d) {
+            var lat = d.Latitude;
+            var lng = d.Longitude;
+            var type = d.CrimeGroup_Name;
+            var year = parseInt(d.Year);
+            var month = parseInt(d.Month);
+
+            // Check if the row falls within the specified date range
+            if ((year > startYear || (year === startYear && month >= startMonth)) &&
+              (year < endYear || (year === endYear && month <= endMonth))) {
+              // Process the row based on crime type
+              switch (type) {
+                case "KARNATAKA POLICE ACT 1963":
+                  KARNATAKA_POLICE_ACT_1963.addLatLng([lat, lng]);
+                  break;
+                case "THEFT":
+                  THEFT.addLatLng([lat, lng]);
+                  break;
+                case "CrPC":
+                  CRPC.addLatLng([lat, lng]);
+                  break;
+                case "CHEATING":
+                  CHEATING.addLatLng([lat, lng]);
+                  break;
+                case "Karnataka State Local Act":
+                  KARNATAKA_STATE_LOCAL_ACT.addLatLng([lat, lng]);
+                  break;
+                case "MOLESTATION":
+                  MOLESTATION.addLatLng([lat, lng]);
+                  break;
+                case "MISSING PERSON":
+                  MISSING_PERSON.addLatLng([lat, lng]);
+                  break;
+                case "RIOTS":
+                  RIOTS.addLatLng([lat, lng]);
+                  break;
+                case "CASES OF HURT":
+                  CASES_OF_HURT.addLatLng([lat, lng]);
+                  break;
+                case "BURGLARY - NIGHT":
+                  BURGLARY_NIGHT.addLatLng([lat, lng]);
+                  break;
+                case "CRUELTY BY HUSBAND":
+                  CRUELTY_BY_HUSBAND.addLatLng([lat, lng]);
+                  break;
+                case "ATTEMPT TO MURDER":
+                  ATTEMPT_TO_MURDER.addLatLng([lat, lng]);
+                  break;
+                case "POCSO":
+                  POCSO.addLatLng([lat, lng]);
+                  break;
+                case "PUBLIC SAFETY":
+                  PUBLIC_SAFETY.addLatLng([lat, lng]);
+                  break;
+                case "NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES":
+                  NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES.addLatLng([lat, lng]);
+                  break;
+                case "ROBBERY":
+                  ROBBERY.addLatLng([lat, lng]);
+                  break;
+                case "CYBER CRIME":
+                  CYBER_CRIME.addLatLng([lat, lng]);
+                  break;
+                case "NEGLIGENT ACT":
+                  NEGLIGENT_ACT.addLatLng([lat, lng]);
+                  break;
+                default:
+                  // Handle other cases if needed
+                  break;
+              }
+            }
+          });
+        }
+      });
+    });
+  });
+
+
+  var checkboxesDiv = document.querySelector('.checkboxes');
+  for (var key in overlayMaps) {
+    var label = document.createElement('label');
+    var description = document.createTextNode(key);
+    var checkbox = document.createElement('input');
+
+    checkbox.type = 'checkbox';
+    checkbox.value = key;
+    checkbox.checked = false;
+
+    label.appendChild(checkbox);
+    label.appendChild(description);
+
+    checkboxesDiv.appendChild(label);
+  }
+
+  // legend
+  // var legend = L.control({position: 'bottomright'});
+  let colors = {
+    KPA1963: 'blue',
+    Theft: 'green',
+    CrPC: 'purple',
+    Cheating: 'cyan',
+    'Local State Act': 'orange',
+    Molestation: 'blue',
+    'Missing Person': 'purple',
+    Riots: 'green',
+    'Cases of hurt': 'cyan',
+    'Burglary (Night)': 'yellow',
+    'Cruelty by Husband': 'pink',
+    'Attempt to Murder': 'orange',
+    POCSO: 'blue',
+    'Public Safety': 'green',
+    'Drug Abuse': 'purple',
+    Robbery: 'cyan',
+    'Cyber Crime': 'yellow',
+    'Negligent Act': 'pink'
+  };
+
+
+  // fix colors
+
+  var current_filters = document.getElementById('current_filters')
+
+  document.querySelectorAll('#filters input[type=checkbox]').forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
+      var filterItem = document.createElement('div');
+      filterItem.innerHTML += '<button onclick="removeFilter(this)"><span class="material-symbols-rounded mt-2">close</span></button>';
+      filterItem.id = this.value;
+      filterItem.className = 'flex items-center rounded-full'
+      filterItem.innerHTML += this.value;
+      filterItem.style.backgroundColor = colors[this.value];
+      filterItem.style.paddingLeft = '8px';
+      filterItem.style.paddingRight = '12px';
+      filterItem.style.whiteSpace = 'nowrap';
+
+
+      if (this.checked) {
+        overlayMaps[this.value].addTo(map);
+        current_filters.insertBefore(filterItem, current_filters.firstChild);
+      } else {
+        map.removeLayer(overlayMaps[this.value]);
+
+        var itemToRemove = document.getElementById(this.value);
+        current_filters.removeChild(itemToRemove);
+      }
+    });
+  });
+
+  function removeFilter(button) {
+    var filterItem = button.parentElement;
+    var filterName = filterItem.id;
+    var checkbox = document.querySelector('input[value="' + filterName + '"]');
+    checkbox.checked = false;
+    checkbox.dispatchEvent(new Event('change'));
+  }
+
+  document.querySelector('button.crimefilter_dropdown').addEventListener('click', function () {
+    var checkboxesDiv = document.getElementById('checkboxes');
+    if (checkboxesDiv.style.display === 'grid') {
+      checkboxesDiv.style.display = 'none';
+    } else {
+      checkboxesDiv.style.display = 'grid';
+    }
+  });
+
+  var startYearSelect = document.getElementById('startYear');
+  var endYearSelect = document.getElementById('endYear');
+
+  for (var year = 2016; year <= 2024; year++) {
+    var startOption = document.createElement('option');
+    startOption.value = year;
+    startOption.text = year;
+    startYearSelect.appendChild(startOption);
+
+    var endOption = document.createElement('option');
+    endOption.value = year;
+    endOption.text = year;
+    endYearSelect.appendChild(endOption);
+  }
+  var startMonthSelect = document.getElementById('startMonth');
+  var endMonthSelect = document.getElementById('endMonth');
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  for (var i = 0; i < months.length; i++) {
+    var startOption = document.createElement('option');
+    startOption.value = i + 1; // Months are 1-indexed
+    startOption.text = months[i];
+    startMonthSelect.appendChild(startOption);
+
+    var endOption = document.createElement('option');
+    endOption.value = i + 1; // Months are 1-indexed
+    endOption.text = months[i];
+    endMonthSelect.appendChild(endOption);
+  }
+  // search box
+  // var options = {
+  //   key: 1f5b876",
+  //   position: 'topright',
+  //   placeholder: 'Search for an address',
+  //   // customMarkerOptions: {}, // Optional Leaflet Marker Options https://leafletjs.com/reference.html#marker-option
+  // };
+
+  // // add geosearch to the map
+  // var geosearchControl = L.Control.openCageGeosearch(options).addTo(map);
+
+</script>
+
+<style>
+  body {
+    background-color: #f8f8f8;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  #filters {
+    width: 20%;
+    height: fit-content;
     position: absolute;
-    color: black;
-    font-size: 40px;
-    font-family: DM Sans;
-    font-weight: 700;
-    word-wrap: break-word;
-  "
->
-  Trends over time
-</div>
-<div
-  style="
-    width: 1554px;
-    height: 651px;
-    left: 131px;
-    top: 1098px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  #map_options {
+    display: none;
+  }
+
+  input[type=text] {
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.03), 0px 18px 18px 0px rgba(0, 0, 0, 0.03), 0px 40px 24px 0px rgba(0, 0, 0, 0.02), 0px 71px 28px 0px rgba(0, 0, 0, 0.00), 0px 110px 31px 0px rgba(0, 0, 0, 0.00);
+  }
+
+  .crimefilter_dropdown {
     position: absolute;
-    background: white;
-  "
->
-  <div
-    style="
-      width: 13px;
-      height: 69px;
-      left: 855px;
-      top: 188px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 35px;
-      left: 957px;
-      top: 222px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 45px;
-      left: 1058px;
-      top: 212px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 41px;
-      left: 1160px;
-      top: 216px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 45px;
-      left: 1262px;
-      top: 212px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 57px;
-      left: 1363px;
-      top: 200px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 67px;
-      left: 1465px;
-      top: 190px;
-      position: absolute;
-      background: #dcff91;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 53px;
-      left: 868px;
-      top: 204px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 26px;
-      left: 970px;
-      top: 231px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 22px;
-      left: 1071px;
-      top: 235px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 22px;
-      left: 1173px;
-      top: 235px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 31px;
-      left: 1275px;
-      top: 226px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 41px;
-      left: 1376px;
-      top: 216px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 13px;
-      height: 41px;
-      left: 1478px;
-      top: 216px;
-      position: absolute;
-      background: #ffcbda;
-    "
-  ></div>
-  <div
-    style="
-      width: 1554px;
-      height: 0px;
-      left: 0px;
-      top: 325px;
-      position: absolute;
-      border: 1px rgba(0, 0, 0, 0.3) solid;
-    "
-  ></div>
-  <div
-    style="
-      width: 651px;
-      height: 0px;
-      left: 777px;
-      top: 0px;
-      position: absolute;
-      transform: rotate(90deg);
-      transform-origin: 0 0;
-      border: 1px rgba(0, 0, 0, 0.3) solid;
-    "
-  ></div>
-  <div
-    style="
-      left: 20px;
-      top: 14px;
-      position: absolute;
-      text-align: center;
-      color: #2b2b2b;
-      font-size: 24px;
-      font-family: DM Sans;
-      font-weight: 500;
-      word-wrap: break-word;
-    "
-  >
-    Dailly Trend
-  </div>
-  <div
-    style="
-      left: 825px;
-      top: 341px;
-      position: absolute;
-      text-align: center;
-      color: #2b2b2b;
-      font-size: 24px;
-      font-family: DM Sans;
-      font-weight: 500;
-      word-wrap: break-word;
-    "
-  >
-    Yearly Trend
-  </div>
-  <div
-    style="
-      left: 17px;
-      top: 341px;
-      position: absolute;
-      text-align: center;
-      color: #2b2b2b;
-      font-size: 24px;
-      font-family: DM Sans;
-      font-weight: 500;
-      word-wrap: break-word;
-    "
-  >
-    Monthly Trend
-  </div>
-  <div
-    style="
-      left: 801px;
-      top: 14px;
-      position: absolute;
-      text-align: center;
-      color: #2b2b2b;
-      font-size: 24px;
-      font-family: DM Sans;
-      font-weight: 500;
-      word-wrap: break-word;
-    "
-  >
-    Weekly Trend
-  </div>
-  <div
-    style="
-      width: 683px;
-      height: 251px;
-      left: 45px;
-      top: 62px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        left: 339px;
-        top: 230px;
-        position: absolute;
-        text-align: center;
-        color: black;
-        font-size: 16px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Time
-    </div>
-    <div
-      style="
-        left: 0px;
-        top: 141px;
-        position: absolute;
-        transform: rotate(-90deg);
-        transform-origin: 0 0;
-        text-align: center;
-        color: black;
-        font-size: 14px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Occurrences
-    </div>
-    <div
-      style="
-        width: 13px;
-        height: 98px;
-        left: 38px;
-        top: 97px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 120px;
-        left: 95px;
-        top: 75px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 74px;
-        left: 206px;
-        top: 121px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 77px;
-        left: 262px;
-        top: 118px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 54px;
-        left: 318px;
-        top: 141px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 42px;
-        left: 374px;
-        top: 153px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 60px;
-        left: 430px;
-        top: 135px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 57px;
-        left: 486px;
-        top: 138px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 60px;
-        left: 542px;
-        top: 135px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 73px;
-        left: 598px;
-        top: 122px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 94px;
-        left: 654px;
-        top: 101px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 91px;
-        left: 150px;
-        top: 104px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 79px;
-        left: 51px;
-        top: 116px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 94px;
-        left: 108px;
-        top: 101px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 67px;
-        left: 219px;
-        top: 128px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 40px;
-        left: 275px;
-        top: 155px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 25px;
-        left: 331px;
-        top: 170px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 25px;
-        left: 387px;
-        top: 170px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 36px;
-        left: 443px;
-        top: 159px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 42px;
-        left: 499px;
-        top: 153px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 47px;
-        left: 555px;
-        top: 148px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 63px;
-        left: 611px;
-        top: 132px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 78px;
-        left: 667px;
-        top: 117px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 79px;
-        left: 163px;
-        top: 116px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 649px;
-        height: 195px;
-        left: 34px;
-        top: 0px;
-        position: absolute;
-        border: 1px black solid;
-      "
-    ></div>
-    <div
-      style="
-        width: 649px;
-        height: 16px;
-        left: 34px;
-        top: 201px;
-        position: absolute;
-        justify-content: space-between;
-        align-items: center;
-        display: inline-flex;
-      "
-    >
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        00:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        02:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        04:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        06:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        08:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        10:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        12:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        14:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        16:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        18:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        20:00
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        22:00
-      </div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 681px;
-      height: 251px;
-      left: 47px;
-      top: 381px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        left: 336px;
-        top: 230px;
-        position: absolute;
-        text-align: center;
-        color: black;
-        font-size: 16px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Dates
-    </div>
-    <div
-      style="
-        left: 0px;
-        top: 141px;
-        position: absolute;
-        transform: rotate(-90deg);
-        transform-origin: 0 0;
-        text-align: center;
-        color: black;
-        font-size: 14px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Occurrences
-    </div>
-    <div
-      style="
-        width: 13px;
-        height: 98px;
-        left: 39px;
-        top: 98px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 120px;
-        left: 116px;
-        top: 75px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 83px;
-        left: 283px;
-        top: 112px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 88px;
-        left: 373px;
-        top: 107px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 83px;
-        left: 465px;
-        top: 112px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 83px;
-        left: 558px;
-        top: 112px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 74px;
-        left: 650px;
-        top: 121px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 91px;
-        left: 195px;
-        top: 104px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 79px;
-        left: 52px;
-        top: 117px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 94px;
-        left: 129px;
-        top: 101px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 67px;
-        left: 296px;
-        top: 128px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 78px;
-        left: 386px;
-        top: 117px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 57px;
-        left: 478px;
-        top: 138px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 57px;
-        left: 571px;
-        top: 138px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 64px;
-        left: 663px;
-        top: 131px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 79px;
-        left: 208px;
-        top: 116px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 649px;
-        height: 195px;
-        left: 32px;
-        top: 0px;
-        position: absolute;
-        border: 1px black solid;
-      "
-    ></div>
-    <div
-      style="
-        width: 643px;
-        height: 16px;
-        left: 38px;
-        top: 201px;
-        position: absolute;
-        justify-content: space-between;
-        align-items: center;
-        display: inline-flex;
-      "
-    >
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        1-3
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        4-7
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        8-11
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        12-15
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        16-19
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        20-23
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        24-27
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        28-30
-      </div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 683px;
-      height: 251px;
-      left: 838px;
-      top: 384px;
-      position: absolute;
-    "
-  >
-    <div
-      style="
-        left: 334px;
-        top: 230px;
-        position: absolute;
-        text-align: center;
-        color: black;
-        font-size: 16px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Month
-    </div>
-    <div
-      style="
-        left: 0px;
-        top: 141px;
-        position: absolute;
-        transform: rotate(-90deg);
-        transform-origin: 0 0;
-        text-align: center;
-        color: black;
-        font-size: 14px;
-        font-family: DM Sans;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      Occurrences
-    </div>
-    <div
-      style="
-        width: 13px;
-        height: 87px;
-        left: 38px;
-        top: 108px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 67px;
-        left: 95px;
-        top: 128px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 81px;
-        left: 206px;
-        top: 114px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 87px;
-        left: 262px;
-        top: 108px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 81px;
-        left: 318px;
-        top: 114px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 81px;
-        left: 374px;
-        top: 114px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 87px;
-        left: 430px;
-        top: 108px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 67px;
-        left: 486px;
-        top: 128px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 81px;
-        left: 542px;
-        top: 114px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 78px;
-        left: 598px;
-        top: 117px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 94px;
-        left: 654px;
-        top: 101px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 93px;
-        left: 150px;
-        top: 102px;
-        position: absolute;
-        background: #dcff91;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 57px;
-        left: 51px;
-        top: 138px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 42px;
-        left: 108px;
-        top: 153px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 81px;
-        left: 219px;
-        top: 114px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 67px;
-        left: 275px;
-        top: 128px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 63px;
-        left: 331px;
-        top: 132px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 73px;
-        left: 387px;
-        top: 122px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 73px;
-        left: 443px;
-        top: 122px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 35px;
-        left: 499px;
-        top: 160px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 67px;
-        left: 555px;
-        top: 128px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 63px;
-        left: 611px;
-        top: 132px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 78px;
-        left: 667px;
-        top: 117px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 13px;
-        height: 60px;
-        left: 163px;
-        top: 135px;
-        position: absolute;
-        background: #ffcbda;
-      "
-    ></div>
-    <div
-      style="
-        width: 649px;
-        height: 195px;
-        left: 34px;
-        top: 0px;
-        position: absolute;
-        border: 1px black solid;
-      "
-    ></div>
-    <div
-      style="
-        width: 649px;
-        height: 16px;
-        left: 34px;
-        top: 201px;
-        position: absolute;
-        justify-content: space-between;
-        align-items: center;
-        display: inline-flex;
-      "
-    >
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Jan
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Feb
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Mar
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Apr
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        May
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        June
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        July
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Aug
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Sept
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Oct
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Nov
-      </div>
-      <div
-        style="
-          text-align: center;
-          color: #4f4f4f;
-          font-size: 12px;
-          font-family: DM Mono;
-          font-weight: 400;
-          word-wrap: break-word;
-        "
-      >
-        Dec
-      </div>
-    </div>
-  </div>
-  <div
-    style="
-      width: 649px;
-      height: 195px;
-      left: 842px;
-      top: 62px;
-      position: absolute;
-      border: 1px black solid;
-    "
-  ></div>
-  <div
-    style="
-      width: 636px;
-      left: 855px;
-      top: 262px;
-      position: absolute;
-      justify-content: space-between;
-      align-items: center;
-      display: inline-flex;
-    "
-  >
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      SUN
-    </div>
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      MON
-    </div>
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      TUE
-    </div>
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      WED
-    </div>
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      THU
-    </div>
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      FRI
-    </div>
-    <div
-      style="
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 14px;
-        font-family: DM Mono;
-        font-weight: 500;
-        word-wrap: break-word;
-      "
-    >
-      SAT
-    </div>
-  </div>
-</div>
+    right: 6%;
+  }
+
+  .checkboxes {
+    display: none;
+    grid-template-columns: auto auto auto;
+    gap: 0.5em;
+    align-items: center;
+  }
+  #hotspot {
+    text-decoration: underline;
+  }
+
+  .self-end {
+    align-self: end;
+    justify-self: end;
+  }
+
+  input[type=checkbox] {
+    margin-right: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
 {% endblock %}

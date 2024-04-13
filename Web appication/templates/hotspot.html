@@ -24,31 +24,39 @@
       </div>
 
       <div id="map_options">
+        <!-- toggle -->
+        <div class="flex items-center text-white text-xl font-bold" id="toggle">
+          <h3>Historical Data</h3>
+          <input type="checkbox" checked="unchecked" id="switch" />
+          <label for="switch" class="switch">Toggle</label>
+          <h3 class="px-3">Predictions</h3>
+        </div>
+        
         <!-- date select -->
-        <div class="flex items-center mx-6 my-4 text-lg gap-4">
-          <h2 class="text-xl text-white">Date&nbsp;Range</h2>
-
-          <div class="flex flex-col gap-2 items-center">
-            <div class="flex gap-2 rounded-xl bg-white">
-              <label for="StartDate" class="ml-4 font-bold">Start&nbsp;Day</label>
-              <input type="date" id="startDate" class="rounded-xl" name="StartDate">
+        <div class="flex flex-col justify-start w-fit items-start mx-6 mt-4 text-lg gap-1 mb-4">
+          <h2 class="text-xl text-white" id="datetext">Date&nbsp;Range</h2>
+          <div class="flex flex-col gap-2 w-fit">
+            <div class="flex gap-2 rounded-xl bg-white w-fit">
+              <label for="StartDate" class="ml-4 font-bold" id="stdaylabel">Start&nbsp;Day:</label>
+              <input type="date" id="startDate" class="rounded-xl w-fit" name="StartDate" max="2024-03-03">
             </div>
-            <div class="flex gap-2 rounded-xl bg-white">
-              <label for="EndDate" class="ml-4 font-bold">End&nbsp;Day</label>
-              <input type="date" id="endDate" class="rounded-xl" name="EndDate">
+            <div class="flex gap-2 rounded-xl bg-white w-fit">
+              <label for="EndDate" class="ml-4 font-bold">End&nbsp;Day:</label>
+              <input type="date" id="endDate" class="rounded-xl w-fit" name="EndDate">
             </div>
           </div>
         </div>
+        
         <!-- crime type -->
-        <div class="flex mx-6 my-4 w-40 items-center gap-4">
-          <h2 class="text-xl text-white flex items-center mb-2">
+        <div class="flex flex-col mx-6 mb-4 gap-1">
+          <h2 class="text-xl text-white flex items-center">
             Crime&nbsp;type
           </h2>
           <!-- current filters -->
           <div id="current_filters"
-            class="bg-slate-50 h-12 w-full overflow-scroll rounded-full flex items-center justify-items-end gap-3 text-white text-base px-2 py-1">
+            class="bg-slate-50 h-12 overflow-scroll rounded-full flex items-center justify-items-end gap-3 text-white text-base px-2">
             <button class="crimefilter_dropdown" id="crimefilter_dropdown">
-              <span class="material-symbols-rounded text-2xl text-black">
+              <span class="material-symbols-rounded text-2xl text-white bg-blue-600 rounded-full p-2">
                 keyboard_arrow_down
               </span>
             </button>
@@ -117,7 +125,7 @@
   filters.querySelector('button').addEventListener('click', function () {
     var children = filters.children;
     if (filters_open) {
-      filters.style.width = '35%';
+      filters.style.width = '25%';
       filters.style.height = 'fit-content';
       document.getElementById('map_options').style.display = 'block';
       filters.querySelector('span').innerText = 'expand_less';
@@ -130,17 +138,26 @@
     }
   });
 
-  // // menu 
-  // var menuButton = document.getElementById('menuButton');
-  // var menu = document.getElementById('menu');
+  document.getElementById('switch').addEventListener('change', function () {
+    var endDateLabel = document.querySelector('label[for="EndDate"]');
+    var endDateInput = document.getElementById('endDate');
+    var startDateLabel = document.querySelector('label[for="StartDate"]');
+    var datetext = document.getElementById('datetext');
 
-  // menuButton.addEventListener('mouseenter', function () {
-  //   menu.classList.add('show');
-  // });
-
-  // menu.addEventListener('mouseleave', function () {
-  //   menu.classList.remove('show');
-  // });
+    if (this.checked) {
+      // Checkbox is checked
+      endDateLabel.style.display = 'none';
+      endDateInput.style.display = 'none';
+      startDateLabel.textContent = 'Select Day';
+      datetext.innerText = 'Date';
+    } else {
+      // Checkbox is not checked
+      endDateLabel.style.display = 'block';
+      endDateInput.style.display = 'block';
+      startDateLabel.textContent = 'Start Day';
+      datetext.innerText = 'Date Range';
+    }
+  });
 
   // adding crime hotspots
   var KARNATAKA_POLICE_ACT_1963 = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } });
@@ -336,6 +353,7 @@
       filterItem.style.backgroundColor = colors[this.value];
       filterItem.style.paddingLeft = '8px';
       filterItem.style.paddingRight = '12px';
+      filterItem.style.paddingBottom = '4px'
       filterItem.style.whiteSpace = 'nowrap';
 
 
@@ -371,43 +389,6 @@
   var startYearSelect = document.getElementById('startYear');
   var endYearSelect = document.getElementById('endYear');
 
-  // for (var year = 2016; year <= 2024; year++) {
-  //   var startOption = document.createElement('option');
-  //   startOption.value = year;
-  //   startOption.text = year;
-  //   startYearSelect.appendChild(startOption);
-
-  //   var endOption = document.createElement('option');
-  //   endOption.value = year;
-  //   endOption.text = year;
-  //   endYearSelect.appendChild(endOption);
-  // }
-  // var startMonthSelect = document.getElementById('startMonth');
-  // var endMonthSelect = document.getElementById('endMonth');
-  // var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  // for (var i = 0; i < months.length; i++) {
-  //   var startOption = document.createElement('option');
-  //   startOption.value = i + 1; // Months are 1-indexed
-  //   startOption.text = months[i];
-  //   startMonthSelect.appendChild(startOption);
-
-  //   var endOption = document.createElement('option');
-  //   endOption.value = i + 1; // Months are 1-indexed
-  //   endOption.text = months[i];
-  //   endMonthSelect.appendChild(endOption);
-  // }
-  // search box
-  // var options = {
-  //   key: 1f5b876",
-  //   position: 'topright',
-  //   placeholder: 'Search for an address',
-  //   // customMarkerOptions: {}, // Optional Leaflet Marker Options https://leafletjs.com/reference.html#marker-option
-  // };
-
-  // // add geosearch to the map
-  // var geosearchControl = L.Control.openCageGeosearch(options).addTo(map);
-
 </script>
 
 <style>
@@ -436,7 +417,7 @@
 
   .crimefilter_dropdown {
     position: absolute;
-    right: 6%;
+    right: 7.5%;
   }
 
   .checkboxes {
@@ -461,6 +442,64 @@
 
   .hidden {
     display: none;
+  }
+
+  .overflow-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .overflow-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  #toggle {
+    margin: 1.5rem;
+  }
+
+  #switch[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  .switch {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 60px;
+    height: 30px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
+
+  .switch:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+
+  #switch:checked+label {
+    background: #5C8DD6;
+  }
+
+  #switch:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
+
+  .switch:active:after {
+    width: 30px;
   }
 </style>
 {% endblock %}

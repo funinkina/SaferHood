@@ -18,18 +18,16 @@
     <!-- cards -->
     <div id="cards">
         <div id="hotspot" class="flex flex-col overflow-hidden">
-            <h2 class="text-[#5C8DD6] text-2xl font-bold">Analyse Hotspots</h2>
+            <div class="flex justify-between">
+                <h2 class="text-[#5C8DD6] text-2xl font-bold">Analyse Hotspots</h2>
+                <a href="/hotspot_mapping" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">See Predictions
+                    <span class="material-symbols-rounded text-4xl">
+                        arrow_right_alt
+                    </span>
+                </a>
+            </div>
             <p class="text-black/60">Visualising crime pattern through time</p>
-            <div class="my-4 flex w-full items-end justify-between gap-6">
-                <div class="w-5/12">
-                    <h3 class="font-bold text-[#5C8DD6]">Boundary</h3>
-                    <select id="boundary" class="py-3 px-3 bg-white border w-full border-black">
-                        <option value="City">City</option>
-                        <option value="Village">Village</option>
-                        <option value="District">District</option>
-                        <option value="Thana">Thana</option>
-                    </select>
-                </div>
+            <div class="my-4 flex w-full items-end  gap-6">
                 <div class="w-5/12">
                     <h3 class="font-bold text-[#5C8DD6]">Time range</h3>
                     <select id="time_range" class="py-3 px-3 bg-white border w-full border-black">

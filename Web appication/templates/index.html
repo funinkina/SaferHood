@@ -11,24 +11,6 @@
         <div class="flex items-center gap-4">
             <p class="text-2xl">Crime Type</p>
             <select class="py-3 px-5 bg-white border border-black" id="crime_type">
-                <option value="THEFT">Theft</option>
-                <option value="KPA1963">KPA1963</option>
-                <option value="CRPC">CrPC</option>
-                <option value="CHEATING">Cheating</option>
-                <option value="KARNATAKA_STATE_LOCAL_ACT">Local State Act</option>
-                <option value="MOLESTATION">Molestation</option>
-                <option value="MISSING_PERSON">Missing Person</option>
-                <option value="RIOTS">Riots</option>
-                <option value="CASES_OF_HURT">Cases of hurt</option>
-                <option value="BURGLARY_NIGHT">Burglary (Night)</option>
-                <option value="CRUELTY_BY_HUSBAND">Cruelty by Husband</option>
-                <option value="ATTEMPT_TO_MURDER">Attempt to Murder</option>
-                <option value="POCSO">POCSO</option>
-                <option value="PUBLIC_SAFETY">Public Safety</option>
-                <option value="NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES">Drug Abuse</option>
-                <option value="ROBBERY">Robbery</option>
-                <option value="CYBER_CRIME">Cyber Crime</option>
-                <option value="NEGLIGENT_ACT">Negligent Act</option>
             </select>
         </div>
     </div>
@@ -192,37 +174,73 @@
         'Negligent Act': NEGLIGENT_ACT
     };
 
+    var selectOptions = document.getElementById('crime_type');
+
+    for (var key in overlayMaps) {
+        var option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        selectOptions.appendChild(option);
+    }
+    var currentLayer = []
+
     document.getElementById('gobutton').addEventListener('click', function () {
         var filePaths = [];
 
-        
+        time_range = document.getElementById("time_range").value
+        crime_type = document.getElementById("crime_type").value
+        var startMonth, startYear;
 
-        var startYear = parseInt(document.getElementById('startYear').value);
-        var startMonth = parseInt(document.getElementById('startMonth').value);
-        var endYear = parseInt(document.getElementById('endYear').value);
-        var endMonth = parseInt(document.getElementById('endMonth').value);
+        if (time_range == 'one_month') {
+            var startMonth = new Date().getMonth() - 1;
+            var startYear = new Date().getFullYear();
+        } else if (time_range == 'three_months') {
+            var startMonth = new Date().getMonth() - 2;
+            if (startMonth <= 0) {
+                var startYear = parseInt(--startYear);
+                var startMonth = 12 - parseInt(startMonth);
+            }
+            var startYear = new Date().getFullYear();
+        } else if (time_range == 'six_months') {
+            var startMonth = new Date().getMonth() - 5;
+            if (startMonth <= 0) {
+                var startYear = parseInt(--startYear);
+                var startMonth = 12 - parseInt(startMonth);
+            }
+            var startYear = new Date().getFullYear();
+        } else if (time_range == 'one_year') {
+            var startMonth = new Date().getMonth() - 11;
+            if (startMonth <= 0) {
+                var startYear = parseInt(--startYear);
+                var startMonth = 12 - parseInt(startMonth);
+            }
+            var startYear = new Date().getFullYear();
+        }
+
+        var endYear = new Date().getFullYear();
+        var endMonth = new Date().getMonth() + 1;
 
         for (var year = startYear; year <= endYear; year++) {
             filePaths.push(year + '_Data.csv');
         }
-
+        if (currentLayer) {
+            map.removeLayer(currentLayer);
+        }
         filePaths.forEach(function (filePath) {
             Papa.parse('/static/data/' + filePath, {
                 header: true,
                 download: true,
                 dynamicTyping: true,
                 complete: function (results) {
-
                     results.data.forEach(function (d) {
                         var lat = d.Latitude;
                         var lng = d.Longitude;
                         var type = d.CrimeGroup_Name;
                         var year = parseInt(d.Year);
                         var month = parseInt(d.Month);
-
                         // Check if the row falls within the specified date range
-                        if ((year > startYear || (year === startYear && month >= startMonth)) &&
-                            (year < endYear || (year === endYear && month <= endMonth))) {
+                        if ((year > startYear || (year == startYear && month >= startMonth)) &&
+                            (year < endYear || (year == endYear && month <= endMonth))) {
                             // Process the row based on crime type
                             switch (type) {
                                 case "KARNATAKA POLICE ACT 1963":
@@ -287,6 +305,8 @@
                 }
             });
         });
+        //add layers to map
+        currentLayer = overlayMaps[crime_type].addTo(map);
     });
 
 </script>

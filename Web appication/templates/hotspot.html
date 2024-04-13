@@ -2,39 +2,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
 <body>
   {% extends "nav.html" %} {% block content %}
-  <!-- header -->
-  <!-- <div class="flex justify-between align-center mx-8 mt-4">
-    <div class="flex items-center gap-4">
-      <button id="menuButton"><span class="material-symbols-rounded text-3xl">menu</span></button>
-      <div id="menu" class="menu text-black">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-        <a href="#">Link 4</a>
-      </div>
-      <div id="logo">
-        <img src="saferhood_logo.svg" alt="">
-        <p>Building a Safer Neighborhood</p>
-      </div>
-    </div>
-    <div class="flex gap-6 align-center items-center">
-      <img class="h-16"
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png"
-        alt="">
-      <div class="h-full w-[1.6px] bg-black/40"></div>
-      <div class="flex items-center">
-        <img class="h-16"
-          src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pngimagesfree.com%2FLOGO%2FK%2FKarnataka-Govt%2FKarnataka-Govt-Logo-Vector-PNG.png&f=1&nofb=1&ipt=412c3a068839b289050c2b567c132e2c1948d6b080341d5a034fe8af43bcc4e6&ipo=images"
-          alt="">
-        <div class="ml-4">
-          <p class="text-xl font-bold">Karnataka State Police</p>
-          <p class="text-sm">Government of Karnataka</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <!-- top bar -->
   <div class="mx-8 my-5 flex justify-between">
     <h2 class="text-4xl font-light text-black/50">
@@ -55,31 +25,28 @@
 
       <div id="map_options">
         <!-- date select -->
-        <div class="flex justify-between items-center mx-6 my-4 text-lg gap-4">
+        <div class="flex items-center mx-6 my-4 text-lg gap-4">
           <h2 class="text-xl text-white">Date&nbsp;Range</h2>
 
-          <div class="bg-slate-50 flex rounded-full px-3">
-            <div class="flex gap-2 items-center">
-              <div class="flex gap-0 rounded-xl">
-                <select id="startMonth" class="py-2 bg-slate-50 px-2 border-r-2 rounded-l-full"></select>
-                <select id="startYear" class="py-2 bg-slate-50 px-2 border-r-2"></select>
-              </div>
-              <p class="text-zinc-800 text-base font-bold">TO</p>
-              <div class="flex gap-0">
-                <select id="endMonth" class="py-2 bg-slate-50 border-r-2 border-l-2 px-2"></select>
-                <select id="endYear" class="py-2 bg-slate-50 px-2  rounded-r-full"></select>
-              </div>
+          <div class="flex flex-col gap-2 items-center">
+            <div class="flex gap-2 rounded-xl bg-white">
+              <label for="StartDate" class="ml-4 font-bold">Start&nbsp;Day</label>
+              <input type="date" id="startDate" class="rounded-xl" name="StartDate">
+            </div>
+            <div class="flex gap-2 rounded-xl bg-white">
+              <label for="EndDate" class="ml-4 font-bold">End&nbsp;Day</label>
+              <input type="date" id="endDate" class="rounded-xl" name="EndDate">
             </div>
           </div>
         </div>
         <!-- crime type -->
-        <div class="flex mx-6 my-4 items-center gap-4">
+        <div class="flex mx-6 my-4 w-40 items-center gap-4">
           <h2 class="text-xl text-white flex items-center mb-2">
             Crime&nbsp;type
           </h2>
           <!-- current filters -->
           <div id="current_filters"
-            class="bg-slate-50 w-full h-12 overflow-scroll rounded-full flex items-center justify-items-end gap-3 text-white text-base px-2 py-1">
+            class="bg-slate-50 h-12 w-full overflow-scroll rounded-full flex items-center justify-items-end gap-3 text-white text-base px-2 py-1">
             <button class="crimefilter_dropdown" id="crimefilter_dropdown">
               <span class="material-symbols-rounded text-2xl text-black">
                 keyboard_arrow_down
@@ -150,7 +117,7 @@
   filters.querySelector('button').addEventListener('click', function () {
     var children = filters.children;
     if (filters_open) {
-      filters.style.width = '40%';
+      filters.style.width = '35%';
       filters.style.height = 'fit-content';
       document.getElementById('map_options').style.display = 'block';
       filters.querySelector('span').innerText = 'expand_less';
@@ -219,18 +186,18 @@
 
   document.getElementById('crimefilter_dropdown').addEventListener('click', function () {
     var filePaths = [];
-    //resetOverlayMaps();
-    var startYear = parseInt(document.getElementById('startYear').value);
-    var startMonth = parseInt(document.getElementById('startMonth').value);
-    var endYear = parseInt(document.getElementById('endYear').value);
-    var endMonth = parseInt(document.getElementById('endMonth').value);
+    var startDateInput = new Date(document.getElementById("startDate").value)
+    var enddateInput = new Date(document.getElementById("endDate").value)
 
-    // Generate file paths for the years within the range
+    var startYear = parseInt(startDateInput.getFullYear());
+    var startMonth = parseInt(startDateInput.getMonth() + 1);
+    var endYear = parseInt(enddateInput.getFullYear());
+    var endMonth = parseInt(enddateInput.getMonth() + 1);
+
     for (var year = startYear; year <= endYear; year++) {
       filePaths.push(year + '_Data.csv');
     }
 
-    // Iterate through each file path
     filePaths.forEach(function (filePath) {
       Papa.parse('/static/data/' + filePath, {
         header: true,
@@ -305,7 +272,6 @@
                   NEGLIGENT_ACT.addLatLng([lat, lng]);
                   break;
                 default:
-                  // Handle other cases if needed
                   break;
               }
             }
@@ -365,7 +331,7 @@
       var filterItem = document.createElement('div');
       filterItem.innerHTML += '<button onclick="removeFilter(this)"><span class="material-symbols-rounded mt-2">close</span></button>';
       filterItem.id = this.value;
-      filterItem.className = 'flex items-center rounded-full'
+      filterItem.className = 'flex items-end rounded-full'
       filterItem.innerHTML += this.value;
       filterItem.style.backgroundColor = colors[this.value];
       filterItem.style.paddingLeft = '8px';
@@ -405,32 +371,32 @@
   var startYearSelect = document.getElementById('startYear');
   var endYearSelect = document.getElementById('endYear');
 
-  for (var year = 2016; year <= 2024; year++) {
-    var startOption = document.createElement('option');
-    startOption.value = year;
-    startOption.text = year;
-    startYearSelect.appendChild(startOption);
+  // for (var year = 2016; year <= 2024; year++) {
+  //   var startOption = document.createElement('option');
+  //   startOption.value = year;
+  //   startOption.text = year;
+  //   startYearSelect.appendChild(startOption);
 
-    var endOption = document.createElement('option');
-    endOption.value = year;
-    endOption.text = year;
-    endYearSelect.appendChild(endOption);
-  }
-  var startMonthSelect = document.getElementById('startMonth');
-  var endMonthSelect = document.getElementById('endMonth');
-  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  //   var endOption = document.createElement('option');
+  //   endOption.value = year;
+  //   endOption.text = year;
+  //   endYearSelect.appendChild(endOption);
+  // }
+  // var startMonthSelect = document.getElementById('startMonth');
+  // var endMonthSelect = document.getElementById('endMonth');
+  // var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-  for (var i = 0; i < months.length; i++) {
-    var startOption = document.createElement('option');
-    startOption.value = i + 1; // Months are 1-indexed
-    startOption.text = months[i];
-    startMonthSelect.appendChild(startOption);
+  // for (var i = 0; i < months.length; i++) {
+  //   var startOption = document.createElement('option');
+  //   startOption.value = i + 1; // Months are 1-indexed
+  //   startOption.text = months[i];
+  //   startMonthSelect.appendChild(startOption);
 
-    var endOption = document.createElement('option');
-    endOption.value = i + 1; // Months are 1-indexed
-    endOption.text = months[i];
-    endMonthSelect.appendChild(endOption);
-  }
+  //   var endOption = document.createElement('option');
+  //   endOption.value = i + 1; // Months are 1-indexed
+  //   endOption.text = months[i];
+  //   endMonthSelect.appendChild(endOption);
+  // }
   // search box
   // var options = {
   //   key: 1f5b876",
@@ -451,7 +417,7 @@
   }
 
   #filters {
-    width: 20%;
+    width: 15%;
     height: fit-content;
     position: absolute;
     top: 0;
@@ -479,7 +445,8 @@
     gap: 0.5em;
     align-items: center;
   }
-  #hotspot {
+
+  #hotspotlink {
     text-decoration: underline;
   }
 

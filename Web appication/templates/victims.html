@@ -1,68 +1,96 @@
 <body>
   {% extends "nav.html" %} {% block content %}
   <div class="mx-8 my-5 flex justify-between">
-    <h2 class="text-4xl font-light text-black/50">
-      Victim Prediction
-    </h2>
+    <h2 class="text-4xl font-light text-black/50">Victim Prediction</h2>
   </div>
-  <div class="flex items-center gap-6 mx-8 my-5 ">
+  <div class="flex items-center gap-6 mx-8 my-5">
     <div>
       <h3 class="font-bold text-[#5C8DD6]">District</h3>
-      <select id="district" class="py-3 px-3 bg-white border w-full border-black">
-        <option value='Bagalkot'>Bagalkot</option>
-        <option value='Ballari'>Ballari</option>
-        <option value='Belagavi City'>Belagavi City</option>
-        <option value='Belagavi Dist'>Belagavi Dist</option>
-        <option value='Bengaluru City'>Bengaluru City</option>
-        <option value='Bengaluru Dist'>Bengaluru Dist</option>
-        <option value='Bidar'>Bidar</option>
-        <option value='Chamarajanagar'>Chamarajanagar</option>
-        <option value='Chickballapura'>Chickballapura</option>
-        <option value='Chikkamagaluru'>Chikkamagaluru</option>
-        <option value='Chitradurga'>Chitradurga</option>
-        <option value='CID'>CID</option>
-        <option value='Coastal Security Police'>Coastal Security Police</option>
-        <option value='Dakshina Kannada'>Dakshina Kannada</option>
-        <option value='Davanagere'>Davanagere</option>
-        <option value='Dharwad'>Dharwad</option>
-        <option value='Gadag'>Gadag</option>
-        <option value='Hassan'>Hassan</option>
-        <option value='Haveri'>Haveri</option>
-        <option value='Hubballi Dharwad City'>Hubballi Dharwad City</option>
-        <option value='ISD Bengaluru'>ISD Bengaluru</option>
-        <option value='K.G.F'>K.G.F</option>
-        <option value='Kalaburagi'>Kalaburagi</option>
-        <option value='Kalaburagi City'>Kalaburagi City</option>
-        <option value='Karnataka Railways'>Karnataka Railways</option>
-        <option value='Kodagu'>Kodagu</option>
-        <option value='Kolar'>Kolar</option>
-        <option value='Koppal'>Koppal</option>
-        <option value='Mandya'>Mandya</option>
-        <option value='Mangaluru City'>Mangaluru City</option>
-        <option value='Mysuru City'>Mysuru City</option>
-        <option value='Mysuru Dist'>Mysuru Dist</option>
-        <option value='Raichur'>Raichur</option>
-        <option value='Ramanagara'>Ramanagara</option>
-        <option value='Shivamogga'>Shivamogga</option>
-        <option value='Tumakuru'>Tumakuru</option>
-        <option value='Udupi'>Udupi</option>
-        <option value='Uttara Kannada'>Uttara Kannada</option>
-        <option value='Vijayanagara'>Vijayanagara</option>
-        <option value='Vijayapur'>Vijayapur</option>
-        <option value='Yadgir'>Yadgir</option>
+      <select
+        id="district"
+        class="py-3 px-3 bg-white border w-full border-black"
+      >
+        <option value="Bagalkot">Bagalkot</option>
+        <option value="Ballari">Ballari</option>
+        <option value="Belagavi City">Belagavi City</option>
+        <option value="Belagavi Dist">Belagavi Dist</option>
+        <option value="Bengaluru City">Bengaluru City</option>
+        <option value="Bengaluru Dist">Bengaluru Dist</option>
+        <option value="Bidar">Bidar</option>
+        <option value="Chamarajanagar">Chamarajanagar</option>
+        <option value="Chickballapura">Chickballapura</option>
+        <option value="Chikkamagaluru">Chikkamagaluru</option>
+        <option value="Chitradurga">Chitradurga</option>
+        <option value="CID">CID</option>
+        <option value="Coastal Security Police">Coastal Security Police</option>
+        <option value="Dakshina Kannada">Dakshina Kannada</option>
+        <option value="Davanagere">Davanagere</option>
+        <option value="Dharwad">Dharwad</option>
+        <option value="Gadag">Gadag</option>
+        <option value="Hassan">Hassan</option>
+        <option value="Haveri">Haveri</option>
+        <option value="Hubballi Dharwad City">Hubballi Dharwad City</option>
+        <option value="ISD Bengaluru">ISD Bengaluru</option>
+        <option value="K.G.F">K.G.F</option>
+        <option value="Kalaburagi">Kalaburagi</option>
+        <option value="Kalaburagi City">Kalaburagi City</option>
+        <option value="Karnataka Railways">Karnataka Railways</option>
+        <option value="Kodagu">Kodagu</option>
+        <option value="Kolar">Kolar</option>
+        <option value="Koppal">Koppal</option>
+        <option value="Mandya">Mandya</option>
+        <option value="Mangaluru City">Mangaluru City</option>
+        <option value="Mysuru City">Mysuru City</option>
+        <option value="Mysuru Dist">Mysuru Dist</option>
+        <option value="Raichur">Raichur</option>
+        <option value="Ramanagara">Ramanagara</option>
+        <option value="Shivamogga">Shivamogga</option>
+        <option value="Tumakuru">Tumakuru</option>
+        <option value="Udupi">Udupi</option>
+        <option value="Uttara Kannada">Uttara Kannada</option>
+        <option value="Vijayanagara">Vijayanagara</option>
+        <option value="Vijayapur">Vijayapur</option>
+        <option value="Yadgir">Yadgir</option>
       </select>
     </div>
     <div>
       <h3 class="font-bold text-[#5C8DD6]">Age</h3>
-      <input type="number" name="age" id="age" class="py-2 px-4 border border-black">
+      <input
+        type="number"
+        name="age"
+        id="age"
+        class="py-2 px-4 border border-black"
+      />
     </div>
     <div>
       <h3 class="font-bold text-[#5C8DD6]">Caste</h3>
-     <input type="text" name="caste" id="caste" class="py-2 px-4 border border-black">
+      <input
+        type="text"
+        name="caste"
+        id="search-bar"
+        class="py-2 px-4 border border-black"
+      />
     </div>
+
+    <div>
+      <h3 class="font-bold text-[#5C8DD6]"></h3>
+      <select
+        id="caste"
+        class="py-3 px-3 bg-white border w-full border-black hidden"
+      >
+        <option value="caste1">Caste 1</option>
+        <option value="caste2">Caste 2</option>
+        <option value="caste3">Caste 3</option>
+        <!-- Add more options for castes -->
+      </select>
+    </div>
+
     <div>
       <h3 class="font-bold text-[#5C8DD6]">Profession</h3>
-      <select id="profession" class="py-3 px-3 bg-white border w-full border-black">
+      <select
+        id="profession"
+        class="py-3 px-3 bg-white border w-full border-black"
+      >
         <option value="profession1">Profession 1</option>
         <option value="profession2">Profession 2</option>
         <option value="profession3">Profession 3</option>
@@ -76,8 +104,10 @@
         <option value="female">Female</option>
       </select>
     </div>
-    <button id="gobutton"
-      class="flex h-12 self-end px-8 rounded-md font-bold text-white items-center bg-[#5C8DD6] hover:bg-[#619BF3]">
+    <button
+      id="gobutton"
+      class="flex h-12 self-end px-8 rounded-md font-bold text-white items-center bg-[#5C8DD6] hover:bg-[#619BF3]"
+    >
       <h3>GO</h3>
     </button>
   </div>
@@ -86,5 +116,63 @@
     <!-- put the output in this div -->
   </div>
 </body>
+
+<style>
+  /* Custom styles for the search bar and select */
+  #search-bar {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    width: calc(100% - 10px);
+  }
+
+  #caste {
+    width: 100%; /* Full width */
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+  }
+
+  /* Hide the select element initially */
+  #caste.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Function to filter options and handle dropdown visibility
+  function filterFunction() {
+    const searchInput = document.getElementById("search-bar");
+    const selectElement = document.getElementById("caste");
+    const filter = searchInput.value.toUpperCase();
+    const options = Array.from(selectElement.options);
+
+    // Filter options based on the search term
+    let visibleOptions = 0;
+    options.forEach((option) => {
+      const textValue = option.textContent || option.innerText;
+      if (textValue.toUpperCase().includes(filter)) {
+        option.style.display = "";
+        visibleOptions++;
+      } else {
+        option.style.display = "none";
+      }
+    });
+
+    // Toggle dropdown visibility based on search input length
+    if (searchInput.value.length > 0 && visibleOptions > 0) {
+      selectElement.classList.remove("hidden");
+    } else {
+      selectElement.classList.add("hidden");
+    }
+  }
+
+  // Attach event listeners
+  const searchInput = document.getElementById("search-bar");
+  searchInput.addEventListener("input", filterFunction);
+  searchInput.addEventListener("click", function () {
+    document.getElementById("caste").classList.remove("hidden");
+  });
+</script>
 
 {% endblock %}

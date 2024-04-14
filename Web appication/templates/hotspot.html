@@ -31,7 +31,7 @@
           <label for="switch" class="switch">Toggle</label>
           <h3 class="px-3">Predictions</h3>
         </div>
-        
+
         <!-- date select -->
         <div class="flex flex-col justify-start w-fit items-start mx-6 mt-4 text-lg gap-1 mb-4">
           <h2 class="text-xl text-white" id="datetext">Date&nbsp;Range</h2>
@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- crime type -->
         <div class="flex flex-col mx-6 mb-4 gap-1">
           <h2 class="text-xl text-white flex items-center">
@@ -70,6 +70,9 @@
 </body>
 
 <script>
+  var toggle = document.getElementById('switch');
+  toggle.checked = false;
+
   var map = L.map('map', {
     center: [15.18, 77.23], // Initial map center
     zoom: 7, // Initial zoom level
@@ -142,6 +145,8 @@
     var endDateLabel = document.querySelector('label[for="EndDate"]');
     var endDateInput = document.getElementById('endDate');
     var startDateLabel = document.querySelector('label[for="StartDate"]');
+    var startDate = document.getElementById('startDate');
+    var endDate = document.getElementById('endDate');
     var datetext = document.getElementById('datetext');
 
     if (this.checked) {
@@ -149,12 +154,24 @@
       endDateLabel.style.display = 'none';
       endDateInput.style.display = 'none';
       startDateLabel.textContent = 'Select Day';
+      startDate.setAttribute("min", "2024-04-01")
+      startDate.setAttribute("max", "2024-04-30")
       datetext.innerText = 'Date';
+
+      for (var layerId in overlayMaps) {
+        if (overlayMaps.hasOwnProperty(layerId)) {
+          map.removeLayer(overlayMaps[layerId]);
+        }
+      }
     } else {
       // Checkbox is not checked
       endDateLabel.style.display = 'block';
       endDateInput.style.display = 'block';
       startDateLabel.textContent = 'Start Day';
+      startDate.setAttribute("min", "2016-01-01")
+      startDate.setAttribute("max", "2024-03-8")
+      endDate.setAttribute("max", "2024-03-10")
+      endDate.setAttribute("min", "2016-01-10")
       datetext.innerText = 'Date Range';
     }
   });
@@ -202,25 +219,18 @@
   };
 
   document.getElementById('crimefilter_dropdown').addEventListener('click', function () {
-    var filePaths = [];
-    var startDateInput = new Date(document.getElementById("startDate").value)
-    var enddateInput = new Date(document.getElementById("endDate").value)
 
-    var startYear = parseInt(startDateInput.getFullYear());
-    var startMonth = parseInt(startDateInput.getMonth() + 1);
-    var endYear = parseInt(enddateInput.getFullYear());
-    var endMonth = parseInt(enddateInput.getMonth() + 1);
-
-    for (var year = startYear; year <= endYear; year++) {
-      filePaths.push(year + '_Data.csv');
-    }
-
-    filePaths.forEach(function (filePath) {
-      Papa.parse('/static/data/' + filePath, {
+    if (toggle.checked) {
+      var startDateInput = new Date(document.getElementById("startDate").value);
+      var Year = parseInt(startDateInput.getFullYear());
+      var Month = parseInt(startDateInput.getMonth() + 1);
+      var Day = parseInt(startDateInput.getDate())
+      Papa.parse('/static/prediction_data/prediction_data.csv', {
         header: true,
         download: true,
         dynamicTyping: true,
         complete: function (results) {
+        console.log(Year, Month, Date)
 
           results.data.forEach(function (d) {
             var lat = d.Latitude;
@@ -228,10 +238,10 @@
             var type = d.CrimeGroup_Name;
             var year = parseInt(d.Year);
             var month = parseInt(d.Month);
-
+            var date = parseInt(d.Date);
+            console.log(year, month, date)
             // Check if the row falls within the specified date range
-            if ((year > startYear || (year === startYear && month >= startMonth)) &&
-              (year < endYear || (year === endYear && month <= endMonth))) {
+            if (year === Year && month === Month && date === Day) {
               // Process the row based on crime type
               switch (type) {
                 case "KARNATAKA POLICE ACT 1963":
@@ -295,7 +305,104 @@
           });
         }
       });
-    });
+    } else {
+      var filePaths = [];
+      var startDateInput = new Date(document.getElementById("startDate").value)
+      var enddateInput = new Date(document.getElementById("endDate").value)
+
+      var startYear = parseInt(startDateInput.getFullYear());
+      var startMonth = parseInt(startDateInput.getMonth() + 1);
+      var endYear = parseInt(enddateInput.getFullYear());
+      var endMonth = parseInt(enddateInput.getMonth() + 1);
+
+      console.log(startYear, startMonth, endYear, endMonth);
+
+      for (var year = startYear; year <= endYear; year++) {
+        filePaths.push(year + '_Data.csv');
+      }
+      console.log(filePaths);
+      filePaths.forEach(function (filePath) {
+        Papa.parse('/static/data/' + filePath, {
+          header: true,
+          download: true,
+          dynamicTyping: true,
+          complete: function (results) {
+
+            results.data.forEach(function (d) {
+              var lat = d.Latitude;
+              var lng = d.Longitude;
+              var type = d.CrimeGroup_Name;
+              var year = parseInt(d.Year);
+              var month = parseInt(d.Month);
+
+              // Check if the row falls within the specified date range
+              if ((year > startYear || (year === startYear && month >= startMonth)) &&
+                (year < endYear || (year === endYear && month <= endMonth))) {
+                // Process the row based on crime type
+                switch (type) {
+                  case "KARNATAKA POLICE ACT 1963":
+                    KARNATAKA_POLICE_ACT_1963.addLatLng([lat, lng]);
+                    break;
+                  case "THEFT":
+                    THEFT.addLatLng([lat, lng]);
+                    break;
+                  case "CrPC":
+                    CRPC.addLatLng([lat, lng]);
+                    break;
+                  case "CHEATING":
+                    CHEATING.addLatLng([lat, lng]);
+                    break;
+                  case "Karnataka State Local Act":
+                    KARNATAKA_STATE_LOCAL_ACT.addLatLng([lat, lng]);
+                    break;
+                  case "MOLESTATION":
+                    MOLESTATION.addLatLng([lat, lng]);
+                    break;
+                  case "MISSING PERSON":
+                    MISSING_PERSON.addLatLng([lat, lng]);
+                    break;
+                  case "RIOTS":
+                    RIOTS.addLatLng([lat, lng]);
+                    break;
+                  case "CASES OF HURT":
+                    CASES_OF_HURT.addLatLng([lat, lng]);
+                    break;
+                  case "BURGLARY - NIGHT":
+                    BURGLARY_NIGHT.addLatLng([lat, lng]);
+                    break;
+                  case "CRUELTY BY HUSBAND":
+                    CRUELTY_BY_HUSBAND.addLatLng([lat, lng]);
+                    break;
+                  case "ATTEMPT TO MURDER":
+                    ATTEMPT_TO_MURDER.addLatLng([lat, lng]);
+                    break;
+                  case "POCSO":
+                    POCSO.addLatLng([lat, lng]);
+                    break;
+                  case "PUBLIC SAFETY":
+                    PUBLIC_SAFETY.addLatLng([lat, lng]);
+                    break;
+                  case "NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES":
+                    NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES.addLatLng([lat, lng]);
+                    break;
+                  case "ROBBERY":
+                    ROBBERY.addLatLng([lat, lng]);
+                    break;
+                  case "CYBER CRIME":
+                    CYBER_CRIME.addLatLng([lat, lng]);
+                    break;
+                  case "NEGLIGENT ACT":
+                    NEGLIGENT_ACT.addLatLng([lat, lng]);
+                    break;
+                  default:
+                    break;
+                }
+              }
+            });
+          }
+        });
+      });
+    }
   });
 
 
@@ -471,7 +578,7 @@
     text-indent: -9999px;
     width: 60px;
     height: 30px;
-    background: grey;
+    background: coral;
     display: block;
     border-radius: 100px;
     position: relative;
@@ -490,7 +597,7 @@
   }
 
   #switch:checked+label {
-    background: #5C8DD6;
+    background: lightgreen;
   }
 
   #switch:checked+label:after {

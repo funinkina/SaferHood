@@ -1,0 +1,612 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+
+<body>
+  {% extends "nav.html" %} {% block content %}
+  <!-- top bar -->
+  <div class="mx-8 my-5 flex justify-between">
+    <h2 class="text-4xl font-light text-black/50">
+      Hotspot Mapping
+    </h2>
+  </div>
+  <div id="map" class="h-[80vh] mx-8">
+    <!-- map filters -->
+    <div class="bg-black/50 m-4 rounded overflow-hidden" id="filters" style="backdrop-filter: blur(10px);">
+      <div class="text-xl text-white font-bold mx-6 my-2 flex items-center justify-between">
+        Map Filters
+        <button>
+          <span class="material-symbols-rounded text-4xl">
+            expand_more
+          </span>
+        </button>
+      </div>
+
+      <div id="map_options">
+        <!-- toggle -->
+        <div class="flex items-center text-white text-xl font-bold" id="toggle">
+          <h3>Historical Data</h3>
+          <input type="checkbox" checked="unchecked" id="switch" />
+          <label for="switch" class="switch">Toggle</label>
+          <h3 class="px-3">Predictions</h3>
+        </div>
+
+        <!-- date select -->
+        <div class="flex flex-col justify-start w-fit items-start mx-6 mt-4 text-lg gap-1 mb-4">
+          <h2 class="text-xl text-white" id="datetext">Date&nbsp;Range</h2>
+          <div class="flex flex-col gap-2 w-fit">
+            <div class="flex gap-2 rounded-xl bg-white w-fit">
+              <label for="StartDate" class="ml-4 font-bold" id="stdaylabel">Start&nbsp;Day:</label>
+              <input type="date" id="startDate" class="rounded-xl w-fit" name="StartDate" max="2024-03-03">
+            </div>
+            <div class="flex gap-2 rounded-xl bg-white w-fit">
+              <label for="EndDate" class="ml-4 font-bold">End&nbsp;Day:</label>
+              <input type="date" id="endDate" class="rounded-xl w-fit" name="EndDate">
+            </div>
+          </div>
+        </div>
+
+        <!-- crime type -->
+        <div class="flex flex-col mx-6 mb-4 gap-1">
+          <h2 class="text-xl text-white flex items-center">
+            Crime&nbsp;type
+          </h2>
+          <!-- current filters -->
+          <div id="current_filters"
+            class="bg-slate-50 h-12 overflow-scroll rounded-full flex items-center justify-items-end gap-3 text-white text-base px-2">
+            <button class="crimefilter_dropdown" id="crimefilter_dropdown">
+              <span class="material-symbols-rounded text-2xl text-white bg-blue-600 rounded-full p-2">
+                keyboard_arrow_down
+              </span>
+            </button>
+          </div>
+        </div>
+        <div id="checkboxes"
+          class="checkboxes select-none bg-white/60 flex-wrap text-md gap-x-4 gap-y-2  mx-6 my-6 p-2 rounded-md"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  var toggle = document.getElementById('switch');
+  toggle.checked = false;
+
+  var map = L.map('map', {
+    center: [15.18, 77.23], // Initial map center
+    zoom: 7, // Initial zoom level
+    zoomControl: false, // Remove default zoom control
+    attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
+    scrollWheelZoom: true, // Enable scroll wheel zoom
+    dragging: true // Enable click and drag camera movement
+  });
+
+  L.control.zoom({
+    position: 'bottomright'
+  }).addTo(map);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 16
+  }).addTo(map);
+
+  // var labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png', {
+  //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  //   subdomains: 'abcd',
+  //   maxZoom: 19,
+  //   pane: 'shadowPane',
+  // }).addTo(map)
+
+
+  // map filter
+  var filter = document.getElementById('filters');
+  filter.style.position = 'absolute';
+  filter.style.top = '0';
+  filter.style.left = '0';
+  filter.style.zIndex = '1000';
+  map.getContainer().appendChild(filter);
+
+  filter.addEventListener('mouseover', function () {
+    map.dragging.disable();
+    map.scrollWheelZoom.disable();
+    if (map.tap) map.tap.disable();
+    map.keyboard.disable();
+    map.doubleClickZoom.disable();
+  });
+
+  filter.addEventListener('mouseout', function () {
+    map.dragging.enable();
+    map.scrollWheelZoom.enable();
+    if (map.tap) map.tap.enable();
+    map.keyboard.enable();
+    map.doubleClickZoom.enable();
+  });
+
+  // collapse
+  var filters_open = true;
+  filters.querySelector('button').addEventListener('click', function () {
+    var children = filters.children;
+    if (filters_open) {
+      filters.style.width = '25%';
+      filters.style.height = 'fit-content';
+      document.getElementById('map_options').style.display = 'block';
+      filters.querySelector('span').innerText = 'expand_less';
+      filters_open = false;
+    } else {
+      filters.style.width = '20%';
+      document.getElementById('map_options').style.display = 'none';
+      filters.querySelector('span').innerText = 'expand_more';
+      filters_open = true;
+    }
+  });
+
+  document.getElementById('switch').addEventListener('change', function () {
+    var endDateLabel = document.querySelector('label[for="EndDate"]');
+    var endDateInput = document.getElementById('endDate');
+    var startDateLabel = document.querySelector('label[for="StartDate"]');
+    var startDate = document.getElementById('startDate');
+    var endDate = document.getElementById('endDate');
+    var datetext = document.getElementById('datetext');
+    
+    for (var layerId in overlayMaps) {
+      if (overlayMaps.hasOwnProperty(layerId)) {
+        map.removeLayer(overlayMaps[layerId]);
+      }
+    }
+    if (this.checked) {
+      // Checkbox is checked
+      endDateLabel.style.display = 'none';
+      endDateInput.style.display = 'none';
+      startDateLabel.textContent = 'Select Day';
+      startDate.setAttribute("min", "2024-04-01")
+      startDate.setAttribute("max", "2024-04-30")
+      datetext.innerText = 'Date';
+
+    } else {
+      // Checkbox is not checked
+      endDateLabel.style.display = 'block';
+      endDateInput.style.display = 'block';
+      startDateLabel.textContent = 'Start Day';
+      startDate.setAttribute("min", "2016-01-01")
+      startDate.setAttribute("max", "2024-03-8")
+      endDate.setAttribute("max", "2024-03-10")
+      endDate.setAttribute("min", "2016-01-10")
+      datetext.innerText = 'Date Range';
+    }
+  });
+
+  // adding crime hotspots
+  var KARNATAKA_POLICE_ACT_1963 = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' } });
+  var THEFT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'yellow', 1: 'red' } });
+  var CRPC = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'pink', 1: 'red' } });
+  var CHEATING = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'magenta', 1: 'red' } });
+  var KARNATAKA_STATE_LOCAL_ACT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'orange', 0.65: 'yellow', 1: 'red' } });
+  var MOLESTATION = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'green', 1: 'red' } });
+  var MISSING_PERSON = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'cyan', 1: 'red' } });
+  var RIOTS = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'blue', 1: 'red' } });
+  var CASES_OF_HURT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'purple', 1: 'red' } });
+  var BURGLARY_NIGHT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'orange', 1: 'red' } });
+  var CRUELTY_BY_HUSBAND = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'blue', 1: 'red' } });
+  var ATTEMPT_TO_MURDER = L.heatLayer([], { radius: 25, gradient: { 0.4: 'orange', 0.65: 'green', 1: 'red' } });
+  var POCSO = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'pink', 1: 'red' } });
+  var PUBLIC_SAFETY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'cyan', 1: 'red' } });
+  var NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'orange', 1: 'red' } });
+  var ROBBERY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'green', 1: 'red' } });
+  var CYBER_CRIME = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'blue', 1: 'red' } });
+  var NEGLIGENT_ACT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'yellow', 1: 'red' } });
+
+
+  var overlayMaps = {
+    "KPA1963": KARNATAKA_POLICE_ACT_1963,
+    "Theft": THEFT,
+    "CrPC": CRPC,
+    "Cheating": CHEATING,
+    "Local State Act": KARNATAKA_STATE_LOCAL_ACT,
+    "Molestation": MOLESTATION,
+    "Missing Person": MISSING_PERSON,
+    "Riots": RIOTS,
+    "Cases of hurt": CASES_OF_HURT,
+    'Burglary (Night)': BURGLARY_NIGHT,
+    'Cruelty by Husband': CRUELTY_BY_HUSBAND,
+    'Attempt to Murder': ATTEMPT_TO_MURDER,
+    'POCSO': POCSO,
+    'Public Safety': PUBLIC_SAFETY,
+    'Drug Abuse': NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES,
+    'Robbery': ROBBERY,
+    'Cyber Crime': CYBER_CRIME,
+    'Negligent Act': NEGLIGENT_ACT
+  };
+
+  document.getElementById('crimefilter_dropdown').addEventListener('click', function () {
+
+    if (toggle.checked) {
+      var startDateInput = new Date(document.getElementById("startDate").value);
+      var Year = parseInt(startDateInput.getFullYear());
+      var Month = parseInt(startDateInput.getMonth() + 1);
+      var Day = parseInt(startDateInput.getDate())
+      Papa.parse('/static/prediction_data/prediction_data.csv', {
+        header: true,
+        download: true,
+        dynamicTyping: true,
+        complete: function (results) {
+        console.log(Year, Month, Date)
+
+          results.data.forEach(function (d) {
+            var lat = d.Latitude;
+            var lng = d.Longitude;
+            var type = d.CrimeGroup_Name;
+            var year = parseInt(d.Year);
+            var month = parseInt(d.Month);
+            var date = parseInt(d.Date);
+            console.log(year, month, date)
+            // Check if the row falls within the specified date range
+            if (year === Year && month === Month && date === Day) {
+              // Process the row based on crime type
+              switch (type) {
+                case "KARNATAKA POLICE ACT 1963":
+                  KARNATAKA_POLICE_ACT_1963.addLatLng([lat, lng]);
+                  break;
+                case "THEFT":
+                  THEFT.addLatLng([lat, lng]);
+                  break;
+                case "CrPC":
+                  CRPC.addLatLng([lat, lng]);
+                  break;
+                case "CHEATING":
+                  CHEATING.addLatLng([lat, lng]);
+                  break;
+                case "Karnataka State Local Act":
+                  KARNATAKA_STATE_LOCAL_ACT.addLatLng([lat, lng]);
+                  break;
+                case "MOLESTATION":
+                  MOLESTATION.addLatLng([lat, lng]);
+                  break;
+                case "MISSING PERSON":
+                  MISSING_PERSON.addLatLng([lat, lng]);
+                  break;
+                case "RIOTS":
+                  RIOTS.addLatLng([lat, lng]);
+                  break;
+                case "CASES OF HURT":
+                  CASES_OF_HURT.addLatLng([lat, lng]);
+                  break;
+                case "BURGLARY - NIGHT":
+                  BURGLARY_NIGHT.addLatLng([lat, lng]);
+                  break;
+                case "CRUELTY BY HUSBAND":
+                  CRUELTY_BY_HUSBAND.addLatLng([lat, lng]);
+                  break;
+                case "ATTEMPT TO MURDER":
+                  ATTEMPT_TO_MURDER.addLatLng([lat, lng]);
+                  break;
+                case "POCSO":
+                  POCSO.addLatLng([lat, lng]);
+                  break;
+                case "PUBLIC SAFETY":
+                  PUBLIC_SAFETY.addLatLng([lat, lng]);
+                  break;
+                case "NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES":
+                  NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES.addLatLng([lat, lng]);
+                  break;
+                case "ROBBERY":
+                  ROBBERY.addLatLng([lat, lng]);
+                  break;
+                case "CYBER CRIME":
+                  CYBER_CRIME.addLatLng([lat, lng]);
+                  break;
+                case "NEGLIGENT ACT":
+                  NEGLIGENT_ACT.addLatLng([lat, lng]);
+                  break;
+                default:
+                  break;
+              }
+            }
+          });
+        }
+      });
+    } else {
+      var filePaths = [];
+      var startDateInput = new Date(document.getElementById("startDate").value)
+      var enddateInput = new Date(document.getElementById("endDate").value)
+
+      var startYear = parseInt(startDateInput.getFullYear());
+      var startMonth = parseInt(startDateInput.getMonth() + 1);
+      var endYear = parseInt(enddateInput.getFullYear());
+      var endMonth = parseInt(enddateInput.getMonth() + 1);
+
+      console.log(startYear, startMonth, endYear, endMonth);
+
+      for (var year = startYear; year <= endYear; year++) {
+        filePaths.push(year + '_Data.csv');
+      }
+      console.log(filePaths);
+      filePaths.forEach(function (filePath) {
+        Papa.parse('/static/data/' + filePath, {
+          header: true,
+          download: true,
+          dynamicTyping: true,
+          complete: function (results) {
+
+            results.data.forEach(function (d) {
+              var lat = d.Latitude;
+              var lng = d.Longitude;
+              var type = d.CrimeGroup_Name;
+              var year = parseInt(d.Year);
+              var month = parseInt(d.Month);
+
+              // Check if the row falls within the specified date range
+              if ((year > startYear || (year === startYear && month >= startMonth)) &&
+                (year < endYear || (year === endYear && month <= endMonth))) {
+                // Process the row based on crime type
+                switch (type) {
+                  case "KARNATAKA POLICE ACT 1963":
+                    KARNATAKA_POLICE_ACT_1963.addLatLng([lat, lng]);
+                    break;
+                  case "THEFT":
+                    THEFT.addLatLng([lat, lng]);
+                    break;
+                  case "CrPC":
+                    CRPC.addLatLng([lat, lng]);
+                    break;
+                  case "CHEATING":
+                    CHEATING.addLatLng([lat, lng]);
+                    break;
+                  case "Karnataka State Local Act":
+                    KARNATAKA_STATE_LOCAL_ACT.addLatLng([lat, lng]);
+                    break;
+                  case "MOLESTATION":
+                    MOLESTATION.addLatLng([lat, lng]);
+                    break;
+                  case "MISSING PERSON":
+                    MISSING_PERSON.addLatLng([lat, lng]);
+                    break;
+                  case "RIOTS":
+                    RIOTS.addLatLng([lat, lng]);
+                    break;
+                  case "CASES OF HURT":
+                    CASES_OF_HURT.addLatLng([lat, lng]);
+                    break;
+                  case "BURGLARY - NIGHT":
+                    BURGLARY_NIGHT.addLatLng([lat, lng]);
+                    break;
+                  case "CRUELTY BY HUSBAND":
+                    CRUELTY_BY_HUSBAND.addLatLng([lat, lng]);
+                    break;
+                  case "ATTEMPT TO MURDER":
+                    ATTEMPT_TO_MURDER.addLatLng([lat, lng]);
+                    break;
+                  case "POCSO":
+                    POCSO.addLatLng([lat, lng]);
+                    break;
+                  case "PUBLIC SAFETY":
+                    PUBLIC_SAFETY.addLatLng([lat, lng]);
+                    break;
+                  case "NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES":
+                    NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES.addLatLng([lat, lng]);
+                    break;
+                  case "ROBBERY":
+                    ROBBERY.addLatLng([lat, lng]);
+                    break;
+                  case "CYBER CRIME":
+                    CYBER_CRIME.addLatLng([lat, lng]);
+                    break;
+                  case "NEGLIGENT ACT":
+                    NEGLIGENT_ACT.addLatLng([lat, lng]);
+                    break;
+                  default:
+                    break;
+                }
+              }
+            });
+          }
+        });
+      });
+    }
+  });
+
+
+  var checkboxesDiv = document.querySelector('.checkboxes');
+  for (var key in overlayMaps) {
+    var label = document.createElement('label');
+    var description = document.createTextNode(key);
+    var checkbox = document.createElement('input');
+
+    checkbox.type = 'checkbox';
+    checkbox.value = key;
+    checkbox.checked = false;
+
+    label.appendChild(checkbox);
+    label.appendChild(description);
+
+    checkboxesDiv.appendChild(label);
+  }
+
+  // legend
+  // var legend = L.control({position: 'bottomright'});
+  let colors = {
+    KPA1963: 'blue',
+    Theft: 'green',
+    CrPC: 'purple',
+    Cheating: 'cyan',
+    'Local State Act': 'orange',
+    Molestation: 'blue',
+    'Missing Person': 'purple',
+    Riots: 'green',
+    'Cases of hurt': 'cyan',
+    'Burglary (Night)': 'yellow',
+    'Cruelty by Husband': 'pink',
+    'Attempt to Murder': 'orange',
+    POCSO: 'blue',
+    'Public Safety': 'green',
+    'Drug Abuse': 'purple',
+    Robbery: 'cyan',
+    'Cyber Crime': 'yellow',
+    'Negligent Act': 'pink'
+  };
+
+
+  // fix colors
+
+  var current_filters = document.getElementById('current_filters')
+
+  document.querySelectorAll('#filters input[type=checkbox]').forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
+      var filterItem = document.createElement('div');
+      filterItem.innerHTML += '<button onclick="removeFilter(this)"><span class="material-symbols-rounded mt-2">close</span></button>';
+      filterItem.id = this.value;
+      filterItem.className = 'flex items-end rounded-full'
+      filterItem.innerHTML += this.value;
+      filterItem.style.backgroundColor = colors[this.value];
+      filterItem.style.paddingLeft = '8px';
+      filterItem.style.paddingRight = '12px';
+      filterItem.style.paddingBottom = '4px'
+      filterItem.style.whiteSpace = 'nowrap';
+
+
+      if (this.checked) {
+        overlayMaps[this.value].addTo(map);
+        current_filters.insertBefore(filterItem, current_filters.firstChild);
+      } else {
+        map.removeLayer(overlayMaps[this.value]);
+
+        var itemToRemove = document.getElementById(this.value);
+        current_filters.removeChild(itemToRemove);
+      }
+    });
+  });
+
+  function removeFilter(button) {
+    var filterItem = button.parentElement;
+    var filterName = filterItem.id;
+    var checkbox = document.querySelector('input[value="' + filterName + '"]');
+    checkbox.checked = false;
+    checkbox.dispatchEvent(new Event('change'));
+  }
+
+  document.querySelector('button.crimefilter_dropdown').addEventListener('click', function () {
+    var checkboxesDiv = document.getElementById('checkboxes');
+    if (checkboxesDiv.style.display === 'grid') {
+      checkboxesDiv.style.display = 'none';
+    } else {
+      checkboxesDiv.style.display = 'grid';
+    }
+  });
+
+  var startYearSelect = document.getElementById('startYear');
+  var endYearSelect = document.getElementById('endYear');
+
+</script>
+
+<style>
+  body {
+    background-color: #f8f8f8;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  #filters {
+    width: 15%;
+    height: fit-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  #map_options {
+    display: none;
+  }
+
+  input[type=text] {
+    background: #FFF;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.03), 0px 18px 18px 0px rgba(0, 0, 0, 0.03), 0px 40px 24px 0px rgba(0, 0, 0, 0.02), 0px 71px 28px 0px rgba(0, 0, 0, 0.00), 0px 110px 31px 0px rgba(0, 0, 0, 0.00);
+  }
+
+  .crimefilter_dropdown {
+    position: absolute;
+    right: 7.5%;
+  }
+
+  .checkboxes {
+    display: none;
+    grid-template-columns: auto auto auto;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  #hotspotlink {
+    text-decoration: underline;
+  }
+
+  .self-end {
+    align-self: end;
+    justify-self: end;
+  }
+
+  input[type=checkbox] {
+    margin-right: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .overflow-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .overflow-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  #toggle {
+    margin: 1.5rem;
+  }
+
+  #switch[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  .switch {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 60px;
+    height: 30px;
+    background: coral;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+  }
+
+  .switch:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+
+  #switch:checked+label {
+    background: lightgreen;
+  }
+
+  #switch:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
+
+  .switch:active:after {
+    width: 30px;
+  }
+</style>
+{% endblock %}

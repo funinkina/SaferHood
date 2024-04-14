@@ -5,6 +5,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
 import random
+import json
 
 app = Flask(__name__)
 
@@ -140,6 +141,43 @@ def victims_post():
 def victims_post_post():
     return render_template("./suspects.html")
 
+@app.route("/add_alert", methods=["POST"])
+def add_alert():
+    data = request.form
+    alert = {
+        "headline": data.get("headline"),
+        "description": data.get("description"),
+        "address": data.get("address"),
+        "street": data.get("street"),
+        "colony": data.get("colony"),
+        "city": data.get("city"),
+        "state": data.get("state"),
+        "severity": data.get("severity"),
+        "id": random.randint(9999, 9999999),
+    }
+    db.alerts.insert_one(alert)
+    return dict(data)
+
+@app.route("/alerts", methods=["get"])
+def get_alerts():
+    alerts = []
+    alerts_db = db.alerts.find()
+    for alert in alerts_db:
+        alerts.append(
+            {
+                "id": int(alert["id"]),
+                "headline": alert["headline"],
+                "description": alert["description"],
+                "address": alert["address"],
+                "street": alert["street"],
+                "colony": alert["colony"],
+                "city": alert["city"],
+                "state": alert["state"],
+                "severity": alert["severity"],
+            }
+        )
+    print(alerts)
+    return jsonify(alerts)
 
 @app.route("/repeat_offenders")
 def victims_post_post_post():

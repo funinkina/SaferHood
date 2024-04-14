@@ -148,7 +148,12 @@
     var startDate = document.getElementById('startDate');
     var endDate = document.getElementById('endDate');
     var datetext = document.getElementById('datetext');
-
+    
+    for (var layerId in overlayMaps) {
+      if (overlayMaps.hasOwnProperty(layerId)) {
+        map.removeLayer(overlayMaps[layerId]);
+      }
+    }
     if (this.checked) {
       // Checkbox is checked
       endDateLabel.style.display = 'none';
@@ -158,11 +163,6 @@
       startDate.setAttribute("max", "2024-04-30")
       datetext.innerText = 'Date';
 
-      for (var layerId in overlayMaps) {
-        if (overlayMaps.hasOwnProperty(layerId)) {
-          map.removeLayer(overlayMaps[layerId]);
-        }
-      }
     } else {
       // Checkbox is not checked
       endDateLabel.style.display = 'block';

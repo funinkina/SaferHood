@@ -126,9 +126,9 @@ def hello_world():
     return render_template("./index.html")
 
 
-@app.route("/victim_prediction")
+@app.route("/live-alerts")
 def victims():
-    return render_template("./victims.html")
+    return render_template("./live_alerts.html")
 
 
 @app.route("/hotspot_mapping")

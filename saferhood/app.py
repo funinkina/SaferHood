@@ -179,9 +179,10 @@ def get_alerts():
     print(alerts)
     return jsonify(alerts)
 
-@app.route("/repeat_offenders")
+
+@app.route("/live_data")
 def victims_post_post_post():
-    return render_template("./repeat_offenders.html")
+    return render_template("./news_live_data.html")
 
 
 @app.route("/<longitude>/<latitude>/<id>", methods=["GET"])

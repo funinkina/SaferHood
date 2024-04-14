@@ -31,10 +31,10 @@
                 <div class="w-5/12">
                     <h3 class="font-bold text-[#5C8DD6]">Time range</h3>
                     <select id="time_range" class="py-3 px-3 bg-white border w-full border-black">
-                        <option value="one_month">Last Month</option>
                         <option value="three_months">Last 3 Months</option>
                         <option value="six_months">Last 6 Months</option>
                         <option value="one_year">Last 1 year</option>
+                        <option value="one_month">Last Month</option>
                     </select>
                 </div>
                 <button id="gobutton"
@@ -47,14 +47,115 @@
         <div id="highriskvictims">
             <h2 class="text-[#5C8DD6] text-2xl font-bold">High Risk Victims</h2>
             <p class="text-black/60">Group or people at the utmost risk</p>
+            <div>
+                <table class="border border-black w-full ">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 bg-gray-200">Caste</th>
+                            <th class="py-2 px-4 bg-gray-200">Gender</th>
+                            <th class="py-2 px-4 bg-gray-200">Age range</th>
+                            <th class="py-2 px-4 bg-gray-200">Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4">Dalit</td>
+                            <td class="py-2 px-4">Male</td>
+                            <td class="py-2 px-4">20-30</td>
+                            <td class="py-2 px-4">Banglore</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">Upper caste</td>
+                            <td class="py-2 px-4">Female</td>
+                            <td class="py-2 px-4">40-50</td>
+                            <td class="py-2 px-4">Mysore</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">OBC</td>
+                            <td class="py-2 px-4">Male</td>
+                            <td class="py-2 px-4">30-40</td>
+                            <td class="py-2 px-4">Bidar</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">Lower caste</td>
+                            <td class="py-2 px-4">Female</td>
+                            <td class="py-2 px-4">50-60</td>
+                            <td class="py-2 px-4">Kundapura</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4">Tribal</td>
+                            <td class="py-2 px-4">Male</td>
+                            <td class="py-2 px-4">20-30</td>
+                            <td class="py-2 px-4">Dharmasthala</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div id="repeatoffenders">
             <h2 class="text-[#5C8DD6] text-2xl font-bold">Most Probable Future Offenders</h2>
             <p class="text-black/60">High risk offenders with the highest probability of reoffending</p>
         </div>
-        <div id="suspectedperpetrators">
-            <h2 class="text-[#5C8DD6] text-2xl font-bold">Suspected Perpatrators</h2>
-            <p class="text-black/60">Matching unsolved crimes with past criminal profiles</p>
+        <div id="suspectedperpetrators" class="overflow-scroll">
+            <h2 class="text-[#5C8DD6] text-2xl font-bold">Live News Criminal Data</h2>
+            <p class="text-black/60">Live information extraction from news articles</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Criminal_name</th>
+                        <th>Reported Date</th>
+                        <th>Reported Time</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>murder</td>
+                        <td>Hemanth kumar nath</td>
+                        <td>25 May, 2021</td>
+                        <td>3:15</td>
+                        <td>Banglore</td>
+                    </tr>
+                    <tr>
+                        <td>murder</td>
+                        <td>Hoti lal</td>
+                        <td>17 May, 2021</td>
+                        <td>10:45</td>
+                        <td>Mysore</td>
+                    </tr>
+                    <tr>
+                        <td>Theft</td>
+                        <td>Rajesh Sharma</td>
+                        <td>10 April, 2021</td>
+                        <td>14:30</td>
+                        <td>Shivanasamudra</td>
+                    </tr>
+                    <tr>
+                        <td>Assault</td>
+                        <td>Veena Singh</td>
+                        <td>5 March, 2021</td>
+                        <td>9:00</td>
+                        <td>Bidar</td>
+                    </tr>
+                    <tr>
+                        <td>Robbery</td>
+                        <td>Amit Patel</td>
+                        <td>20 February, 2021</td>
+                        <td>18:15</td>
+                        <td>Kundapura</td>
+                    </tr>
+                    <tr>
+                        <td>Fraud</td>
+                        <td>Priya Gupta</td>
+                        <td>15 January, 2021</td>
+                        <td>11:20</td>
+                        <td>Dharmasthala</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -106,6 +207,46 @@
 
     #hotspot {
         grid-area: 1 / 1 / 4 / 2;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 90%;
+        /* Reduce table width */
+        max-width: 800px;
+        /* Limit maximum width */
+        background-color: #ffffff;
+        /* White background for table */
+        border-radius: 8px;
+        /* Add some border radius */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        /* Add a subtle shadow */
+        margin: 20px auto;
+        /* Center table horizontally */
+    }
+
+    th,
+    td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 6px;
+        /* Increase cell padding for better spacing */
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        /* Make header text bold */
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+        /* Alternate row background color */
+    }
+
+    tr:hover {
+        background-color: #f0f0f0;
+        /* Hover row background color */
     }
 </style>
 

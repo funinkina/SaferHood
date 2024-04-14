@@ -9,5 +9,5 @@ import SwiftUI
 import Foundation
 
 struct APIConstants {
-    static let baseURL = "http://172.18.4.94:5050/"
+    static let baseURL = "http://192.168.55.35:5050/"
 }

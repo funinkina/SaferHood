@@ -154,6 +154,7 @@ def add_alert():
         "state": data.get("state"),
         "severity": data.get("severity"),
         "id": random.randint(9999, 9999999),
+        "date": datetime.now(),
     }
     db.alerts.insert_one(alert)
     return dict(data)
@@ -172,11 +173,11 @@ def get_alerts():
                 "street": alert["street"],
                 "colony": alert["colony"],
                 "city": alert["city"],
-                "state": alert["state"],
                 "severity": alert["severity"],
+                "date": alert["date"].strftime("%Y-%m-%d %H:%M:%S"),
             }
         )
-    print(alerts)
+    alerts = sorted(alerts, key=lambda k: k["date"])
     return jsonify(alerts)
 
 @app.route("/repeat_offenders")

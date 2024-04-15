@@ -137,9 +137,10 @@ def victims_post():
     return render_template("./hotspot.html")
 
 
-@app.route("/suspected_perpetrators")
+@app.route("/victim_analysis")
 def victims_post_post():
-    return render_template("./suspects.html")
+    json_file = url_for('static', filename='data/victim_info.json')
+    return render_template("./victims.html", json_file=json_file)
 
 @app.route("/add_alert", methods=["POST"])
 def add_alert():
@@ -180,9 +181,10 @@ def get_alerts():
     alerts = sorted(alerts, key=lambda k: k["date"])
     return jsonify(alerts)
 
-@app.route("/repeat_offenders")
+
+@app.route("/live_data")
 def victims_post_post_post():
-    return render_template("./repeat_offenders.html")
+    return render_template("./news_live_data.html")
 
 
 @app.route("/<longitude>/<latitude>/<id>", methods=["GET"])

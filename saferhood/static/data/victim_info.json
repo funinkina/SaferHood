@@ -1,0 +1,1082 @@
+{
+    "Bagalkot": {
+        "Caste": {
+            "Lingayath": 3981,
+            "MUSLIM": 2368,
+            "KURAB": 2152,
+            "KURUB": 1307,
+            "GANIGA": 1264
+        },
+        "Sex": {
+            "MALE": 17118,
+            "FEMALE": 7628,
+            "Others": 2
+        },
+        "Profession": {
+            "Farmer ": 5599,
+            "Labourer ": 5168,
+            "Housewife ": 4375,
+            "Student ": 2679,
+            "Businessman ": 1221
+        },
+        "Age": {
+            "25-40": 9525,
+            "40-60": 7095,
+            "18-25": 4055,
+            "10-18": 1412,
+            "0-10": 621
+        }
+    },
+    "Ballari": {
+        "Caste": {
+            "VALMIKI": 2929,
+            "MUSLIM": 2384,
+            "ADI KARNATAKA": 1963,
+            "Lingayath": 1954,
+            "KURUBA": 1578
+        },
+        "Sex": {
+            "MALE": 13169,
+            "FEMALE": 5780,
+            "Others": 34
+        },
+        "Profession": {
+            "Labourer ": 3651,
+            "Farmer ": 3368,
+            "Housewife ": 2227,
+            "Student ": 1933,
+            "Others PI Specify": 887
+        },
+        "Age": {
+            "25-40": 7641,
+            "40-60": 5450,
+            "18-25": 2986,
+            "10-18": 1241,
+            "0-10": 391
+        }
+    },
+    "Belagavi City": {
+        "Caste": {
+            "MARATHA": 5232,
+            "Lingayath": 2547,
+            "MUSLIM": 2420,
+            "Naik": 506,
+            "JAINS (DIGAMBARAS)": 496
+        },
+        "Sex": {
+            "MALE": 12517,
+            "FEMALE": 5005
+        },
+        "Profession": {
+            "Housewife ": 2847,
+            "Others PI Specify": 2413,
+            "Farmer ": 1708,
+            "Student ": 1696,
+            "Labourer ": 1374
+        },
+        "Age": {
+            "25-40": 6539,
+            "40-60": 5329,
+            "18-25": 2801,
+            "10-18": 842,
+            "0-10": 339
+        }
+    },
+    "Belagavi Dist": {
+        "Caste": {
+            "Lingayath": 13609,
+            "MARATHA": 4968,
+            "MUSLIM": 4614,
+            "KURAB": 3675,
+            "UPPARA": 2306
+        },
+        "Sex": {
+            "MALE": 36555,
+            "FEMALE": 15883,
+            "Others": 5
+        },
+        "Profession": {
+            "Farmer ": 15529,
+            "Housewife ": 10034,
+            "Labourer ": 8546,
+            "Student ": 4953,
+            "Driver": 1787
+        },
+        "Age": {
+            "25-40": 20537,
+            "40-60": 15166,
+            "18-25": 8097,
+            "10-18": 2732,
+            "0-10": 1386
+        }
+    },
+    "Bengaluru City": {
+        "Caste": {
+            "MUSLIM": 26320,
+            "VOKKALIGA": 25796,
+            "ACHARI": 24196,
+            "ADI KARNATAKA": 13115,
+            "BRAHMIN": 11704
+        },
+        "Sex": {
+            "MALE": 157400,
+            "FEMALE": 81159,
+            "Others": 134
+        },
+        "Profession": {
+            "Others PI Specify": 84513,
+            "Housewife ": 22536,
+            "Student ": 17331,
+            "Employed in private firms ": 16457,
+            "Police officer ": 15120
+        },
+        "Age": {
+            "25-40": 106500,
+            "40-60": 65670,
+            "18-25": 36762,
+            "10-18": 10173,
+            "0-10": 2885
+        }
+    },
+    "Bengaluru Dist": {
+        "Caste": {
+            "VOKKALIGA": 10163,
+            "ADI KARNATAKA": 7946,
+            "MUSLIM": 3072,
+            "Lingayath": 2817,
+            "KURUBA": 1778
+        },
+        "Sex": {
+            "MALE": 34623,
+            "FEMALE": 14725,
+            "Others": 17
+        },
+        "Profession": {
+            "Others PI Specify": 7330,
+            "Labourer ": 6173,
+            "Housewife ": 5821,
+            "Student ": 4891,
+            "Farmer ": 4647
+        },
+        "Age": {
+            "25-40": 19893,
+            "40-60": 13545,
+            "18-25": 8761,
+            "10-18": 2557,
+            "0-10": 836
+        }
+    },
+    "Bidar": {
+        "Caste": {
+            "Lingayath": 6176,
+            "MUSLIM": 5275,
+            "HOLAYA, HOLER, HOLEYA": 3790,
+            "MARATHA": 2641,
+            "MADIGA": 2150
+        },
+        "Sex": {
+            "MALE": 25435,
+            "FEMALE": 9068,
+            "Others": 1
+        },
+        "Profession": {
+            "Labourer ": 9593,
+            "Farmer ": 5429,
+            "Housewife ": 4877,
+            "Student ": 3520,
+            "Businessman ": 2099
+        },
+        "Age": {
+            "25-40": 13214,
+            "40-60": 10065,
+            "18-25": 5718,
+            "10-18": 1592,
+            "0-10": 703
+        }
+    },
+    "Chamarajanagar": {
+        "Caste": {
+            "ADI KARNATAKA": 4470,
+            "Lingayath": 3118,
+            "UPPARA": 1858,
+            "NAYAKA": 1604,
+            "MUSLIM": 949
+        },
+        "Sex": {
+            "MALE": 11379,
+            "FEMALE": 5815,
+            "Others": 4
+        },
+        "Profession": {
+            "Labourer ": 5177,
+            "Farmer ": 3655,
+            "Housewife ": 2647,
+            "Student ": 1351,
+            "Others PI Specify": 944
+        },
+        "Age": {
+            "25-40": 6190,
+            "40-60": 5709,
+            "18-25": 2293,
+            "10-18": 802,
+            "0-10": 305
+        }
+    },
+    "Chickballapura": {
+        "Caste": {
+            "VOKKALIGA": 5546,
+            "ADI KARNATAKA": 4816,
+            "NAYAKA": 3026,
+            "MUSLIM": 2536,
+            "BALAJIGA": 1534
+        },
+        "Sex": {
+            "MALE": 17331,
+            "FEMALE": 10000,
+            "Others": 2
+        },
+        "Profession": {
+            "Farmer ": 6919,
+            "Labourer ": 5075,
+            "Housewife ": 3658,
+            "Student ": 3274,
+            "Businessman ": 1340
+        },
+        "Age": {
+            "25-40": 10100,
+            "40-60": 8252,
+            "18-25": 4483,
+            "10-18": 1743,
+            "0-10": 507
+        }
+    },
+    "Chikkamagaluru": {
+        "Caste": {
+            "ADI KARNATAKA": 3803,
+            "Lingayath": 3687,
+            "VOKKALIGA": 3520,
+            "MUSLIM": 2753,
+            "KURUBA": 2318
+        },
+        "Sex": {
+            "MALE": 19563,
+            "FEMALE": 10075,
+            "Others": 4
+        },
+        "Profession": {
+            "Labourer ": 7978,
+            "Farmer ": 6261,
+            "Housewife ": 4218,
+            "Student ": 2978,
+            "Others PI Specify": 1458
+        },
+        "Age": {
+            "25-40": 10705,
+            "40-60": 9209,
+            "18-25": 4398,
+            "10-18": 1878,
+            "0-10": 585
+        }
+    },
+    "Chitradurga": {
+        "Caste": {
+            "NAYAKA": 5718,
+            "Lingayath": 5590,
+            "ADI KARNATAKA": 4732,
+            "GOLLA": 3728,
+            "MUSLIM": 2726
+        },
+        "Sex": {
+            "MALE": 24837,
+            "FEMALE": 12888,
+            "Others": 8
+        },
+        "Profession": {
+            "Farmer ": 10094,
+            "Labourer ": 7121,
+            "Housewife ": 5866,
+            "Student ": 3549,
+            "Others PI Specify": 3259
+        },
+        "Age": {
+            "25-40": 14616,
+            "40-60": 10739,
+            "18-25": 6320,
+            "10-18": 2012,
+            "0-10": 757
+        }
+    },
+    "CID": {
+        "Caste": {
+            "CHRISTIAN": 1,
+            "REDDY": 1,
+            "NAIR": 1,
+            "THOREYA": 1
+        },
+        "Sex": {
+            "MALE": 4
+        },
+        "Profession": {
+            "Businessman ": 1,
+            "CEO": 1,
+            "Others PI Specify": 1,
+            "Govt. official non-gazetted ": 1
+        },
+        "Age": {
+            "40-60": 2,
+            "25-40": 1,
+            "0-10": 0,
+            "10-18": 0,
+            "18-25": 0
+        }
+    },
+    "Dakshina Kannada": {
+        "Caste": {
+            "MUSLIM": 3980,
+            "GOUDA": 2825,
+            "BILLAVA": 1421,
+            "CHRISTIAN": 1153,
+            "ACHARI": 807
+        },
+        "Sex": {
+            "MALE": 12295,
+            "FEMALE": 5200
+        },
+        "Profession": {
+            "Labourer ": 4837,
+            "Housewife ": 2588,
+            "Others PI Specify": 2002,
+            "Student ": 1970,
+            "Farmer ": 1151
+        },
+        "Age": {
+            "25-40": 6415,
+            "40-60": 5256,
+            "18-25": 2658,
+            "10-18": 1096,
+            "0-10": 384
+        }
+    },
+    "Davanagere": {
+        "Caste": {
+            "Lingayath": 8721,
+            "MUSLIM": 4230,
+            "NAYAKA": 3260,
+            "ADI KARNATAKA": 2704,
+            "KURUBA": 2527
+        },
+        "Sex": {
+            "MALE": 24465,
+            "FEMALE": 10993,
+            "Others": 19
+        },
+        "Profession": {
+            "Farmer ": 7704,
+            "Labourer ": 6904,
+            "Housewife ": 5182,
+            "Student ": 3447,
+            "Businessman ": 1972
+        },
+        "Age": {
+            "25-40": 13366,
+            "40-60": 11237,
+            "18-25": 5528,
+            "10-18": 1787,
+            "0-10": 584
+        }
+    },
+    "Dharwad": {
+        "Caste": {
+            "Lingayath": 4450,
+            "MUSLIM": 1898,
+            "MARATHA": 884,
+            "KURAB": 604,
+            "VALMIKI": 587
+        },
+        "Sex": {
+            "MALE": 9715,
+            "FEMALE": 4057
+        },
+        "Profession": {
+            "Farmer ": 3126,
+            "Labourer ": 3040,
+            "Housewife ": 2199,
+            "Student ": 1303,
+            "Driver": 714
+        },
+        "Age": {
+            "25-40": 5316,
+            "40-60": 3936,
+            "18-25": 2350,
+            "10-18": 709,
+            "0-10": 322
+        }
+    },
+    "Gadag": {
+        "Caste": {
+            "Lingayath": 2890,
+            "MUSLIM": 1448,
+            "KURUB": 867,
+            "VALMIKI": 696,
+            "KURAB": 687
+        },
+        "Sex": {
+            "MALE": 8597,
+            "FEMALE": 4276
+        },
+        "Profession": {
+            "Farmer ": 3203,
+            "Labourer ": 3029,
+            "Housewife ": 1803,
+            "Student ": 1273,
+            "Businessman ": 594
+        },
+        "Age": {
+            "25-40": 4839,
+            "40-60": 3768,
+            "18-25": 2113,
+            "10-18": 671,
+            "0-10": 309
+        }
+    },
+    "Hassan": {
+        "Caste": {
+            "VOKKALIGA": 20655,
+            "ADI KARNATAKA": 7629,
+            "Lingayath": 5663,
+            "KURUBA": 3140,
+            "MUSLIM": 2776
+        },
+        "Sex": {
+            "MALE": 37279,
+            "FEMALE": 15228,
+            "Others": 4
+        },
+        "Profession": {
+            "Farmer ": 14510,
+            "Housewife ": 8548,
+            "Police officer ": 5771,
+            "Labourer ": 5383,
+            "Student ": 4176
+        },
+        "Age": {
+            "25-40": 19368,
+            "40-60": 18631,
+            "18-25": 6348,
+            "10-18": 2265,
+            "0-10": 689
+        }
+    },
+    "Haveri": {
+        "Caste": {
+            "Lingayath": 7106,
+            "MUSLIM": 3479,
+            "VALMIKI": 1949,
+            "KURUB": 1022,
+            "KURAB": 941
+        },
+        "Sex": {
+            "MALE": 16038,
+            "FEMALE": 8025
+        },
+        "Profession": {
+            "Farmer ": 5909,
+            "Labourer ": 5169,
+            "Housewife ": 3721,
+            "Student ": 2409,
+            "Businessman ": 1240
+        },
+        "Age": {
+            "25-40": 9050,
+            "40-60": 7129,
+            "18-25": 4015,
+            "10-18": 1343,
+            "0-10": 509
+        }
+    },
+    "Hubballi Dharwad City": {
+        "Caste": {
+            "Lingayath": 3954,
+            "MUSLIM": 3410,
+            "BRAHMIN": 886,
+            "MARATHA": 820,
+            "CHRISTIAN": 533
+        },
+        "Sex": {
+            "MALE": 12292,
+            "FEMALE": 5160,
+            "Others": 1
+        },
+        "Profession": {
+            "Housewife ": 2416,
+            "Employed in private firms ": 1985,
+            "Labourer ": 1984,
+            "Student ": 1970,
+            "Businessman ": 1951
+        },
+        "Age": {
+            "25-40": 6614,
+            "40-60": 5250,
+            "18-25": 2959,
+            "10-18": 803,
+            "0-10": 261
+        }
+    },
+    "K.G.F": {
+        "Caste": {
+            "ADI KARNATAKA": 1367,
+            "ADI DRAVIDA": 1282,
+            "VOKKALIGA": 653,
+            "MUSLIM": 487,
+            "BHOVI": 486
+        },
+        "Sex": {
+            "MALE": 4966,
+            "FEMALE": 2771
+        },
+        "Profession": {
+            "Labourer ": 2032,
+            "Housewife ": 1164,
+            "Farmer ": 1011,
+            "Student ": 869,
+            "Businessman ": 445
+        },
+        "Age": {
+            "25-40": 2794,
+            "40-60": 2354,
+            "18-25": 1269,
+            "10-18": 421,
+            "0-10": 139
+        }
+    },
+    "Kalaburagi": {
+        "Caste": {
+            "Lingayath": 4556,
+            "MUSLIM": 3316,
+            "KABBALIGA": 3050,
+            "HOLAYA, HOLER, HOLEYA": 2966,
+            "LAMBANI": 1799
+        },
+        "Sex": {
+            "MALE": 18829,
+            "FEMALE": 7711,
+            "Others": 6
+        },
+        "Profession": {
+            "Labourer ": 7309,
+            "Farmer ": 4774,
+            "Housewife ": 3514,
+            "Student ": 2332,
+            "Police officer ": 2060
+        },
+        "Age": {
+            "25-40": 11256,
+            "40-60": 7435,
+            "18-25": 4205,
+            "10-18": 1302,
+            "0-10": 473
+        }
+    },
+    "Kalaburagi City": {
+        "Caste": {
+            "MUSLIM": 3207,
+            "Lingayath": 3131,
+            "HOLAYA, HOLER, HOLEYA": 1673,
+            "KABBALIGA": 777,
+            "LAMBANI": 647
+        },
+        "Sex": {
+            "MALE": 10064,
+            "FEMALE": 3850,
+            "Others": 15
+        },
+        "Profession": {
+            "Housewife ": 2026,
+            "Labourer ": 1888,
+            "Student ": 1653,
+            "Businessman ": 977,
+            "Self Employed Others": 968
+        },
+        "Age": {
+            "25-40": 5572,
+            "40-60": 3838,
+            "18-25": 2590,
+            "10-18": 631,
+            "0-10": 284
+        }
+    },
+    "Karnataka Railways": {
+        "Caste": {
+            "Lingayath": 692,
+            "MUSLIM": 655,
+            "BRAHMIN": 523,
+            "ACHARI": 347,
+            "VOKKALIGA": 263
+        },
+        "Sex": {
+            "MALE": 4304,
+            "FEMALE": 1941
+        },
+        "Profession": {
+            "Housewife ": 1082,
+            "Student ": 621,
+            "Employed in private firms ": 574,
+            "Businessman ": 506,
+            "Labourer ": 467
+        },
+        "Age": {
+            "25-40": 2637,
+            "40-60": 1923,
+            "18-25": 999,
+            "10-18": 86,
+            "0-10": 44
+        }
+    },
+    "Kodagu": {
+        "Caste": {
+            "MUSLIM": 1976,
+            "KODAGARU": 1952,
+            "ADI KARNATAKA": 1500,
+            "GOUDA": 1373,
+            "VOKKALIGA": 1148
+        },
+        "Sex": {
+            "MALE": 9854,
+            "FEMALE": 4465,
+            "Others": 1
+        },
+        "Profession": {
+            "Labourer ": 3569,
+            "Farmer ": 2213,
+            "Housewife ": 1609,
+            "Student ": 1531,
+            "Businessman ": 1103
+        },
+        "Age": {
+            "25-40": 5144,
+            "40-60": 4388,
+            "18-25": 2015,
+            "10-18": 982,
+            "0-10": 263
+        }
+    },
+    "Kolar": {
+        "Caste": {
+            "VOKKALIGA": 4986,
+            "ADI KARNATAKA": 4556,
+            "MUSLIM": 2023,
+            "BHOVI": 1295,
+            "NAYAKA": 975
+        },
+        "Sex": {
+            "MALE": 14642,
+            "FEMALE": 7336,
+            "Others": 10
+        },
+        "Profession": {
+            "Labourer ": 4953,
+            "Farmer ": 4809,
+            "Housewife ": 2670,
+            "Student ": 2460,
+            "Businessman ": 1106
+        },
+        "Age": {
+            "25-40": 8395,
+            "40-60": 6617,
+            "18-25": 3608,
+            "10-18": 1155,
+            "0-10": 451
+        }
+    },
+    "Koppal": {
+        "Caste": {
+            "Lingayath": 3269,
+            "MUSLIM": 1861,
+            "MADIGA": 1302,
+            "VALMIKI": 1260,
+            "KURUB": 1071
+        },
+        "Sex": {
+            "MALE": 12681,
+            "FEMALE": 5990,
+            "Others": 4
+        },
+        "Profession": {
+            "Farmer ": 4960,
+            "Labourer ": 3595,
+            "Housewife ": 2314,
+            "Student ": 1729,
+            "Businessman ": 989
+        },
+        "Age": {
+            "25-40": 7456,
+            "40-60": 5309,
+            "18-25": 3078,
+            "10-18": 1105,
+            "0-10": 433
+        }
+    },
+    "Mandya": {
+        "Caste": {
+            "VOKKALIGA": 24194,
+            "ADI KARNATAKA": 5550,
+            "Lingayath": 2009,
+            "MUSLIM": 1686,
+            "KURUBA": 1204
+        },
+        "Sex": {
+            "MALE": 28922,
+            "FEMALE": 15998,
+            "Others": 5
+        },
+        "Profession": {
+            "Farmer ": 13696,
+            "Housewife ": 9336,
+            "Others PI Specify": 4354,
+            "Student ": 4166,
+            "Labourer ": 4127
+        },
+        "Age": {
+            "25-40": 15668,
+            "40-60": 14452,
+            "18-25": 6507,
+            "10-18": 2377,
+            "0-10": 857
+        }
+    },
+    "Mangaluru City": {
+        "Caste": {
+            "MUSLIM": 4573,
+            "ACHARI": 2354,
+            "CHRISTIAN": 2049,
+            "BILLAVA": 1836,
+            "POOJAR": 891
+        },
+        "Sex": {
+            "MALE": 15689,
+            "FEMALE": 5738,
+            "Others": 29
+        },
+        "Profession": {
+            "Others PI Specify": 6904,
+            "Police officer ": 2825,
+            "Student ": 1908,
+            "Housewife ": 1811,
+            "Labourer ": 1550
+        },
+        "Age": {
+            "25-40": 7788,
+            "40-60": 7104,
+            "18-25": 3266,
+            "10-18": 1010,
+            "0-10": 370
+        }
+    },
+    "Mysuru City": {
+        "Caste": {
+            "VOKKALIGA": 4539,
+            "MUSLIM": 3543,
+            "ADI KARNATAKA": 2707,
+            "Lingayath": 2163,
+            "KURUBA": 1522
+        },
+        "Sex": {
+            "MALE": 16441,
+            "FEMALE": 8408,
+            "Others": 4
+        },
+        "Profession": {
+            "Housewife ": 3814,
+            "Student ": 2753,
+            "Others PI Specify": 2564,
+            "Labourer ": 2448,
+            "Businessman ": 2298
+        },
+        "Age": {
+            "25-40": 9193,
+            "40-60": 7436,
+            "18-25": 4170,
+            "10-18": 1226,
+            "0-10": 391
+        }
+    },
+    "Mysuru Dist": {
+        "Caste": {
+            "ADI KARNATAKA": 7282,
+            "VOKKALIGA": 6228,
+            "Lingayath": 4228,
+            "KURUBA": 4009,
+            "NAYAKA": 3406
+        },
+        "Sex": {
+            "MALE": 23777,
+            "FEMALE": 11634,
+            "Others": 10
+        },
+        "Profession": {
+            "Farmer ": 10079,
+            "Labourer ": 7601,
+            "Housewife ": 5978,
+            "Student ": 3205,
+            "Others PI Specify": 1677
+        },
+        "Age": {
+            "25-40": 12714,
+            "40-60": 11288,
+            "18-25": 5218,
+            "10-18": 1850,
+            "0-10": 612
+        }
+    },
+    "Raichur": {
+        "Caste": {
+            "MADIGA": 3147,
+            "MUSLIM": 2723,
+            "NAYAK": 2276,
+            "Lingayath": 2259,
+            "NAYAKA": 1917
+        },
+        "Sex": {
+            "MALE": 15655,
+            "FEMALE": 8490,
+            "Others": 4
+        },
+        "Profession": {
+            "Farmer ": 6235,
+            "Labourer ": 5653,
+            "Housewife ": 3571,
+            "Student ": 2224,
+            "Others PI Specify": 850
+        },
+        "Age": {
+            "25-40": 10000,
+            "40-60": 6483,
+            "18-25": 4180,
+            "10-18": 1439,
+            "0-10": 480
+        }
+    },
+    "Ramanagara": {
+        "Caste": {
+            "VOKKALIGA": 14904,
+            "ADI KARNATAKA": 3643,
+            "MUSLIM": 2026,
+            "Lingayath": 1448,
+            "BHOVI": 676
+        },
+        "Sex": {
+            "MALE": 22095,
+            "FEMALE": 10347,
+            "Others": 10
+        },
+        "Profession": {
+            "Farmer ": 6099,
+            "Housewife ": 4890,
+            "Labourer ": 4197,
+            "Others PI Specify": 3965,
+            "Student ": 2944
+        },
+        "Age": {
+            "25-40": 12384,
+            "40-60": 9848,
+            "18-25": 4788,
+            "10-18": 1631,
+            "0-10": 539
+        }
+    },
+    "Shivamogga": {
+        "Caste": {
+            "MUSLIM": 5464,
+            "Lingayath": 5169,
+            "EDIGA": 4214,
+            "VOKKALIGA": 3413,
+            "ADI KARNATAKA": 2605
+        },
+        "Sex": {
+            "MALE": 30959,
+            "FEMALE": 14583
+        },
+        "Profession": {
+            "Labourer ": 10108,
+            "Farmer ": 9165,
+            "Housewife ": 6034,
+            "Student ": 4398,
+            "Others PI Specify": 2445
+        },
+        "Age": {
+            "25-40": 16506,
+            "40-60": 14334,
+            "18-25": 7315,
+            "10-18": 2400,
+            "0-10": 877
+        }
+    },
+    "Tumakuru": {
+        "Caste": {
+            "VOKKALIGA": 12380,
+            "Lingayath": 7278,
+            "ADI KARNATAKA": 5699,
+            "MUSLIM": 4531,
+            "NAYAKA": 3283
+        },
+        "Sex": {
+            "MALE": 40873,
+            "FEMALE": 17555,
+            "Others": 12
+        },
+        "Profession": {
+            "Farmer ": 13148,
+            "Housewife ": 9224,
+            "Labourer ": 9009,
+            "Student ": 5169,
+            "Businessman ": 3372
+        },
+        "Age": {
+            "25-40": 21303,
+            "40-60": 19441,
+            "18-25": 8365,
+            "10-18": 2550,
+            "0-10": 993
+        }
+    },
+    "Udupi": {
+        "Caste": {
+            "BILLAVA": 3027,
+            "MUSLIM": 2389,
+            "Shetty": 1582,
+            "MOGAVEERA": 1421,
+            "ACHARI": 1372
+        },
+        "Sex": {
+            "MALE": 15496,
+            "FEMALE": 6727,
+            "Others": 7
+        },
+        "Profession": {
+            "Labourer ": 4985,
+            "Housewife ": 3570,
+            "Student ": 2260,
+            "Businessman ": 2112,
+            "Others PI Specify": 1177
+        },
+        "Age": {
+            "25-40": 7632,
+            "40-60": 7144,
+            "18-25": 3217,
+            "10-18": 1115,
+            "0-10": 405
+        }
+    },
+    "Uttara Kannada": {
+        "Caste": {
+            "MUSLIM": 3376,
+            "Naik": 1801,
+            "MARATHA": 1638,
+            "NAMADHARI": 1431,
+            "Lingayath": 1195
+        },
+        "Sex": {
+            "MALE": 16746,
+            "FEMALE": 7510,
+            "Others": 3
+        },
+        "Profession": {
+            "Labourer ": 5464,
+            "Housewife ": 3738,
+            "Student ": 2571,
+            "Farmer ": 2493,
+            "Businessman ": 1468
+        },
+        "Age": {
+            "25-40": 9196,
+            "40-60": 7200,
+            "18-25": 3889,
+            "10-18": 1328,
+            "0-10": 512
+        }
+    },
+    "Vijayanagara": {
+        "Caste": {
+            "Lingayath": 3132,
+            "VALMIKI": 2703,
+            "MUSLIM": 1824,
+            "ADI KARNATAKA": 1599,
+            "KURUBA": 1540
+        },
+        "Sex": {
+            "MALE": 13331,
+            "FEMALE": 6263,
+            "Others": 1
+        },
+        "Profession": {
+            "Farmer ": 5329,
+            "Labourer ": 3671,
+            "Housewife ": 2575,
+            "Student ": 1868,
+            "Others PI Specify": 805
+        },
+        "Age": {
+            "25-40": 7882,
+            "40-60": 5468,
+            "18-25": 3191,
+            "10-18": 1196,
+            "0-10": 411
+        }
+    },
+    "Vijayapur": {
+        "Caste": {
+            "Lingayath": 5530,
+            "MUSLIM": 4016,
+            "KURUB": 1601,
+            "LAMBANI": 1436,
+            "HOLAYA, HOLER, HOLEYA": 1384
+        },
+        "Sex": {
+            "MALE": 19220,
+            "FEMALE": 8719,
+            "Others": 4
+        },
+        "Profession": {
+            "Labourer ": 6074,
+            "Farmer ": 5914,
+            "Housewife ": 5010,
+            "Student ": 2924,
+            "Businessman ": 1227
+        },
+        "Age": {
+            "25-40": 11252,
+            "40-60": 7626,
+            "18-25": 4577,
+            "10-18": 1561,
+            "0-10": 759
+        }
+    },
+    "Yadgir": {
+        "Caste": {
+            "KABBALIGA": 1466,
+            "BEDARU": 1441,
+            "MUSLIM": 1304,
+            "MADIGA": 1116,
+            "KURUBA": 1020
+        },
+        "Sex": {
+            "MALE": 9536,
+            "FEMALE": 4153,
+            "Others": 6
+        },
+        "Profession": {
+            "Farmer ": 4081,
+            "Labourer ": 3540,
+            "Housewife ": 1884,
+            "Student ": 1222,
+            "Driver": 487
+        },
+        "Age": {
+            "25-40": 5426,
+            "40-60": 3908,
+            "18-25": 2396,
+            "10-18": 795,
+            "0-10": 170
+        }
+    }
+}

@@ -1,0 +1,142 @@
+<body>
+  {% extends "nav.html" %} {% block content %}
+  <div class="mx-8 my-5 flex justify-between">
+    <h2 class="text-4xl font-light text-black/50">
+      Live Data from News Articles
+    </h2>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Article_name</th>
+        <th>Type</th>
+        <th>Criminal_name</th>
+        <th>Criminal_gender</th>
+        <th>Reported_date</th>
+        <th>Reported_time</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Indiatoday</td>
+        <td>murder</td>
+        <td>Hemanth kumar nath</td>
+        <td>Male</td>
+        <td>25 March, 2024</td>
+        <td>3:15</td>
+        <td>Banglore</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Indiatv</td>
+        <td>murder</td>
+        <td>Hoti lal</td>
+        <td>Male</td>
+        <td>17 March, 2024</td>
+        <td>10:45</td>
+        <td>Mysore</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Times of India</td>
+        <td>Theft</td>
+        <td>Rajesh Sharma</td>
+        <td>Male</td>
+        <td>10 April, 2024</td>
+        <td>14:30</td>
+        <td>Shivanasamudra</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Hindustan Times</td>
+        <td>Assault</td>
+        <td>Veena Singh</td>
+        <td>Female</td>
+        <td>5 March, 2024</td>
+        <td>9:00</td>
+        <td>Bidar</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>The Indian Express</td>
+        <td>Robbery</td>
+        <td>Amit Patel</td>
+        <td>Male</td>
+        <td>20 February, 2024</td>
+        <td>18:15</td>
+        <td>Kundapura</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>News18</td>
+        <td>Fraud</td>
+        <td>Priya Gupta</td>
+        <td>Female</td>
+        <td>15 January, 2024</td>
+        <td>11:20</td>
+        <td>Dharmasthala</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+</body>
+<style>
+
+  h1 {
+    color: #2b2b2b;
+    /* Dark text color */
+    word-wrap: break-word;
+    margin-top: 20px;
+    /* Add some top margin */
+    text-align: center;
+    /* Center align heading */
+    font-size: 36px;
+    font-family: Gotham;
+    font-weight: 300;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    /* Reduce table width */
+    max-width: 800px;
+    /* Limit maximum width */
+    background-color: #ffffff;
+    /* White background for table */
+    border-radius: 8px;
+    /* Add some border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
+    margin: 100px auto;
+    /* Center table horizontally */
+  }
+
+  th,
+  td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 12px;
+    /* Increase cell padding for better spacing */
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    /* Make header text bold */
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Alternate row background color */
+  }
+
+  tr:hover {
+    background-color: #f0f0f0;
+    /* Hover row background color */
+  }
+</style>
+{% endblock %}

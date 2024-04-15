@@ -3,3 +3,4 @@ __pycache__
 _pycache_
 site-packages
 .vercel
+.DS_Store

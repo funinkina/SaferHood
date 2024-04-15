@@ -69,12 +69,10 @@ struct Profile: View {
                 Spacer()
                 
                 HStack {
-                    Image(systemName: "arrow.up.left.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20, height: 20)
-                        .padding(5)
-                    Text("Logout")
+                    Button("Logout", systemImage: "arrow.up.left.circle.fill", action: {
+                        context.delete(token[0])
+                        exit(0)
+                    })
                 }
                 .padding()
                 .foregroundColor(.white)

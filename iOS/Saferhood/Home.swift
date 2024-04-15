@@ -15,6 +15,7 @@ struct Home: View {
     @State private var coordinate = CLLocationCoordinate2D(latitude: 19.0760, longitude: 72.8777)
     @State private var showProfile: Bool = false
     @State private var showAlerts: Bool = false
+    @State private var criminalPrediction: Bool = false
     @State var camera: MapCameraPosition = .automatic
     @State var sos: Bool = false
     @StateObject var viewModel = ContentViewModel()
@@ -102,21 +103,7 @@ struct Home: View {
                 HStack {
                     Text("SaferHood")
                         .font(.title.bold())
-                    Spacer()
-                    Button(action: {
-                        showProfile = true
-                    }) {
-                        HStack {
-                            Image(systemName: "person.circle.fill")
-                            Text("Profile")
-                        }
-                    }
-                    .padding(10)
-                    .background(Color.black.opacity(0.5))
-                    .foregroundColor(.white)
-                    .font(.title3)
-                    .clipShape(Capsule())
-                    
+                    Spacer()                    
                     Button(action: {
                         showAlerts = true
                     }) {
@@ -151,12 +138,9 @@ struct Home: View {
                     .font(.title3)
                     .clipShape(Capsule())
                     Spacer()
-                    // Use a conditional statement to display different buttons based on the SOS status
                     VStack {
-                        // Use a conditional statement to display different buttons based on the SOS status
                         if !sos {
                             Button(action: {
-                                // Start sending location updates when the Help button is clicked
                                 id = Int.random(in: 0..<999999)
                                 startStreamingLocation()
                                 sos = true
@@ -223,10 +207,6 @@ struct Home: View {
             })
             .sheet(isPresented: $showAlerts) {
                 InfoPageView()
-                    .background(.ultraThinMaterial)
-            }
-            .sheet(isPresented: $showProfile) {
-                Profile()
             }
         }
     }

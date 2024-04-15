@@ -1,0 +1,35 @@
+<body>
+    {% extends "nav.html" %} {% block content %}
+    <div class="mx-8 my-5 flex justify-between">
+        <h2 class="text-4xl font-light text-black/50">
+            Repeat Offenders
+        </h2>
+        <div>
+            <div class="flex items-center  gap-4">
+                <p class="text-2xl">Select District</p>
+                <select class="py-3 px-5 bg-white border border-black" id="district">
+                </select>
+            </div>
+        </div>
+    </div>
+    <img src="/static/images/repeat_offenders.png" alt="">
+
+    <script>
+        fetch('{{ json_file }}')
+            .then(response => response.json())
+            .then(data => {
+                // Get the select element
+                var selectElement = document.getElementById('district');
+
+                // Loop through the keys of the JSON object and create an option for each key
+                Object.keys(data).forEach(key => {
+                    var option = document.createElement('option');
+                    option.text = key;
+                    option.value = key;
+                    selectElement.appendChild(option);
+                });
+            });
+    </script>
+
+</body>
+{% endblock %}

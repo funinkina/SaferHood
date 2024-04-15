@@ -66,6 +66,10 @@
           class="checkboxes select-none bg-white/60 flex-wrap text-md gap-x-4 gap-y-2  mx-6 my-6 p-2 rounded-md"></div>
       </div>
     </div>
+    <div id="markers">
+      <div class="flex items-center"><input type="checkbox" id="hosCheckbox"> <label class="flex items-center gap-2" for="hosCheckbox"><img src="/static/images/hospital.png" width="20" height="20">Hospitals</label><br></div>
+      <div class="flex itmes-center"><input type="checkbox" id="stationCheckbox"> <label for="stationCheckbox" class="flex items-center"> <img src="/static/images/police-station.png" width="20" height="20">Police Stations</label><br></div>
+    </div>
   </div>
 </body>
 
@@ -98,6 +102,63 @@
   //   pane: 'shadowPane',
   // }).addTo(map)
 
+  //adding markers
+
+  function addMarkers(data, markerIcon, layerGroup) {
+    data.forEach(point => {
+      var marker = L.marker([point.Latitude, point.Longitude], { icon: markerIcon });
+      layerGroup.addLayer(marker);
+    });
+  }
+
+  // Create layer groups for each type of marker
+  var hosLayerGroup = L.layerGroup();
+  var stationLayerGroup = L.layerGroup();
+
+  fetch('{{ hospitals_data }}')
+    .then(response => response.json())
+    .then(data => {
+      // Add markers with hos icon to hosLayerGroup
+      var hosIcon = L.icon({
+        iconUrl: '/static/images/hospital.png', // Replace 'path_to_hos_icon.png' with the actual path to the icon
+        iconSize: [16, 16],
+        iconAnchor: [8, 16],
+        popupAnchor: [0, -16]
+      });
+      addMarkers(data, hosIcon, hosLayerGroup);
+    })
+    .catch(error => console.error('Error:', error));
+
+  // Fetch the JSON data for station.json
+  fetch('{{ stations_data }}')
+    .then(response => response.json())
+    .then(data => {
+      // Add markers with station icon to stationLayerGroup
+      var stationIcon = L.icon({
+        iconUrl: '/static/images/police-station.png', // Replace 'path_to_station_icon.png' with the actual path to the icon
+        iconSize: [16, 16],
+        iconAnchor: [8, 16],
+        popupAnchor: [0, -16]
+      });
+      addMarkers(data, stationIcon, stationLayerGroup);
+    })
+    .catch(error => console.error('Error:', error));
+
+  document.getElementById('hosCheckbox').addEventListener('change', function () {
+    if (this.checked) {
+      map.addLayer(hosLayerGroup);
+    } else {
+      map.removeLayer(hosLayerGroup);
+    }
+  });
+
+  document.getElementById('stationCheckbox').addEventListener('change', function () {
+    if (this.checked) {
+      map.addLayer(stationLayerGroup);
+    } else {
+      map.removeLayer(stationLayerGroup);
+    }
+  });
 
   // map filter
   var filter = document.getElementById('filters');
@@ -116,6 +177,22 @@
   });
 
   filter.addEventListener('mouseout', function () {
+    map.dragging.enable();
+    map.scrollWheelZoom.enable();
+    if (map.tap) map.tap.enable();
+    map.keyboard.enable();
+    map.doubleClickZoom.enable();
+  });
+  var markers = document.getElementById('markers');
+  markers.addEventListener('mouseover', function () {
+    map.dragging.disable();
+    map.scrollWheelZoom.disable();
+    if (map.tap) map.tap.disable();
+    map.keyboard.disable();
+    map.doubleClickZoom.disable();
+  });
+
+  markers.addEventListener('mouseout', function () {
     map.dragging.enable();
     map.scrollWheelZoom.enable();
     if (map.tap) map.tap.enable();
@@ -148,7 +225,7 @@
     var startDate = document.getElementById('startDate');
     var endDate = document.getElementById('endDate');
     var datetext = document.getElementById('datetext');
-    
+
     for (var layerId in overlayMaps) {
       if (overlayMaps.hasOwnProperty(layerId)) {
         map.removeLayer(overlayMaps[layerId]);
@@ -230,7 +307,7 @@
         download: true,
         dynamicTyping: true,
         complete: function (results) {
-        console.log(Year, Month, Date)
+          console.log(Year, Month, Date)
 
           results.data.forEach(function (d) {
             var lat = d.Latitude;
@@ -422,8 +499,6 @@
     checkboxesDiv.appendChild(label);
   }
 
-  // legend
-  // var legend = L.control({position: 'bottomright'});
   let colors = {
     KPA1963: 'blue',
     Theft: 'green',
@@ -444,10 +519,6 @@
     'Cyber Crime': 'yellow',
     'Negligent Act': 'pink'
   };
-
-
-  // fix colors
-
   var current_filters = document.getElementById('current_filters')
 
   document.querySelectorAll('#filters input[type=checkbox]').forEach(function (checkbox) {
@@ -536,6 +607,19 @@
 
   #hotspotlink {
     text-decoration: underline;
+  }
+
+  #markers {
+    z-index: 1001;
+    position: absolute;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.646);
+    backdrop-filter: blur(25px);
+    color: white;
+    font-size: medium;
+    padding: 0.5rem;
+    margin: 1rem;
+    border-radius: 5px;
   }
 
   .self-end {

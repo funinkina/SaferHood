@@ -1,0 +1,86 @@
+[
+    {
+        "Type": "murder",
+        "Criminal_name": "Hemanth kumar nath",
+        "Reported_date": "15 March, 2024",
+        "Reported_time": "3:15",
+        "Location": "Banglore"
+    },
+    {
+        "Type": "murder",
+        "Criminal_name": "Hoti lal",
+        "Reported_date": "7 March, 2024",
+        "Reported_time": "10:45",
+        "Location": "Mysore"
+    },
+    {
+        "Type": "Theft",
+        "Criminal_name": "Rajesh Sharma",
+        "Reported_date": "2 April, 2024",
+        "Reported_time": "14:30",
+        "Location": "Shivanasamudra"
+    },
+    {
+        "Type": "Assault",
+        "Criminal_name": "Veena Singh",
+        "Reported_date": "21 March, 2024",
+        "Reported_time": "9:00",
+        "Location": "Bidar"
+    },
+    {
+        "Type": "Robbery",
+        "Criminal_name": "Amit Patel",
+        "Reported_date": "12 March, 2024",
+        "Reported_time": "18:15",
+        "Location": "Kundapura"
+    },
+    {
+        "Type": "Fraud",
+        "Criminal_name": "Priya Gupta",
+        "Reported_date": "8 April, 2024",
+        "Reported_time": "11:20",
+        "Location": "Dharmasthala"
+    },
+    {
+        "Type": "Assault",
+        "Criminal_name": "Suresh Kumar",
+        "Reported_date": "16 March, 2024",
+        "Reported_time": "16:50",
+        "Location": "Tumkur"
+    },
+    {
+        "Type": "Theft",
+        "Criminal_name": "Anita Desai",
+        "Reported_date": "5 April, 2024",
+        "Reported_time": "12:10",
+        "Location": "Hassan"
+    },
+    {
+        "Type": "Robbery",
+        "Criminal_name": "Rakesh Reddy",
+        "Reported_date": "28 March, 2024",
+        "Reported_time": "19:30",
+        "Location": "Gulbarga"
+    },
+    {
+        "Type": "Fraud",
+        "Criminal_name": "Shilpa Jain",
+        "Reported_date": "19 April, 2024",
+        "Reported_time": "10:15",
+        "Location": "Bijapur"
+    },
+    {
+        "Type": "Assault",
+        "Criminal_name": "Arun Kumar",
+        "Reported_date": "9 March, 2024",
+        "Reported_time": "15:20",
+        "Location": "Hospet"
+    },
+    {
+        "Type": "Robbery",
+        "Criminal_name": "Vijay Singh",
+        "Reported_date": "3 April, 2024",
+        "Reported_time": "21:00",
+        "Location": "Belgaum"
+    }
+]

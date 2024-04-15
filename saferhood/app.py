@@ -133,9 +133,15 @@ def victims():
 
 
 @app.route("/hotspot_mapping")
-def victims_post():
-    return render_template("./hotspot.html")
+def hotspot():
+    hospitals_data = url_for('static', filename='data/hospitals_data.json')
+    stations_data = url_for('static', filename='data/police_station.json')
+    return render_template("./hotspot.html", hospitals_data=hospitals_data, stations_data=stations_data)
 
+@app.route("/repeat_offenders")
+def repeat_offenders():
+    json_file = url_for('static', filename='data/victim_info.json')
+    return render_template("./repeat_offenders.html", json_file=json_file)
 
 @app.route("/victim_analysis")
 def victims_post_post():
@@ -184,7 +190,8 @@ def get_alerts():
 
 @app.route("/live_data")
 def victims_post_post_post():
-    return render_template("./news_live_data.html")
+    news_file = url_for('static', filename='data/news_data.json')
+    return render_template("./news_live_data.html", news_file=news_file)
 
 
 @app.route("/<longitude>/<latitude>/<id>", methods=["GET"])

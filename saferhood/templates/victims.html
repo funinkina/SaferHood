@@ -1,0 +1,206 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<body style="font-family: 'DM Sans', sans-serif;">
+  {% extends "nav.html" %} {% block content %}
+  <!-- top bar -->
+  <div class="mx-8 my-5 flex justify-between">
+    <h2 class="text-4xl font-light text-black/50">
+      Victim Analysis
+    </h2>
+    <div>
+      <div class="flex items-center  gap-4">
+        <p class="text-2xl">Select District</p>
+        <select class="py-3 px-5 bg-white border border-black" id="district">
+        </select>
+      </div>
+    </div>
+  </div>
+  <div id="graphs" class="grid-container mx-8">
+    <div>
+      <h2 class="text-2xl font-bold text-black/60">Caste Distribution</h2>
+      <canvas id="casteGraph"></canvas>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold text-black/60">Sex Distribution</h2>
+      <canvas id="sexGraph" height="350"></canvas>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold text-black/60">Professions Distribution</h2>
+      <canvas id="professionGraph"></canvas>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold text-black/60">Age Distribution</h2>
+      <canvas id="ageGraph"></canvas>
+    </div>
+  </div>
+  <script>
+    fetch('{{ json_file }}')
+      .then(response => response.json())
+      .then(data => {
+        // Get the select element
+        var selectElement = document.getElementById('district');
+
+        // Loop through the keys of the JSON object and create an option for each key
+        Object.keys(data).forEach(key => {
+          var option = document.createElement('option');
+          option.text = key;
+          option.value = key;
+          selectElement.appendChild(option);
+        });
+
+        // Function to plot graphs
+        function plotGraphs(selectedDistrict) {
+
+          // Destroy existing charts if they exist
+          if (window.casteChart) {
+            window.casteChart.destroy();
+          }
+          if (window.sexChart) {
+            window.sexChart.destroy();
+          }
+          if (window.professionChart) {
+            window.professionChart.destroy();
+          }
+          if (window.ageChart) {
+            window.ageChart.destroy();
+          }
+
+          var districtData = data[selectedDistrict];
+
+          // Plot graph for caste
+          var casteData = districtData['Caste'];
+          var casteLabels = Object.keys(casteData);
+          var casteValues = Object.values(casteData);
+          window.casteChart = new Chart(document.getElementById('casteGraph'), {
+            type: 'bar',
+            data: {
+              labels: casteLabels,
+              datasets: [{
+                label: 'Caste Distribution',
+                data: casteValues,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: false
+                  }
+                }]
+              }
+            }
+          });
+
+          // Plot graph for sex
+          var sexData = districtData['Sex'];
+          var sexLabels = Object.keys(sexData);
+          var sexValues = Object.values(sexData);
+          window.sexChart = new Chart(document.getElementById('sexGraph'), {
+            type: 'pie',
+            data: {
+              labels: sexLabels,
+              datasets: [{
+                data: sexValues,
+                backgroundColor: ['rgb(161, 173, 247)', 'rgb(221, 162, 248)', 'rgba(255, 206, 86, 0.6)'],
+                beginAtZero: true
+              }]
+            },
+            options: {
+              responsive: false,
+            }
+          });
+
+          // Plot graph for profession
+          var professionData = districtData['Profession'];
+          var professionLabels = Object.keys(professionData);
+          var professionValues = Object.values(professionData);
+          window.professionChart = new Chart(document.getElementById('professionGraph'), {
+            type: 'bar',
+            data: {
+              labels: professionLabels,
+              datasets: [{
+                label: 'Profession Distribution',
+                data: professionValues,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+
+          // Plot graph for age
+          var ageData = districtData['Age'];
+          var ageLabels = Object.keys(ageData);
+          var ageValues = Object.values(ageData);
+          window.ageChart = new Chart(document.getElementById('ageGraph'), {
+            type: 'bar',
+            data: {
+              labels: ageLabels,
+              datasets: [{
+                label: 'Age Distribution',
+                data: ageValues,
+                borderColor: 'rgba(216, 162, 255, 0.6)',
+                backgroundColor: 'rgba(216, 162, 255, 0.6)' ,
+                fill: false
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+        }
+
+        // Event listener for dropdown change
+        selectElement.addEventListener('change', function () {
+          var selectedDistrict = this.value;
+          plotGraphs(selectedDistrict);
+        });
+
+        // Initial plot on page load
+        plotGraphs(selectElement.value);
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      /* 2 columns */
+      grid-template-rows: repeat(2, auto);
+      /* 2 rows */
+      gap: 20px;
+      /* Gap between grid items */
+      margin-bottom: 4vh;
+    }
+    .grid-container div {
+      padding: 20px;
+      border: 1px solid #ccc;
+      height: 100%;
+      width: 45vw;
+      border-radius: 10px;
+    }
+    .grid-container div canvas  {
+      width: 100%;
+      height: fit-content;
+    }
+  </style>
+</body>
+
+{% endblock %}

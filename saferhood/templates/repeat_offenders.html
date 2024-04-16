@@ -12,24 +12,65 @@
             </div>
         </div>
     </div>
-    <img src="/static/images/repeat_offenders.png" alt="">
+    <div id="offenders_data" class="mx-auto w-fit">
 
-    <script>
-        fetch('{{ json_file }}')
-            .then(response => response.json())
-            .then(data => {
-                // Get the select element
-                var selectElement = document.getElementById('district');
+    </div>
 
-                // Loop through the keys of the JSON object and create an option for each key
-                Object.keys(data).forEach(key => {
-                    var option = document.createElement('option');
-                    option.text = key;
-                    option.value = key;
-                    selectElement.appendChild(option);
-                });
-            });
-    </script>
 
 </body>
+<script>
+    fetch('{{ json_file }}')
+        .then(response => response.json())
+        .then(data => {
+            // Get the select element
+            var selectElement = document.getElementById('district');
+
+            // Loop through the keys of the JSON object and create an option for each key
+            Object.keys(data).forEach(key => {
+                var option = document.createElement('option');
+                option.text = key;
+                option.value = key;
+                selectElement.appendChild(option);
+            });
+            function displayOffenders() {
+                var district = document.getElementById('district').value;
+                var offenders = data[district];
+                var offendersDiv = document.getElementById('offenders_data');
+                offendersDiv.innerHTML = ''; // Clear previous content
+
+                // Create card for each offender
+                offenders.forEach(function (offender) {
+                    var card = document.createElement('div');
+                    card.classList.add('bg-gray-100', 'p-4', 'rounded-lg', 'shadow-md', 'mb-4');
+
+                    // Add offender information to card
+                    card.innerHTML = `
+                        <div class="flex">
+                            <img src="/static/images/placeholder.png" class="w-35 h-40 mr-6 rounded-md" alt="Offender Image">
+                            <div>
+                                <p class="text-xl font-bold mb-6 text-cyan-900">${offender.Name}</p>
+                                <div class="flex gap-20">
+                                    <div>
+                                        <p class="text-gray-600">Age: ${offender.age}</p>
+                                        <p class="text-gray-600">Caste: ${offender.Caste}</p>
+                                        <p class="text-gray-600">Profession: ${offender.Profession}</p>
+                                        <p class="text-gray-600">Sex: ${offender.Sex}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Present Address: ${offender.PresentAddress}</p>
+                                        <p class="text-gray-600">Present City: ${offender.PresentCity}</p>
+                                        <p class="text-gray-600">Offense Count: ${offender.Offense_Count}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    offendersDiv.appendChild(card);
+                });
+            }
+
+            // Event listener for dropdown change
+            document.getElementById('district').addEventListener('change', displayOffenders);
+            displayOffenders();
+        });
+</script>
 {% endblock %}

@@ -264,14 +264,8 @@
   var RIOTS = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'blue', 1: 'red' } });
   var CASES_OF_HURT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'purple', 1: 'red' } });
   var BURGLARY_NIGHT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'orange', 1: 'red' } });
-  var CRUELTY_BY_HUSBAND = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'blue', 1: 'red' } });
-  var ATTEMPT_TO_MURDER = L.heatLayer([], { radius: 25, gradient: { 0.4: 'orange', 0.65: 'green', 1: 'red' } });
-  var POCSO = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'pink', 1: 'red' } });
   var PUBLIC_SAFETY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'cyan', 1: 'red' } });
   var NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'orange', 1: 'red' } });
-  var ROBBERY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'green', 1: 'red' } });
-  var CYBER_CRIME = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'blue', 1: 'red' } });
-  var NEGLIGENT_ACT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'yellow', 1: 'red' } });
 
 
   var overlayMaps = {
@@ -285,14 +279,8 @@
     "Riots": RIOTS,
     "Cases of hurt": CASES_OF_HURT,
     'Burglary (Night)': BURGLARY_NIGHT,
-    'Cruelty by Husband': CRUELTY_BY_HUSBAND,
-    'Attempt to Murder': ATTEMPT_TO_MURDER,
-    'POCSO': POCSO,
     'Public Safety': PUBLIC_SAFETY,
     'Drug Abuse': NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES,
-    'Robbery': ROBBERY,
-    'Cyber Crime': CYBER_CRIME,
-    'Negligent Act': NEGLIGENT_ACT
   };
 
   document.getElementById('crimefilter_dropdown').addEventListener('click', function () {
@@ -351,29 +339,11 @@
                 case "BURGLARY - NIGHT":
                   BURGLARY_NIGHT.addLatLng([lat, lng]);
                   break;
-                case "CRUELTY BY HUSBAND":
-                  CRUELTY_BY_HUSBAND.addLatLng([lat, lng]);
-                  break;
-                case "ATTEMPT TO MURDER":
-                  ATTEMPT_TO_MURDER.addLatLng([lat, lng]);
-                  break;
-                case "POCSO":
-                  POCSO.addLatLng([lat, lng]);
-                  break;
                 case "PUBLIC SAFETY":
                   PUBLIC_SAFETY.addLatLng([lat, lng]);
                   break;
                 case "NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES":
                   NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES.addLatLng([lat, lng]);
-                  break;
-                case "ROBBERY":
-                  ROBBERY.addLatLng([lat, lng]);
-                  break;
-                case "CYBER CRIME":
-                  CYBER_CRIME.addLatLng([lat, lng]);
-                  break;
-                case "NEGLIGENT ACT":
-                  NEGLIGENT_ACT.addLatLng([lat, lng]);
                   break;
                 default:
                   break;
@@ -447,29 +417,11 @@
                   case "BURGLARY - NIGHT":
                     BURGLARY_NIGHT.addLatLng([lat, lng]);
                     break;
-                  case "CRUELTY BY HUSBAND":
-                    CRUELTY_BY_HUSBAND.addLatLng([lat, lng]);
-                    break;
-                  case "ATTEMPT TO MURDER":
-                    ATTEMPT_TO_MURDER.addLatLng([lat, lng]);
-                    break;
-                  case "POCSO":
-                    POCSO.addLatLng([lat, lng]);
-                    break;
                   case "PUBLIC SAFETY":
                     PUBLIC_SAFETY.addLatLng([lat, lng]);
                     break;
                   case "NARCOTIC DRUGS & PSHYCOTROPIC SUBSTANCES":
                     NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES.addLatLng([lat, lng]);
-                    break;
-                  case "ROBBERY":
-                    ROBBERY.addLatLng([lat, lng]);
-                    break;
-                  case "CYBER CRIME":
-                    CYBER_CRIME.addLatLng([lat, lng]);
-                    break;
-                  case "NEGLIGENT ACT":
-                    NEGLIGENT_ACT.addLatLng([lat, lng]);
                     break;
                   default:
                     break;
@@ -510,14 +462,8 @@
     Riots: 'green',
     'Cases of hurt': 'cyan',
     'Burglary (Night)': 'yellow',
-    'Cruelty by Husband': 'pink',
-    'Attempt to Murder': 'orange',
-    POCSO: 'blue',
     'Public Safety': 'green',
     'Drug Abuse': 'purple',
-    Robbery: 'cyan',
-    'Cyber Crime': 'yellow',
-    'Negligent Act': 'pink'
   };
   var current_filters = document.getElementById('current_filters')
 

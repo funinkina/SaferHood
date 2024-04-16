@@ -2,13 +2,16 @@
 
 SaferHood is an advanced crime prediction and preventive policing system designed to enhance public safety and reduce crime rates through the integration of machine learning algorithms and comprehensive data analysis. Leveraging historical crime data, socio-economic factors, real-time social media feeds, and cutting-edge technologies, SaferHood provides law enforcement agencies with actionable insights to optimize resource allocation and proactively address criminal activities
 
+# Website
+https://saferhood.pythonanywhere.com/
 
 # Application
 
 SaferHood offers both a web and iOS application designed to provide law enforcement agencies with essential tools for crime prediction, resource allocation, and proactive policing. Here's how each platform contributes to enhancing public safety:
 
 **Web Application Features:**
-2.  **Hotspot Mapping:**
+
+1.  **Hotspot Mapping:**
 - Generates hotspot maps to identify high-risk areas and potential crime patterns.
 - Utilizes FIR records, criminal records, and real-time patrol locations for accurate predictions.
 2.  **Victim Prediction:**

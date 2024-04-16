@@ -123,12 +123,13 @@ def validate_token():
 
 
 @app.route("/")
-def hello_world():
-    return render_template("./index.html")
+def dashboard():
+    json_file = url_for('static', filename='data/victim_info.json')
+    return render_template("./index.html", json_file=json_file)
 
 
 @app.route("/live-alerts")
-def victims():
+def live_alerts():
     return render_template("./live_alerts.html")
 
 
@@ -189,7 +190,7 @@ def get_alerts():
 
 
 @app.route("/live_data")
-def victims_post_post_post():
+def live_data():
     news_file = url_for('static', filename='data/news_data.json')
     return render_template("./news_live_data.html", news_file=news_file)
 

@@ -13,6 +13,11 @@
             <p class="text-2xl">Crime Type</p>
             <select class="py-3 px-5 bg-white border border-black" id="crime_type">
             </select>
+            <div class="flex items-center gap-4">
+                <p class="text-2xl">Select District</p>
+                <select class="py-3 px-5 bg-white border border-black" id="district">
+                </select>
+            </div>
         </div>
     </div>
 
@@ -57,11 +62,6 @@
                 </a>
             </div>
             <p class="text-black/60">Group or people at the utmost risk</p>
-            <div class="flex items-center  gap-4 w-full justify-between">
-                <p class="text-2xl">Select District</p>
-                <select class="py-3 px-5 bg-white border border-black" id="district">
-                </select>
-            </div>
             <div class="flex flex-col">
                 <canvas id="casteGraph"></canvas>
                 <canvas id="professionGraph"></canvas>
@@ -70,18 +70,20 @@
             </div>
         </div>
         <div id="repeatoffenders" class="overflow-hidden">
-            <h2 class="text-[#5C8DD6] text-2xl font-bold">Most Probable Future Offenders</h2>
+            <div class="flex justify-between">
+                <h2 class="text-[#5C8DD6] text-2xl font-bold">Most Probable Repeat Offenders</h2>
+                <a href="/repeat_offenders" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">
+                    <span class="underline">See complete data</span>
+                    <span class="material-symbols-rounded text-4xl">
+                        arrow_right_alt
+                    </span>
+                </a>
+            </div>
             <p class="text-black/60">High risk offenders with the highest probability of reoffending</p>
-            <a href="/repeat_offenders">
-                <div class="flex items-center gap-3">
-                    <img src="/static/images/offender_profile1.png" alt="">
-                    <img src="/static/images/offender_profile2.png" alt="">
-                    <img src="/static/images/offender_profile2.png" alt="">
-                </div>
-            </a>
+            <div class="flex items-start gap-3 mt-4" id="offenders_data"></div>
         </div>
         <div id="suspectedperpetrators" class="overflow-scroll">
-            <div class="flex justify-between">
+            <div class="flex justify-between bg-white sticky top-0">
                 <h2 class="text-[#5C8DD6] text-2xl font-bold">Live News Criminal Data</h2>
                 <a href="/live_data" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">
                     <span class="underline">See full data</span>
@@ -91,61 +93,19 @@
                 </a>
             </div>
             <p class="text-black/60">Live information extraction from news articles</p>
-            <table class="w-full">
+            <table id="table">
+                <!-- Table header -->
                 <thead>
                     <tr>
                         <th>Type</th>
-                        <th>Criminal_name</th>
+                        <th>Criminal Name</th>
                         <th>Reported Date</th>
-                        <th>Reported Time</th>
                         <th>Location</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>murder</td>
-                        <td>Hemanth kumar nath</td>
-                        <td>25 May, 2021</td>
-                        <td>3:15</td>
-                        <td>Banglore</td>
-                    </tr>
-                    <tr>
-                        <td>murder</td>
-                        <td>Hoti lal</td>
-                        <td>17 May, 2021</td>
-                        <td>10:45</td>
-                        <td>Mysore</td>
-                    </tr>
-                    <tr>
-                        <td>Theft</td>
-                        <td>Rajesh Sharma</td>
-                        <td>10 April, 2021</td>
-                        <td>14:30</td>
-                        <td>Shivanasamudra</td>
-                    </tr>
-                    <tr>
-                        <td>Assault</td>
-                        <td>Veena Singh</td>
-                        <td>5 March, 2021</td>
-                        <td>9:00</td>
-                        <td>Bidar</td>
-                    </tr>
-                    <tr>
-                        <td>Robbery</td>
-                        <td>Amit Patel</td>
-                        <td>20 February, 2021</td>
-                        <td>18:15</td>
-                        <td>Kundapura</td>
-                    </tr>
-                    <tr>
-                        <td>Fraud</td>
-                        <td>Priya Gupta</td>
-                        <td>15 January, 2021</td>
-                        <td>11:20</td>
-                        <td>Dharmasthala</td>
-                    </tr>
-
-
+                <!-- Table body for crime data -->
+                <tbody id="crime-body">
+                    <!-- Crime data will be dynamically added here -->
                 </tbody>
             </table>
         </div>
@@ -240,6 +200,20 @@
         background-color: #f0f0f0;
         /* Hover row background color */
     }
+
+    .address {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+    }
+
+    .oname {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 400px;
+    }
 </style>
 
 </html>
@@ -274,14 +248,8 @@
     var RIOTS = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'blue', 1: 'red' } });
     var CASES_OF_HURT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'purple', 1: 'red' } });
     var BURGLARY_NIGHT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'orange', 1: 'red' } });
-    var CRUELTY_BY_HUSBAND = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'blue', 1: 'red' } });
-    var ATTEMPT_TO_MURDER = L.heatLayer([], { radius: 25, gradient: { 0.4: 'orange', 0.65: 'green', 1: 'red' } });
-    var POCSO = L.heatLayer([], { radius: 25, gradient: { 0.4: 'blue', 0.65: 'pink', 1: 'red' } });
     var PUBLIC_SAFETY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'green', 0.65: 'cyan', 1: 'red' } });
     var NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES = L.heatLayer([], { radius: 25, gradient: { 0.4: 'purple', 0.65: 'orange', 1: 'red' } });
-    var ROBBERY = L.heatLayer([], { radius: 25, gradient: { 0.4: 'cyan', 0.65: 'green', 1: 'red' } });
-    var CYBER_CRIME = L.heatLayer([], { radius: 25, gradient: { 0.4: 'yellow', 0.65: 'blue', 1: 'red' } });
-    var NEGLIGENT_ACT = L.heatLayer([], { radius: 25, gradient: { 0.4: 'pink', 0.65: 'yellow', 1: 'red' } });
 
 
     var overlayMaps = {
@@ -295,14 +263,8 @@
         "Riots": RIOTS,
         "Cases of hurt": CASES_OF_HURT,
         'Burglary (Night)': BURGLARY_NIGHT,
-        'Cruelty by Husband': CRUELTY_BY_HUSBAND,
-        'Attempt to Murder': ATTEMPT_TO_MURDER,
-        'POCSO': POCSO,
         'Public Safety': PUBLIC_SAFETY,
         'Drug Abuse': NARCOTIC_DRUGS_PSHYCOTROPIC_SUBSTANCES,
-        'Robbery': ROBBERY,
-        'Cyber Crime': CYBER_CRIME,
-        'Negligent Act': NEGLIGENT_ACT
     };
 
     var selectOptions = document.getElementById('crime_type');
@@ -581,6 +543,62 @@
 
             // Initial plot on page load
             plotGraphs(selectElement.value);
+        })
+        .catch(error => console.error('Error:', error));
+
+    fetch('{{ offenders_list }}')
+        .then(response => response.json())
+        .then(data => {
+            function displayOffenders() {
+                var district = document.getElementById('district').value;
+                var offenders = data[district].slice(0, 3);
+                var offendersDiv = document.getElementById('offenders_data');
+                offendersDiv.innerHTML = ''; // Clear previous content
+
+                // Create card for each offender
+                offenders.forEach(function (offender) {
+                    var card = document.createElement('div');
+                    card.classList.add('bg-gray-100', 'p-4', 'rounded-lg', 'shadow-md', 'w-full');
+
+                    // Add offender information to card
+                    card.innerHTML = `
+                        <div>
+                            <p class="text-md font-bold mb-2 text-cyan-900 oname">${offender.Name}</p>
+                            <div class="flex gap-3">
+                                <div>
+                                    <p class="text-gray-600">Age:&nbsp;${offender.age}</p>
+                                    <p class="text-gray-600">Sex:&nbsp;${offender.Sex}</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-600 address">Present Address: ${offender.PresentAddress}</p>
+                                    <p class="text-gray-600">Offense Count: ${offender.Offense_Count}</p>
+                                </div>
+                            </div>
+                        </div>`;
+                    offendersDiv.appendChild(card);
+                });
+            }
+
+            // Event listener for dropdown change
+            document.getElementById('district').addEventListener('change', displayOffenders);
+            displayOffenders();
+        });
+
+    fetch('{{ news_file }}')
+        .then(response => response.json())
+        .then(data => {
+            var crimeBody = document.getElementById('crime-body');
+            data.forEach((crime, index) => {
+                setTimeout(() => {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+            <td>${crime.Type}</td>
+            <td>${crime.Criminal_name}</td>
+            <td>${crime.Reported_date} ${crime.Reported_time}</td>
+            <td>${crime.Location}</td>`;
+                    crimeBody.appendChild(row);
+                }, Math.random() * 2000);
+            });
         })
         .catch(error => console.error('Error:', error));
 

@@ -134,7 +134,10 @@ def validate_token():
 @app.route("/")
 def dashboard():
     json_file = url_for("static", filename="data/victim_info.json")
-    return render_template("./index.html", json_file=json_file)
+    offenders_list = url_for("static", filename="data/repeat_offenders.json")
+    news_file = url_for("static", filename="data/news_data.json")
+    return render_template("./index.html", json_file=json_file,
+                           offenders_list=offenders_list, news_file=news_file)
 
 
 @app.route("/live-alerts")
@@ -147,7 +150,8 @@ def hotspot():
     hospitals_data = url_for("static", filename="data/hospitals_data.json")
     stations_data = url_for("static", filename="data/police_station.json")
     return render_template(
-        "./hotspot.html", hospitals_data=hospitals_data, stations_data=stations_data)
+        "./hotspot.html", hospitals_data=hospitals_data,
+        stations_data=stations_data)
 
 
 @app.route("/repeat_offenders")

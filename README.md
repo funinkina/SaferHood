@@ -2,10 +2,7 @@
 
 SaferHood is an advanced crime prediction and preventive policing system designed to enhance public safety and reduce crime rates through the integration of machine learning algorithms and comprehensive data analysis. Leveraging historical crime data, socio-economic factors, real-time social media feeds, and cutting-edge technologies, SaferHood provides law enforcement agencies with actionable insights to optimize resource allocation and proactively address criminal activities
 
-# Website
-https://saferhood.pythonanywhere.com/
-
-# Application
+## [SaferHood Web App](https://saferhood.pythonanywhere.com)
 
 SaferHood offers both a web and iOS application designed to provide law enforcement agencies with essential tools for crime prediction, resource allocation, and proactive policing. Here's how each platform contributes to enhancing public safety:
 

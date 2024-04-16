@@ -61,8 +61,9 @@
   }
 
   th {
-    background-color: #f2f2f2;
+    background-color: #5C8DD6;
     font-weight: bold;
+    color: white;
     /* Make header text bold */
   }
 
@@ -75,15 +76,35 @@
     background-color: #f0f0f0;
     /* Hover row background color */
   }
+
+  .skeleton {
+    background-color: #f0f0f0;
+    height: 40px;
+    background-image:
+      linear-gradient(90deg,
+        rgba(#ae5959, 0),
+        rgba(#b23333, 0.5),
+        rgba(#0e0202, 0));
+    background-size: 40px 100%;
+    background-repeat: no-repeat;
+    background-position: left -40px top 0;
+    animation: shine 1s ease infinite;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: right -40px top 0;
+    }
+  }
 </style>
 
 <script>
-  // Fetch the JSON data using the URL passed from Flask
   fetch('{{ news_file }}')
-      .then(response => response.json())
-      .then(data => {
-        var crimeBody = document.getElementById('crime-body');
-        data.forEach(crime => {
+    .then(response => response.json())
+    .then(data => {
+      var crimeBody = document.getElementById('crime-body');
+      data.forEach((crime, index) => {
+        setTimeout(() => {
           var row = document.createElement('tr');
           row.innerHTML = `
             <td>${crime.Type}</td>
@@ -92,8 +113,19 @@
             <td>${crime.Location}</td>
           `;
           crimeBody.appendChild(row);
-        });
-      })
-      .catch(error => console.error('Error:', error));
+        }, Math.random() * 2000);
+      });
+
+      // Add a row with skeleton loading animation
+      var skeletonRow = document.createElement('tr');
+      skeletonRow.innerHTML = `
+        <td class="skeleton">Loading more...</td>
+        <td class="skeleton"></td>
+        <td class="skeleton"></td>
+        <td class="skeleton"></td>
+      `;
+      crimeBody.appendChild(skeletonRow);
+    })
+    .catch(error => console.error('Error:', error));
 </script>
 {% endblock %}

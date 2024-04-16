@@ -9,7 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,200,0,0" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,200,0,0" />
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
     rel="stylesheet">
@@ -18,14 +19,15 @@
 
 <body style="background-color:  #f8f8f8">
   <div class="flex justify-between align-center mx-8 mt-4">
-    <div class="flex items-center gap-16">
+    <div class="flex items-center gap-6">
       <button id="menuButton" class="w-8"><img src="{{ url_for('static', filename='images/menu.svg') }}"
           alt=""></button>
       <div id="menu" class="menu text-black py-20 flex flex-col">
         <a href="/hotspot_mapping" id="hotspotlink">Hotspot Mapping</a>
-        <a href="/victim_analysis" id="offenders">Victim Analysis</a>
-        <a href="/live-alerts" id="victim">Live Alerts</a>
-        <a href="/live_data" id="perpetrators">Live News&nbsp;Data</a>
+        <a href="/victim_analysis" id="victim">Victim Analysis</a>
+        <a href="/repeat_offenders" id="offenders">Repeat Offenders</a>
+        <a href="/live-alerts" id="victim">Alert officers</a>
+        <a href="/live_data" id="perpetrators">Real&nbsp;Time News&nbsp;Data</a>
       </div>
       <div id="logo">
         <a href="/">
@@ -61,13 +63,13 @@
     justify-content: space-between;
     left: 0;
     top: 0;
-    width: 120px;
+    width: 200px;
     height: 100%;
     padding: 14vh 2.5rem 10vh 2rem;
-    background-color: #65656529;
-    backdrop-filter: blur(25px);
-    transform: translateX(-100%);
+    background-color: #ececec;
+    transform: translateX(-93%);
     transition: transform 0.26s cubic-bezier(.79, .14, .15, .86);
+    border-right: 1px solid #b2b2b2;
   }
 
   #logo,
@@ -77,21 +79,39 @@
 
   .menu.show {
     transform: translateX(0);
+    -webkit-box-shadow: 10px 3px 65px -13px rgba(0, 0, 0, 0.58);
+    -moz-box-shadow: 10px 3px 65px -13px rgba(0, 0, 0, 0.58);
+    box-shadow: 10px 3px 65px -13px rgba(0, 0, 0, 0.58);
   }
 
   #menu a {
-    text-align: center;
-    writing-mode: vertical-rl;
-    rotate: 180deg;
     height: min-content;
     display: block;
     font-weight: 600;
-    color: #3b6d84;
+    color: #5C8DD6;
     font-size: 1.4rem;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    position: relative;
   }
 
-  #menu a:hover {
-    color: #000000;
+  #menu a:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #5C8DD6;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+
+  #menu a:hover:after {
+    width: 100%;
+    left: 0;
   }
 </style>
 

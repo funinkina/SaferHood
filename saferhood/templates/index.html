@@ -2,6 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body class="bg-[#f8f8f8]">
     {% extends "nav.html" %} {% block content %}
@@ -20,7 +21,8 @@
         <div id="hotspot" class="flex flex-col overflow-hidden">
             <div class="flex justify-between">
                 <h2 class="text-[#5C8DD6] text-2xl font-bold">Analyse Hotspots</h2>
-                <a href="/hotspot_mapping" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">See Predictions
+                <a href="/hotspot_mapping" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">
+                    <span class="underline">See Predictions</span>
                     <span class="material-symbols-rounded text-4xl">
                         arrow_right_alt
                     </span>
@@ -44,59 +46,27 @@
             </div>
             <div id="map" class="grow"></div>
         </div>
-        <div id="highriskvictims">
+        <div id="highriskvictims" class="overflow-scroll">
             <div class="flex justify-between">
                 <h2 class="text-[#5C8DD6] text-2xl font-bold">High Risk Victims</h2>
-                <a href="/victim_analysis" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">See full analysis
+                <a href="/victim_analysis" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">
+                    <span class="underline">See full analysis</span>
                     <span class="material-symbols-rounded text-4xl">
                         arrow_right_alt
                     </span>
                 </a>
             </div>
             <p class="text-black/60">Group or people at the utmost risk</p>
-            <div>
-                <table class="border border-black w-full">
-                    <thead>
-                        <tr>
-                            <th class="py-2 px-4 bg-gray-200">Caste</th>
-                            <th class="py-2 px-4 bg-gray-200">Gender</th>
-                            <th class="py-2 px-4 bg-gray-200">Age range</th>
-                            <th class="py-2 px-4 bg-gray-200">Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="py-2 px-4">Dalit</td>
-                            <td class="py-2 px-4">Male</td>
-                            <td class="py-2 px-4">20-30</td>
-                            <td class="py-2 px-4">Banglore</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 px-4">Upper caste</td>
-                            <td class="py-2 px-4">Female</td>
-                            <td class="py-2 px-4">40-50</td>
-                            <td class="py-2 px-4">Mysore</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 px-4">OBC</td>
-                            <td class="py-2 px-4">Male</td>
-                            <td class="py-2 px-4">30-40</td>
-                            <td class="py-2 px-4">Bidar</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 px-4">Lower caste</td>
-                            <td class="py-2 px-4">Female</td>
-                            <td class="py-2 px-4">50-60</td>
-                            <td class="py-2 px-4">Kundapura</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2 px-4">Tribal</td>
-                            <td class="py-2 px-4">Male</td>
-                            <td class="py-2 px-4">20-30</td>
-                            <td class="py-2 px-4">Dharmasthala</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="flex items-center  gap-4 w-full justify-between">
+                <p class="text-2xl">Select District</p>
+                <select class="py-3 px-5 bg-white border border-black" id="district">
+                </select>
+            </div>
+            <div class="flex flex-col">
+                <canvas id="casteGraph"></canvas>
+                <canvas id="professionGraph"></canvas>
+                <canvas id="sexGraph"></canvas>
+                <canvas id="ageGraph"></canvas>
             </div>
         </div>
         <div id="repeatoffenders" class="overflow-hidden">
@@ -113,7 +83,8 @@
         <div id="suspectedperpetrators" class="overflow-scroll">
             <div class="flex justify-between">
                 <h2 class="text-[#5C8DD6] text-2xl font-bold">Live News Criminal Data</h2>
-                <a href="/live_data" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">See full data
+                <a href="/live_data" class="text-xl hover:text-[#5C8DD6] flex items-end gap-3">
+                    <span class="underline">See full data</span>
                     <span class="material-symbols-rounded text-4xl">
                         arrow_right_alt
                     </span>
@@ -468,6 +439,150 @@
         //add layers to map
         currentLayer = overlayMaps[crime_type].addTo(map);
     });
+
+    fetch('{{ json_file }}')
+        .then(response => response.json())
+        .then(data => {
+            // Get the select element
+            var selectElement = document.getElementById('district');
+
+            // Loop through the keys of the JSON object and create an option for each key
+            Object.keys(data).forEach(key => {
+                var option = document.createElement('option');
+                option.text = key;
+                option.value = key;
+                selectElement.appendChild(option);
+            });
+
+            // Function to plot graphs
+            function plotGraphs(selectedDistrict) {
+
+                // Destroy existing charts if they exist
+                if (window.casteChart) {
+                    window.casteChart.destroy();
+                }
+                if (window.sexChart) {
+                    window.sexChart.destroy();
+                }
+                if (window.professionChart) {
+                    window.professionChart.destroy();
+                }
+                if (window.ageChart) {
+                    window.ageChart.destroy();
+                }
+
+                var districtData = data[selectedDistrict];
+
+                // Plot graph for caste
+                var casteData = districtData['Caste'];
+                var casteLabels = Object.keys(casteData);
+                var casteValues = Object.values(casteData);
+                window.casteChart = new Chart(document.getElementById('casteGraph'), {
+                    type: 'bar',
+                    data: {
+                        labels: casteLabels,
+                        datasets: [{
+                            label: 'Caste Distribution',
+                            data: casteValues,
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: false
+                                }
+                            }]
+                        }
+                    }
+                });
+
+                // Plot graph for sex
+                var sexData = districtData['Sex'];
+                var sexLabels = Object.keys(sexData);
+                var sexValues = Object.values(sexData);
+                window.sexChart = new Chart(document.getElementById('sexGraph'), {
+                    type: 'pie',
+                    data: {
+                        labels: sexLabels,
+                        datasets: [{
+                            data: sexValues,
+                            backgroundColor: ['rgb(161, 173, 247)', 'rgb(221, 162, 248)', 'rgba(255, 206, 86, 0.6)'],
+                            beginAtZero: true
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                    }
+                });
+
+                // Plot graph for profession
+                var professionData = districtData['Profession'];
+                var professionLabels = Object.keys(professionData);
+                var professionValues = Object.values(professionData);
+                window.professionChart = new Chart(document.getElementById('professionGraph'), {
+                    type: 'bar',
+                    data: {
+                        labels: professionLabels,
+                        datasets: [{
+                            label: 'Profession Distribution',
+                            data: professionValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+
+                // Plot graph for age
+                var ageData = districtData['Age'];
+                var ageLabels = Object.keys(ageData);
+                var ageValues = Object.values(ageData);
+                window.ageChart = new Chart(document.getElementById('ageGraph'), {
+                    type: 'bar',
+                    data: {
+                        labels: ageLabels,
+                        datasets: [{
+                            label: 'Age Distribution',
+                            data: ageValues,
+                            borderColor: 'rgba(216, 162, 255, 0.6)',
+                            backgroundColor: 'rgba(216, 162, 255, 0.6)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+            // Event listener for dropdown change
+            selectElement.addEventListener('change', function () {
+                var selectedDistrict = this.value;
+                plotGraphs(selectedDistrict);
+            });
+
+            // Initial plot on page load
+            plotGraphs(selectElement.value);
+        })
+        .catch(error => console.error('Error:', error));
 
 </script>
 

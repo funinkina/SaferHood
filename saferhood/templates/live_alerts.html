@@ -1,7 +1,4 @@
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
 
@@ -12,84 +9,46 @@
   </div>
 
   <div>
-    <form class="mx-8 my-5" action="/add_alert" method="post">
+    <div class="mx-8 my-5" action="/add_alert" method="post">
       <div class="mb-4">
-        <label class="block text-lg font-medium text-gray-700" for="headline"
-          >Headline</label
-        >
+        <label class="block text-lg font-medium text-gray-700" for="headline">Headline</label>
         <input
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          name="headline"
-          id="headline"
-          type="text"
-          id="headline"
-          name="headline"
-          required
-        />
+          name="headline" id="headline" type="text" id="headline" name="headline" required />
       </div>
       <div class="mb-4">
-        <label class="block text-lg font-medium text-gray-700" for="description"
-          >Description</label
-        >
+        <label class="block text-lg font-medium text-gray-700" for="description">Description</label>
         <textarea
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          id="description"
-          name="description"
-          rows="4"
-          required
-        ></textarea>
+          id="description" name="description" rows="4" required></textarea>
       </div>
       <div class="mb-4 flex flex-row gap-8 justify-between">
         <div class="flex flex-col">
-          <label
-            class="block text-lg font-medium text-gray-700"
-            for="coordinates"
-            >Address</label
-          >
+          <label class="block text-lg font-medium text-gray-700" for="coordinates">Address</label>
           <label for="address">Address:</label>
           <input
             class="w-96 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            type="text"
-            id="address"
-            name="address"
-            required
-          />
+            type="text" id="address" name="address" required />
 
           <label for="street">Street:</label>
           <input
             class="w-96 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            type="text"
-            id="street"
-            name="street"
-            required
-          />
+            type="text" id="street" name="street" required />
 
           <label for="colony">Colony:</label>
           <input
             class="w-96 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            type="text"
-            id="colony"
-            name="colony"
-            required
-          />
+            type="text" id="colony" name="colony" required />
 
           <label for="city">City:</label>
           <input
             class="w-96 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            type="text"
-            id="city"
-            name="city"
-            required
-          />
+            type="text" id="city" name="city" required />
 
           <label for="pincode">Pincode:</label>
           <input
             class="w-96 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-            type="number"
-            id="pincode"
-            name="pincode"
-            required
-          />
+            type="number" id="pincode" name="pincode" required />
         </div>
         <div class="w-full h-96">
           <h2 class="block text-lg font-medium text-gray-700">
@@ -99,31 +58,41 @@
         </div>
       </div>
       <div class="mb-4">
-        <label class="block text-lg font-medium text-gray-700" for="severity"
-          >Severity</label
-        >
+        <label class="block text-lg font-medium text-gray-700" for="severity">Severity</label>
         <select
           class="w-1/2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          id="severity"
-          name="severity"
-          required
-        >
+          id="severity" name="severity" required>
           <option value="" disabled selected>Select severity</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
       </div>
-      <button
-        class="px-10 py-2 mx-auto text-lg font-bold text-white bg-indigo-600 rounded-md hover:bg-indigo-500"
-        type="submit"
-      >
+      <button id="showToast" class="px-10 py-2 mx-auto text-lg font-bold text-white bg-indigo-600 rounded-md hover:bg-indigo-500">
         Send
       </button>
-    </form>
+    </div>
   </div>
+  <div id="toast" class="toast hidden flex items-center"><span class="material-symbols-rounded mr-3">
+    info
+    </span>Alert sent</div>
 </body>
-
+<style>
+  .toast {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: top 0.5s ease;
+    z-index: 9999;
+    margin-top: 5vh;
+  }
+</style>
 <script>
   var map = L.map("map", {
     center: [15.18, 77.23], // Initial map center
@@ -148,6 +117,17 @@
       maxZoom: 16,
     }
   ).addTo(map);
+
+  function showToast() {
+    var toast = document.getElementById('toast');
+    toast.classList.remove('hidden');
+    setTimeout(function () {
+      toast.classList.add('hidden');
+    }, 3000); // Hide toast after 3 seconds
+  }
+
+  // Event listener for button click to show toast notification
+  document.getElementById('showToast').addEventListener('click', showToast);
 </script>
 
 {% endblock %}

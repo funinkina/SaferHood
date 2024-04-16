@@ -93,7 +93,7 @@ def login():
     return jsonify(user_data), 200
 
 
-@app.route("/login", methods=["GET"])
+@app.route("/", methods=["GET"])
 def show_login():
     return render_template("./login.html")
 
@@ -130,8 +130,7 @@ def validate_token():
     }
     return jsonify({"userData": user_data}), 200
 
-
-@app.route("/")
+@app.route("/home")
 def dashboard():
     json_file = url_for("static", filename="data/victim_info.json")
     offenders_list = url_for("static", filename="data/repeat_offenders.json")

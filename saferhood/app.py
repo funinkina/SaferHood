@@ -61,7 +61,39 @@ def register():
 
 @app.route("/register", methods=["GET", "POST"])
 def show_register():
+    if request.method == "POST":
+        data = request.form
+        name = data.get("name")
+        police_id = data.get("id")
+        position = data.get("position")
+        password = data.get("password")
+        confirm_password = data.get("confirm-password")
 
+        if not (name and police_id and position and password and confirm_password):
+            return render_template("./register.html", error="Missing required fields")
+
+        if password != confirm_password:
+            return render_template("./register.html", error="Passwords do not match")
+
+        try:
+            existing_user = db.credentials.find_one({"police_id": police_id})
+            if existing_user:
+                return render_template(
+                    "./register.html", error="User with this police ID already exists"
+                )
+
+            hashed_password = generate_password_hash(password)
+
+            user = {
+                "name": name,
+                "police_id": police_id,
+                "position": position,
+                "password": hashed_password,
+            }
+            db.credentials.insert_one(user)
+            return render_template("./register.html", message="User registered successfully")
+        except Exception as e:
+            return render_template("./register.html", error=str(e))
     return render_template("./register.html")
 
 

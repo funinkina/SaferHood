@@ -1,11 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, url_for, jsonify
 from pymongo import MongoClient
-from flask_login import LoginManager, login_user, UserMixin
+import flask_login
 from flask_bcrypt import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
 import random
-import json
 
 app = Flask(__name__)
 
@@ -22,38 +21,34 @@ db = client[MONGO_DBNAME]
 
 @app.route("/register", methods=["POST"])
 def register():
-    # Parse incoming JSON data
-    data = request.json
-    name = data.get("name")
-    age = data.get("age")
-    role = data.get("role")
-    phone = data.get("phone")
-    blood_group = data.get("bloodGroup")
-    password = data.get("password")
-    email = data.get("email").lower()
+    # Parse incoming form data
+    name = request.form.get("name")
+    police_id = request.form.get("id")
+    position = request.form.get("position")
+    password = request.form.get("password")
+    confirm_password = request.form.get("confirm-password")
 
-    if not (name and age and phone and blood_group and email and password):
+    if not (name and police_id and position and password and confirm_password):
         return jsonify({"error": "Missing required fields"}), 400
 
+    if password != confirm_password:
+        return jsonify({"error": "Passwords do not match"}), 400
+
     try:
-        # Check if user with given email already exists
-        existing_user = db.credentials.find_one({"email": email})
+        # Check if user with given police ID already exists
+        existing_user = db.credentials.find_one({"police_id": police_id})
         if existing_user:
-            return jsonify({"error": "User with this email already exists"}), 400
+            return jsonify({"error": "User with this police ID already exists"}), 400
 
         # Encrypt the password
-        hashed_password = generate_password_hash(password).decode("utf-8")
+        hashed_password = generate_password_hash(password)
 
         # Create user object
         user = {
             "name": name,
-            "age": age,
-            "role": role,
-            "phone": phone,
-            "blood_group": blood_group,
+            "police_id": police_id,
+            "position": position,
             "password": hashed_password,
-            "email": email,
-            "id": random.randint(9999, 9999999),
         }
 
         # Insert user into database
@@ -64,29 +59,43 @@ def register():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/register", methods=["GET"])
+def show_register():
+    return render_template("./register.html")
+
+
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
-    email = data.get("username").lower()
+    email = data.get("email").lower()  # Change to "email" from "username"
     password = data.get("password")
     user = db.credentials.find_one({"email": email})
     if not user or not check_password_hash(user["password"], password):
         return jsonify({"error": "Invalid email or password"}), 401
-    token = jwt.encode(
-        {"email": email, "exp": datetime.now() + timedelta(seconds=TOKEN_EXPIRATION)},
-        SECRET_KEY,
-        algorithm="HS256",
-    )
+
+    # Generate token
+    token_payload = {
+        "email": email,
+        "exp": datetime.now() + timedelta(seconds=TOKEN_EXPIRATION),
+    }
+    token = jwt.encode(token_payload, SECRET_KEY, algorithm="HS256").decode("utf-8")
+
+    # Construct user data response
     user_data = {
         "name": user["name"],
         "age": user["age"],
         "role": user["role"],
         "phone": user["phone"],
         "bloodGroup": user["blood_group"],
-        "token": token,
+        "token": token,  # Include the token in the response
         "id": user["id"],
     }
     return jsonify(user_data), 200
+
+
+@app.route("/login", methods=["GET"])
+def show_login():
+    return render_template("./login.html")
 
 
 def is_token_valid(token):
@@ -124,7 +133,7 @@ def validate_token():
 
 @app.route("/")
 def dashboard():
-    json_file = url_for('static', filename='data/victim_info.json')
+    json_file = url_for("static", filename="data/victim_info.json")
     return render_template("./index.html", json_file=json_file)
 
 
@@ -135,19 +144,24 @@ def live_alerts():
 
 @app.route("/hotspot_mapping")
 def hotspot():
-    hospitals_data = url_for('static', filename='data/hospitals_data.json')
-    stations_data = url_for('static', filename='data/police_station.json')
-    return render_template("./hotspot.html", hospitals_data=hospitals_data, stations_data=stations_data)
+    hospitals_data = url_for("static", filename="data/hospitals_data.json")
+    stations_data = url_for("static", filename="data/police_station.json")
+    return render_template(
+        "./hotspot.html", hospitals_data=hospitals_data, stations_data=stations_data
+    )
+
 
 @app.route("/repeat_offenders")
 def repeat_offenders():
-    json_file = url_for('static', filename='data/victim_info.json')
+    json_file = url_for("static", filename="data/victim_info.json")
     return render_template("./repeat_offenders.html", json_file=json_file)
+
 
 @app.route("/victim_analysis")
 def victims_post_post():
-    json_file = url_for('static', filename='data/victim_info.json')
+    json_file = url_for("static", filename="data/victim_info.json")
     return render_template("./victims.html", json_file=json_file)
+
 
 @app.route("/add_alert", methods=["POST"])
 def add_alert():
@@ -166,6 +180,7 @@ def add_alert():
     }
     db.alerts.insert_one(alert)
     return dict(data)
+
 
 @app.route("/alerts", methods=["get"])
 def get_alerts():
@@ -191,7 +206,7 @@ def get_alerts():
 
 @app.route("/live_data")
 def live_data():
-    news_file = url_for('static', filename='data/news_data.json')
+    news_file = url_for("static", filename="data/news_data.json")
     return render_template("./news_live_data.html", news_file=news_file)
 
 

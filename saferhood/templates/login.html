@@ -1,304 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="loginDiv" id="loginDiv">
-      <h1>Login</h1>
-      <div class="inputField">
-        <input type="text" id="username" required aria-invalid="false" />
-        <label>Email or Username</label>
-      </div>
-      <div class="inputField">
-        <input type="password" id="password" required aria-invalid="false" />
-        <label>Password</label>
-      </div>
-      <div
-        class="error"
-        aria-errormessage="Invalid username or password."
-        id="error"
-      >
-        <p>You have entered an invalid username or password.</p>
-      </div>
-      <button id="login" class="login">Login</button>
-    </div>
 
-    <div id="success" class="modal" aria-modal="true">
-      <div class="modal-content">
-        <h1>Login Successful!</h1>
-        <span>Welcome to my website!</span>
-        <span id="smile">😁</span>
-        <button id="close" class="login" onclick="closeModal()">Logout</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>SaferHood - Sign Up</title>
+</head>
+
+<body class="flex items-center justify-center h-screen bg-gray-100" style="font-family: 'DM Sans', sans-serif;">
+  <div class="flex gap-6 absolute top-0 right-0 mt-6 mr-6 align-center items-center">
+    <img class="h-16"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png"
+      alt="">
+    <div class="h-full w-2 bg-black"></div>
+    <div class="flex items-center">
+      <img class="h-16"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Seal_of_Karnataka.svg/250px-Seal_of_Karnataka.svg.png"
+        alt="">
+      <div class="ml-4">
+        <p class="text-xl font-bold">Karnataka State Police</p>
+        <p class="text-sm">Government of Karnataka</p>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+  <div class="bg-white p-8 rounded-md flex items-center flex-col w-1/4"
+    style="box-shadow: 0px 190px 53px 0px rgba(0, 0, 0, 0.00), 0px 121px 49px 0px rgba(0, 0, 0, 0.01), 0px 68px 41px 0px rgba(0, 0, 0, 0.03), 0px 30px 30px 0px rgba(0, 0, 0, 0.04), 0px 8px 17px 0px rgba(0, 0, 0, 0.05);">
+    <img src="/static/images/logo.svg" class="mb-10 w-64" alt="">
+    <h2 class="text-2xl mx-auto font-bold mb-4">Welcome back, Officer</h2>
+    <form class="w-full">
+      <div class="mb-4">
+        <label for="id" class="block text-gray-700 text-sm font-bold mb-2">Police ID</label>
+        <input type="number" id="id" name="id"
+          class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-2 focus:border-blue-500"
+          placeholder="Enter officer ID" required>
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <input type="password" id="password" name="password"
+          class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-2 focus:border-blue-500"
+          placeholder="Enter Password" required>
+      </div>
+      <button type="submit"
+        class="bg-cyan-800 hover:bg-cyan-900 w-full mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Login
+      </button>
+    </form>
+  </div>
+</body>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-  * {
-  	font-family: 'Poppins';
-  }
-  html, body {
-  	background-color: #DDF7E3;
-  	height: 100%;
-  	margin: 0;
-  	padding: 0;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
-  body {margin-top: -21px;}
-
-  input[type=text], input[type=password] {
-  	display: block;
-  	width: 77%;
-  	margin-left: 10.5%;
-  	margin-top: 6%;
-  	margin-bottom: 2%;
-  	min-width: 100px;
-  	height: 30px;
-  	padding: 4px;
-  	padding-right: 4px;
-  	padding-left: 4px;
-  	border: none;
-  	border-radius: 2px;
-  	background-color: #c7e0e8;
-  	border-bottom: 2px solid #4a7d47;
-  	font-size: 18px;
-  	z-index: 3;
-  }
-
-  input[type=text]:focus, input[type=password]:focus {
-  	outline: none;
-  }
-
-  input[type=text]:autofill, input[type=password]:autofill {
-  	background-color: #6da66a !important;
-  }
-
-  .loginDiv {
-  	position: relative;
-  	top: 15%;
-  	margin: auto;
-  	width: 30%;
-  	height: 50%;
-  	min-height: 400px;
-  	min-width: 400px;
-  	background-color: #C7E8CA;
-  	border-radius: 35px;
-  	box-sizing: content-box;
-  	box-shadow: 0 0 20px -8px #4a7d47;
-  }
-
-  .login {
-    position: absolute;
-  	bottom: 32px;
-  	left: 5%;
-  	width: 90%;
-    padding: 10px;
-    background-color: #4a7d47;
-    color: white;
-    border: none;
-    cursor: pointer;
-  	border-radius: 15px;
-  	font-size: 18px;
-  	box-shadow: 0 0 10px -5px #2D5C29;
-  	transition: all 0.1s;
-  	-webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
-  }
-
-  .login:hover {
-  	bottom: 31px;
-  	font-size: 20px;
-  	background-color: #5D9C59;
-  	transition: all 0.1s;
-  	box-shadow: 0 0 20px -2px #2D5C29;
-  }
-
-  .login:active {
-  	bottom: 32px;
-  	font-size: 18px;
-  	background-color: #385e35;
-  	transition: all 0.1s;
-  	box-shadow: 0 0 10px -7px #2D5C29;
-  }
-
-  h1 {
-  	text-align: center;
-  	padding-top: 24px;
-  	font-family: 'Poppins';
-  	padding-bottom: 15px;
-  	color: #253e24;
-  	-webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
-  }
-
-  label {
-  	position: relative;
-  	top: -40px;
-  	margin-left: 10.5%;
-  	font-size: 18px;
-  	z-index: 0;
-  	transition: all 0.4s;
-    pointer-events: none;
-  	-webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
-  }
-
-  #password:focus ~ label, #password:valid ~ label {
-  	font-size: 14px;
-  	top: -70px;
-  	transition: all 0.2s;
-  	color: #4a7d47;
-  }
-
-  #username:focus ~ label,
-  #username:valid ~ label {
-  	font-size: 14px;
-  	top: -70px;
-  	transition: all 0.2s;
-  	color: #4a7d47;
-  }
-
-  #username:valid ~ .error {
-  	display: none;
-  }
-
-  .inputField {
-  	height: 60px;
-  }
-
-  .error {
-  	display: none;
-  	width: 80%;
-  	margin: auto;
-  	color: #DF2E38;
-  	margin-top: -20px;
-  }
-
-  input[aria-invalid="true"] {
-    border-bottom: 2px solid #DF2E38;
-  }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .modal-content {
-  	position: relative;
-  	top: -15%;
-  	background-color: #C7E8CA;
-  	border-radius: 35px;
-  	box-sizing: content-box;
-  	box-shadow: 0 0 25px -8px #1a4d17;
-    margin: 15% auto;
-    padding: 20px;
-    border: none;
-    width: 40%;
-  	height: 50%;
-  	min-height: 350px;
-  	-webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
-  }
-
-  span {
-  	display: block;
-  	text-align: center;
-  	color: #253e24;
-  	width: 100%;
-  	padding-bottom: 24px;s
-  }
-
-  #smile {
-  	font-size: 80px;
-  	margin-top: -15px;
-  }
-
-  @keyframes shake {
-  	0% {transform: translateX(-10px);}
-  	20% {transform: translateX(10px);}
-  	40% {transform: translateX(-10px);}
-  	60% {transform: translateX(10px);}
-  	80% {transform: translateX(0px);}
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
   }
 </style>
 
-<script>
-  const username = document.getElementById("username");
-  const password = document.getElementById("password");
-  const success = document.getElementById("success");
-  const error = document.getElementById("error");
-  const div = document.getElementById("loginDiv");
-
-  document.getElementById("login").onclick = function () {
-    let valid = username.checkValidity() && password.checkValidity();
-
-    if (!valid) {
-      error.style.display = "block";
-      error.style.animation = "shake 0.5s 1";
-      password.setAttribute("aria-invalid", "true");
-      username.setAttribute("aria-invalid", "true");
-    } else {
-      error.style.display = "none";
-      div.style.display = "none";
-      success.style.display = "block";
-    }
-  };
-
-  username.addEventListener("keyup", function (event) {
-    let userValid = username.checkValidity();
-    let passValid = password.checkValidity();
-
-    if (passValid) {
-      password.setAttribute("aria-invalid", "false");
-    }
-    if (userValid) {
-      username.setAttribute("aria-invalid", "false");
-    }
-  });
-
-  password.addEventListener("keyup", function (event) {
-    let passValid = password.checkValidity();
-    let userValid = username.checkValidity();
-
-    if (passValid) {
-      password.setAttribute("aria-invalid", "false");
-    }
-    if (userValid) {
-      username.setAttribute("aria-invalid", "false");
-    }
-  });
-
-  function closeModal() {
-    success.style.display = "none";
-    div.style.display = "block";
-    username.value = "";
-    password.value = "";
-  }
-</script>
+</html>

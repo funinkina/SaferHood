@@ -6,6 +6,9 @@ SaferHood is an advanced crime prediction and preventive policing system designe
 
 SaferHood offers both a web and iOS application designed to provide law enforcement agencies with essential tools for crime prediction, resource allocation, and proactive policing. Here's how each platform contributes to enhancing public safety:
 
+Demo Videos:
+https://drive.google.com/drive/folders/1gOLj5ihSVnrbu2DLfNwEDy395vBf_i4D
+
 **Web Application Features:**
 
 1.  **Hotspot Mapping:**

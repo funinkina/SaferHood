@@ -9,13 +9,15 @@ import certifi
 
 app = Flask(__name__)
 
+
 def connect_to_mongodb(connection_string):
     client = MongoClient(connection_string, tlsCAFile=certifi.where())
     print("Connection succeed")
     return client
 
+
 # MongoDB
-MONGO_DBNAME = 'saferhood'    # MongoDB database name
+MONGO_DBNAME = "saferhood"  # MongoDB database name
 CONNECTION_STRING = "mongodb://saferhood:NPi6uDddE1VqM3WXkeG7ATLzkiAXuJZsXISZjG1Obcz0fdAThQMBkC0BBpDi98c9AKBQ8iXhfk1qACDbUsTO4w==@saferhood.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@saferhood@"
 SECRET_KEY = "Gupt4Ch4bi@2023"
 
@@ -23,7 +25,7 @@ SECRET_KEY = "Gupt4Ch4bi@2023"
 mongo_client = connect_to_mongodb(CONNECTION_STRING)
 
 # Access a specific collection
-db = mongo_client.get_database('saferhood')
+db = mongo_client.get_database("saferhood")
 
 TOKEN_EXPIRATION = 3600
 
@@ -100,7 +102,9 @@ def show_register():
                 "password": hashed_password,
             }
             db.credentials.insert_one(user)
-            return render_template("./register.html", message="User registered successfully")
+            return render_template(
+                "./register.html", message="User registered successfully"
+            )
         except Exception as e:
             return render_template("./register.html", error=str(e))
     return render_template("./register.html")
@@ -142,7 +146,11 @@ def show_login():
         email = data.get("email").lower()
         password = data.get("password")
         user = db.credentials.find_one({"email": email})
-        if not user or not check_password_hash(user["password"], password) or user["role"] == "user":
+        if (
+            not user
+            or not check_password_hash(user["password"], password)
+            or user["role"] == "user"
+        ):
             return render_template("./login.html", error="Invalid email or password")
         token_payload = {
             "email": email,
@@ -161,8 +169,13 @@ def show_login():
         json_file = url_for("static", filename="data/victim_info.json")
         offenders_list = url_for("static", filename="data/repeat_offenders.json")
         news_file = url_for("static", filename="data/news_data.json")
-        return render_template("./index.html", user_data=user_data, json_file=json_file,
-                           offenders_list=offenders_list, news_file=news_file)
+        return render_template(
+            "./index.html",
+            user_data=user_data,
+            json_file=json_file,
+            offenders_list=offenders_list,
+            news_file=news_file,
+        )
     return render_template("./login.html")
 
 
@@ -198,6 +211,7 @@ def validate_token():
     }
     return jsonify({"userData": user_data}), 200
 
+
 @app.route("/live-alerts")
 def live_alerts():
     return render_template("./live_alerts.html")
@@ -208,8 +222,8 @@ def hotspot():
     hospitals_data = url_for("static", filename="data/hospitals_data.json")
     stations_data = url_for("static", filename="data/police_station.json")
     return render_template(
-        "./hotspot.html", hospitals_data=hospitals_data,
-        stations_data=stations_data)
+        "./hotspot.html", hospitals_data=hospitals_data, stations_data=stations_data
+    )
 
 
 @app.route("/repeat_offenders")

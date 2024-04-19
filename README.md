@@ -8,6 +8,13 @@ https://saferhood.pythonanywhere.com
 
 SaferHood offers both a web and iOS application designed to provide law enforcement agencies with essential tools for crime prediction, resource allocation, and proactive policing. Here's how each platform contributes to enhancing public safety:
 
+## How to run it locally:
+1. Clone the repository using `git clone https://github.com/funinkina/SaferHood/`
+2. Change directory to `./SaferHood/saferhood`
+1. Run `pip install -r requirements.txt` to install all the dependencies
+1. Run `python3 app.py`
+1. Access the app on [http://127.0.0.1:5050/](http://127.0.0.1:5050/)
+
 Demo Videos:
 https://drive.google.com/drive/folders/1gOLj5ihSVnrbu2DLfNwEDy395vBf_i4D
 

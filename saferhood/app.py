@@ -5,18 +5,27 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 import jwt
 from datetime import datetime, timedelta
 import random
+import certifi
 
 app = Flask(__name__)
 
-DEBUG = True
-MONGO_HOST = "localhost"
-MONGO_PORT = 27017
-MONGO_DBNAME = "saferhood"
-SECRET_KEY = "Gupt4Ch4bi@2023"
-TOKEN_EXPIRATION = 3600
+def connect_to_mongodb(connection_string):
+    client = MongoClient(connection_string, tlsCAFile=certifi.where())
+    print("Connection succeed")
+    return client
 
-client = MongoClient(MONGO_HOST, MONGO_PORT)
-db = client[MONGO_DBNAME]
+# MongoDB
+MONGO_DBNAME = 'saferhood'    # MongoDB database name
+CONNECTION_STRING = "mongodb://saferhood:NPi6uDddE1VqM3WXkeG7ATLzkiAXuJZsXISZjG1Obcz0fdAThQMBkC0BBpDi98c9AKBQ8iXhfk1qACDbUsTO4w==@saferhood.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@saferhood@"
+SECRET_KEY = "Gupt4Ch4bi@2023"
+
+# Connect to the MongoDB database
+mongo_client = connect_to_mongodb(CONNECTION_STRING)
+
+# Access a specific collection
+db = mongo_client.get_database('saferhood')
+
+TOKEN_EXPIRATION = 3600
 
 
 @app.route("/register", methods=["POST"])
@@ -100,7 +109,7 @@ def show_register():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
-    email = data.get("email").lower()  # Change to "email" from "username"
+    email = data.get("username").lower()  # Change to "email" from "username"
     password = data.get("password")
     user = db.credentials.find_one({"email": email})
     if not user or not check_password_hash(user["password"], password):
@@ -111,7 +120,7 @@ def login():
         "email": email,
         "exp": datetime.now() + timedelta(seconds=TOKEN_EXPIRATION),
     }
-    token = jwt.encode(token_payload, SECRET_KEY, algorithm="HS256").decode("utf-8")
+    token = jwt.encode(token_payload, SECRET_KEY, algorithm="HS256")
 
     # Construct user data response
     user_data = {

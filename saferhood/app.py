@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import random
 import certifi
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="template")
 
 
 def connect_to_mongodb(connection_string):

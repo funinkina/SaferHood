@@ -128,33 +128,36 @@ def login():
 
 @app.route("/", methods=["GET", "POST"])
 def show_login():
-    if request.method == "POST":
-        data = request.form
-        email = data.get("email").lower()
-        password = data.get("password")
-        user = db.credentials.find_one({"email": email})
-        if not user or not check_password_hash(user["password"], password) or user["role"] == "user":
-            return render_template("./login.html", error="Invalid email or password")
-        token_payload = {
-            "email": email,
-            "exp": datetime.now() + timedelta(seconds=TOKEN_EXPIRATION),
-        }
-        token = jwt.encode(token_payload, SECRET_KEY, algorithm="HS256")
-        user_data = {
-            "name": user["name"],
-            "age": user["age"],
-            "role": user["role"],
-            "phone": user["phone"],
-            "bloodGroup": user["blood_group"],
-            "token": token,  # Include the token in the response
-            "id": user["id"],
-        }
-        json_file = url_for("static", filename="data/victim_info.json")
-        offenders_list = url_for("static", filename="data/repeat_offenders.json")
-        news_file = url_for("static", filename="data/news_data.json")
-        return render_template("./index.html", user_data=user_data, json_file=json_file,
-                           offenders_list=offenders_list, news_file=news_file)
-    return render_template("./login.html")
+    # if request.method == "POST":
+    #     data = request.form
+    #     email = data.get("email").lower()
+    #     password = data.get("password")
+    #     user = db.credentials.find_one({"email": email})
+    #     if not user or not check_password_hash(user["password"], password) or user["role"] == "user":
+    #         return render_template("./login.html", error="Invalid email or password")
+    #     token_payload = {
+    #         "email": email,
+    #         "exp": datetime.now() + timedelta(seconds=TOKEN_EXPIRATION),
+    #     }
+    #     token = jwt.encode(token_payload, SECRET_KEY, algorithm="HS256")
+    #     user_data = {
+    #         "name": user["name"],
+    #         "age": user["age"],
+    #         "role": user["role"],
+    #         "phone": user["phone"],
+    #         "bloodGroup": user["blood_group"],
+    #         "token": token,  # Include the token in the response
+    #         "id": user["id"],
+    #     }
+    #     json_file = url_for("static", filename="data/victim_info.json")
+    #     offenders_list = url_for("static", filename="data/repeat_offenders.json")
+    #     news_file = url_for("static", filename="data/news_data.json")
+    #     return render_template("./index.html", user_data=user_data, json_file=json_file,
+    #                        offenders_list=offenders_list, news_file=news_file)
+    json_file = json_file = url_for("static", filename="data/victim_info.json")
+    offenders_list = url_for("static", filename="data/repeat_offenders.json")
+    news_file = url_for("static", filename="data/news_data.json")
+    return render_template("./index.html", json_file=json_file, offenders_list=offenders_list, news_file=news_file)
 
 
 def is_token_valid(token):
